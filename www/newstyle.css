@@ -1,0 +1,131 @@
+.help-block,
+.help-inline {
+  color: #ffffff;
+}
+
+.help-block {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.help-inline {
+  display: inline-block;
+  *display: inline;
+  padding-left: 5px;
+  vertical-align: middle;
+  *zoom: 1;
+}
+.form-search .help-inline,
+.form-inline .help-inline,
+.form-horizontal .help-inline,
+
+.form-horizontal .help-block {
+  margin-bottom: 0;
+}
+
+.form-horizontal input + .help-block,
+.form-horizontal select + .help-block,
+.form-horizontal textarea + .help-block,
+.form-horizontal .uneditable-input + .help-block,
+.form-horizontal .input-prepend + .help-block,
+.form-horizontal .input-append + .help-block {
+  margin-top: 10px;
+}
+
+.help-block {
+  color: #ece9d7;
+  opacity: 0.6;
+}
+.control-group.error .help-block,
+.control-group.error .help-inline {
+  color: #c76e6d;
+}
+
+.control-group.warning .control-label,
+.control-group.warning .help-block,
+.control-group.warning .help-inline {
+  color: #ceae78;
+}
+
+.control-group.success .help-block,
+.control-group.success .help-inline {
+  color: #58a959;
+}
+
+.help-tip{
+	position: relative;
+	text-align: center;
+	background-color: #CFCFCF;          
+	border-radius: 50%;
+	left: 16px;              
+	bottom: 0px;           
+	width: 18px;            
+	height: 18px;
+	font-size: 9px;        
+	line-height: 20px;     
+	cursor: default;
+}
+
+.help-tip:before{
+	content:'?';
+	font-weight: bold;
+	color:#fff;
+}
+
+.help-tip:hover p{
+	display:block;
+	transform-origin: 100% 0%;
+	-webkit-animation: fadeIn 0.6s ease-in-out;
+	animation: fadeIn 0.6s ease-in-out;
+
+}
+
+.help-tip p{	
+	display: none;
+	text-align: left;           
+	background-color: #1E2021;
+	padding: 19px;              
+	width: 310px;
+	position: absolute;
+	border-radius: 3px;
+	box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+	right: -300px;            
+	top: 15px;                 
+	color: #FFF;
+	font-size: 13px;
+	line-height: 1.4;
+	z-index:3;                
+}
+
+.help-tip p:before{ 
+	position: relative;
+	content: '';
+	border: 6px solid transparent;
+	border-bottom-color: #1E2021;
+}
+
+.help-tip p:after{ 
+	width:100%;
+	height:40px;
+	content:'';
+	position: relative;
+	top:0px;
+	left:0;
+}
+
+@-webkit-keyframes fadeIn {
+	0% { 
+		opacity:0; 
+		transform: scale(0.6);
+	}
+
+	100% {
+		opacity:100%;
+		transform: scale(1);
+	}
+}
+
+@keyframes fadeIn {
+	0% { opacity:0; }
+	100% { opacity:100%; }
+}
