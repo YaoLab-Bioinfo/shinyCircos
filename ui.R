@@ -266,7 +266,7 @@ For example, 'grey95' or 'grey95,grey,pink,yellow'. Hex color codes as '#FF0000'
 	                                      </div></td></tr>
 	                                      </table>
 	                                      "), value=0.01, min=0, max=0.8, step=0.005),
-			radioButtons("borderTrack1", "Add borders", c("Show" = "add", "Hide" = ""),selected=""),
+			radioButtons("borderTrack1", "Add borders", c("Yes" = "add", "No" = ""),selected=""),
 			conditionalPanel(condition="input.typeTrack1!='rect' & output.trackdat1",
 			radioButtons("highlightTrack1", HTML("<table><tr><td><strong>Highlight regions</strong></td>
 <td>
@@ -379,7 +379,7 @@ For data with four columns, a single character representing a color should be pr
 	                                      </div></td></tr>
 	                                      </table>
 	                                      "), value=0.01, min=0, max=0.8, step=0.005),
-			radioButtons("borderTrack2", "Add borders", c("Show" = "add", "Hide" = ""),selected=""),
+			radioButtons("borderTrack2", "Add borders", c("Yes" = "add", "No" = ""),selected=""),
 			conditionalPanel(condition="input.typeTrack2!='rect' & output.trackdat2",
 			radioButtons("highlightTrack2", HTML("<table><tr><td><strong>Highlight regions</strong></td>
 <td>
@@ -490,7 +490,7 @@ For data with four columns, a single character representing a color should be pr
 	                                      </div></td></tr>
 	                                      </table>
 	                                      "), value=0.01, min=0, max=0.8, step=0.005),
-			radioButtons("borderTrack3", "Add borders", c("Show" = "add", "Hide" = ""),selected=""),
+			radioButtons("borderTrack3", "Add borders", c("Yes" = "add", "No" = ""),selected=""),
 			conditionalPanel(condition="input.typeTrack3!='rect' & output.trackdat3",
 			radioButtons("highlightTrack3", HTML("<table><tr><td><strong>Highlight regions</strong></td>
 <td>
@@ -602,7 +602,7 @@ For example, 'grey95' or 'grey95,grey,pink,yellow'. Hex color codes as '#FF0000'
 	                                      </div></td></tr>
 	                                      </table>
 	                                      "), value=0.01, min=0, max=0.8, step=0.005),
-			radioButtons("borderTrack4", "Add borders", c("Show" = "add", "Hide" = ""),selected=""),
+			radioButtons("borderTrack4", "Add borders", c("Yes" = "add", "No" = ""),selected=""),
 			conditionalPanel(condition="input.typeTrack4!='rect' & output.trackdat4",
 			radioButtons("highlightTrack4", HTML("<table><tr><td><strong>Highlight regions</strong></td>
 <td>
@@ -713,7 +713,7 @@ For data with four columns, a single character representing a color should be pr
 	                                      </div></td></tr>
 	                                      </table>
 	                                      "), value=0.01, min=0, max=0.8, step=0.005),
-			radioButtons("borderTrack5", "Add borders", c("Show" = "add", "Hide" = ""),selected=""),
+			radioButtons("borderTrack5", "Add borders", c("Yes" = "add", "No" = ""),selected=""),
 			conditionalPanel(condition="input.typeTrack5!='rect' & output.trackdat5",
 			radioButtons("highlightTrack5", HTML("<table><tr><td><strong>Highlight regions</strong></td>
 <td>
@@ -824,7 +824,7 @@ For data with four columns, a single character representing a color should be pr
 	                                      </div></td></tr>
 	                                      </table>
 	                                      "), value=0.01, min=0, max=0.8, step=0.005),
-			radioButtons("borderTrack6", "Add borders", c("Show" = "add", "Hide" = ""),selected=""),
+			radioButtons("borderTrack6", "Add borders", c("Yes" = "add", "No" = ""),selected=""),
 			conditionalPanel(condition="input.typeTrack6!='rect' & output.trackdat6",
 			radioButtons("highlightTrack6", HTML("<table><tr><td><strong>Highlight regions</strong></td>
 <td>
@@ -935,7 +935,7 @@ For data with four columns, a single character representing a color should be pr
 	                                      </div></td></tr>
 	                                      </table>
 	                                      "), value=0.01, min=0, max=0.8, step=0.005),
-			radioButtons("borderTrack7", "Add borders", c("Show" = "add", "Hide" = ""),selected=""),
+			radioButtons("borderTrack7", "Add borders", c("Yes" = "add", "No" = ""),selected=""),
 			conditionalPanel(condition="input.typeTrack7!='rect' & output.trackdat7",
 			radioButtons("highlightTrack7", HTML("<table><tr><td><strong>Highlight regions</strong></td>
 <td>
@@ -1046,7 +1046,7 @@ For data with four columns, a single character representing a color should be pr
 	                                      </div></td></tr>
 	                                      </table>
 	                                      "), value=0.01, min=0, max=0.8, step=0.005),
-			radioButtons("borderTrack8", "Add borders", c("Show" = "add", "Hide" = ""),selected=""),
+			radioButtons("borderTrack8", "Add borders", c("Yes" = "add", "No" = ""),selected=""),
 			conditionalPanel(condition="input.typeTrack8!='rect' & output.trackdat8",
 			radioButtons("highlightTrack8", HTML("<table><tr><td><strong>Highlight regions</strong></td>
 <td>
@@ -1157,7 +1157,7 @@ For data with four columns, a single character representing a color should be pr
 	                                      </div></td></tr>
 	                                      </table>
 	                                      "), value=0.01, min=0, max=0.8, step=0.005),
-			radioButtons("borderTrack9", "Add borders", c("Show" = "add", "Hide" = ""),selected=""),
+			radioButtons("borderTrack9", "Add borders", c("Yes" = "add", "No" = ""),selected=""),
 			conditionalPanel(condition="input.typeTrack9!='rect' & output.trackdat9",
 			radioButtons("highlightTrack9", HTML("<table><tr><td><strong>Highlight regions</strong></td>
 <td>
@@ -1268,7 +1268,7 @@ For data with four columns, a single character representing a color should be pr
 	                                      </div></td></tr>
 	                                      </table>
 	                                      "), value=0.01, min=0, max=0.8, step=0.005),
-			radioButtons("borderTrack10", "Add borders", c("Show" = "add", "Hide" = ""),selected=""),
+			radioButtons("borderTrack10", "Add borders", c("Yes" = "add", "No" = ""),selected=""),
 			conditionalPanel(condition="input.typeTrack10!='rect' & output.trackdat10",
 			radioButtons("highlightTrack10", HTML("<table><tr><td><strong>Highlight regions</strong></td>
 <td>
