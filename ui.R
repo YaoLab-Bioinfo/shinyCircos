@@ -47,7 +47,7 @@ shinyUI(fluidPage(theme="newstyle.css",
 				radioButtons("uploadtrack1", NULL, c("NULL" = "1", "Upload" = "2"), "1"),
 				conditionalPanel(condition="input.uploadtrack1 == '2'",
 				fileInput("uploadTrackfile1", "Upload track1 data:", multiple = FALSE),
-				selectInput("typeTrack1", "plot type:", choices = c("point", "line", "bar", "rect"), selected="point")
+				selectInput("typeTrack1", "Plot type:", choices = c("point", "line", "bar", "rect"), selected="point")
 				)
 				),
 				checkboxInput("seltrack2", HTML("<font color='red'>Track2</font>"), FALSE),
@@ -55,7 +55,7 @@ shinyUI(fluidPage(theme="newstyle.css",
 				radioButtons("uploadtrack2", NULL, c("NULL" = "1", "Upload" = "2"), "1"),
 				conditionalPanel(condition="input.uploadtrack2 == '2'",
 				fileInput("uploadTrackfile2", "Upload track2 data:", multiple = FALSE),
-				selectInput("typeTrack2", "plot type:", choices = c("point", "line", "bar", "rect"), selected="line")
+				selectInput("typeTrack2", "Plot type:", choices = c("point", "line", "bar", "rect"), selected="line")
 				)
 				),
 				checkboxInput("seltrack3", HTML("<font color='red'>Track3</font>"), FALSE),
@@ -63,7 +63,7 @@ shinyUI(fluidPage(theme="newstyle.css",
 				radioButtons("uploadtrack3", NULL, c("NULL" = "1", "Upload" = "2"), "1"),
 				conditionalPanel(condition="input.uploadtrack3 == '2'",
 				fileInput("uploadTrackfile3", "Upload track3 data:", multiple = FALSE),
-				selectInput("typeTrack3", "plot type:", choices = c("point", "line", "bar", "rect"), selected="bar")
+				selectInput("typeTrack3", "Plot type:", choices = c("point", "line", "bar", "rect"), selected="bar")
 				)
 				),
 				checkboxInput("seltrack4", HTML("<font color='red'>Track4</font>"), FALSE),
@@ -71,7 +71,7 @@ shinyUI(fluidPage(theme="newstyle.css",
 				radioButtons("uploadtrack4", NULL, c("NULL" = "1", "Upload" = "2"), "1"),
 				conditionalPanel(condition="input.uploadtrack4 == '2'",
 				fileInput("uploadTrackfile4", "Upload track4 data:", multiple = FALSE),
-				selectInput("typeTrack4", "plot type:", choices = c("point", "line", "bar", "rect"), selected="bar")
+				selectInput("typeTrack4", "Plot type:", choices = c("point", "line", "bar", "rect"), selected="bar")
 				)
 				),
 				checkboxInput("seltrack5", HTML("<font color='red'>Track5</font>"), FALSE),
@@ -79,7 +79,7 @@ shinyUI(fluidPage(theme="newstyle.css",
 				radioButtons("uploadtrack5", NULL, c("NULL" = "1", "Upload" = "2"), "1"),
 				conditionalPanel(condition="input.uploadtrack5 == '2'",
 				fileInput("uploadTrackfile5", "Upload track5 data:", multiple = FALSE),
-				selectInput("typeTrack5", "plot type:", choices = c("point", "line", "bar", "rect"), selected="rect")
+				selectInput("typeTrack5", "Plot type:", choices = c("point", "line", "bar", "rect"), selected="rect")
 				)
 				),
 				checkboxInput("seltrack6", HTML("<font color='red'>Track6</font>"), FALSE),
@@ -87,7 +87,7 @@ shinyUI(fluidPage(theme="newstyle.css",
 				radioButtons("uploadtrack6", NULL, c("NULL" = "1", "Upload" = "2"), "1"),
 				conditionalPanel(condition="input.uploadtrack6 == '2'",
 				fileInput("uploadTrackfile6", "Upload track6 data:", multiple = FALSE),
-				selectInput("typeTrack6", "plot type:", choices = c("point", "line", "bar", "rect"), selected="point")
+				selectInput("typeTrack6", "Plot type:", choices = c("point", "line", "bar", "rect"), selected="point")
 				)
 				),
 				checkboxInput("seltrack7", HTML("<font color='red'>Track7</font>"), FALSE),
@@ -95,7 +95,7 @@ shinyUI(fluidPage(theme="newstyle.css",
 				radioButtons("uploadtrack7", NULL, c("NULL" = "1", "Upload" = "2"), "1"),
 				conditionalPanel(condition="input.uploadtrack7 == '2'",
 				fileInput("uploadTrackfile7", "Upload track7 data:", multiple = FALSE),
-				selectInput("typeTrack7", "plot type:", choices = c("point", "line", "bar", "rect"), selected="bar")
+				selectInput("typeTrack7", "Plot type:", choices = c("point", "line", "bar", "rect"), selected="bar")
 				)
 				),
 				checkboxInput("seltrack8", HTML("<font color='red'>Track8</font>"), FALSE),
@@ -103,7 +103,7 @@ shinyUI(fluidPage(theme="newstyle.css",
 				radioButtons("uploadtrack8", NULL, c("NULL" = "1", "Upload" = "2"), "1"),
 				conditionalPanel(condition="input.uploadtrack8 == '2'",
 				fileInput("uploadTrackfile8", "Upload track8 data:", multiple = FALSE),
-				selectInput("typeTrack8", "plot type:", choices = c("point", "line", "bar", "rect"), selected="bar")
+				selectInput("typeTrack8", "Plot type:", choices = c("point", "line", "bar", "rect"), selected="bar")
 				)
 				),
 				checkboxInput("seltrack9", HTML("<font color='red'>Track9</font>"), FALSE),
@@ -111,7 +111,7 @@ shinyUI(fluidPage(theme="newstyle.css",
 				radioButtons("uploadtrack9", NULL, c("NULL" = "1", "Upload" = "2"), "1"),
 				conditionalPanel(condition="input.uploadtrack9 == '2'",
 				fileInput("uploadTrackfile9", "Upload track9 data:", multiple = FALSE),
-				selectInput("typeTrack9", "plot type:", choices = c("point", "line", "bar", "rect"), selected="rect")
+				selectInput("typeTrack9", "Plot type:", choices = c("point", "line", "bar", "rect"), selected="rect")
 				)
 				),
 				checkboxInput("seltrack10", HTML("<font color='red'>Track10</font>"), FALSE),
@@ -119,7 +119,7 @@ shinyUI(fluidPage(theme="newstyle.css",
 				radioButtons("uploadtrack10", NULL, c("NULL" = "1", "Upload" = "2"), "1"),
 				conditionalPanel(condition="input.uploadtrack10 == '2'",
 				fileInput("uploadTrackfile10", "Upload track10 data:", multiple = FALSE),
-				selectInput("typeTrack10", "plot type:", choices = c("point", "line", "bar", "rect"), selected="line")
+				selectInput("typeTrack10", "Plot type:", choices = c("point", "line", "bar", "rect"), selected="line")
 			    )
 				),	
 				HTML('<br>'),
@@ -155,7 +155,7 @@ shinyUI(fluidPage(theme="newstyle.css",
 			conditionalPanel(condition="input.datatypeChr=='general'",							  
 			radioButtons("trackChr", "Chromosome band", c("Show" = "track", "Hide" = "")),
 			conditionalPanel(condition="input.trackChr=='track'",
-			textInput("colorChr", HTML("<table><tr><td><strong>color(s):</strong></td>
+			textInput("colorChr", HTML("<table><tr><td><strong>Color(s):</strong></td>
 <td>
 <div class='help-tip'>
 	<p>Colors to be used for each chromosome/sector. Character vector of arbitrary length representing colors is accepted and adjusted automatically to the number of sectors. For example, 'grey' or 'grey,red,green,blue'. Hex color codes as '#FF0000' are also supported.</p>
@@ -165,7 +165,7 @@ shinyUI(fluidPage(theme="newstyle.css",
 			)
 			),
 			radioButtons("labelChr", "Chromosome IDs", c("Show" = "labels", "Hide" = "axis")),
-			radioButtons("unitChr", "Size Units of genomic regions", c("Show" = "unit", "Hide" = "")),
+			radioButtons("unitChr", "Size units of genomic regions", c("Show" = "unit", "Hide" = "")),
 			textInput("gapChr", HTML("<table><tr><td><strong>Gap width(s):</strong></td>
 <td>
 <div class='help-tip'>
@@ -226,7 +226,7 @@ For data with four columns, a single character representing a color should be pr
 			selectInput("colrectTrack1", NULL, choices = c("blue", "red", "green", "cyan", "purple", "pink", "orange", "yellow", "navy", "seagreen", "maroon", "olivedrab", "gold", "lightblue", "navy.yellow", "purple.seagreen", "navy.orange", "navy.cyan", "blue.red", "green.red"))
 			)
 			),
-			numericInput("transparencyTrack1", HTML("<table><tr><td>color transparency:</td>
+			numericInput("transparencyTrack1", HTML("<table><tr><td>Color transparency:</td>
 <td>
 <div class='help-tip'>
 	<p>A decimal number in [0, 1] to adjust the color transparency. The higher the value, the deeper the color.</p>
@@ -288,7 +288,7 @@ For example, 'Chr1,1,100000000,red'. Hex color codes as '#FF0000' are also suppo
 			HTML('<br>'),
 			HTML('<p>Data separated by commas.</p>'),
 			actionButton('clearText_button1','Clear data'),
-			numericInput("transparencyHlt1", HTML("<table><tr><td>color transparency:</td>
+			numericInput("transparencyHlt1", HTML("<table><tr><td>Color transparency:</td>
 <td>
 <div class='help-tip'>
 	<p>A decimal number in [0, 1] to adjust the color transparency. The higher the value, the deeper the color.</p>
@@ -342,7 +342,7 @@ For data with four columns, a single character representing a color should be pr
 			selectInput("colrectTrack2", NULL, choices = c("blue", "red", "green", "cyan", "purple", "pink", "orange", "yellow", "navy", "seagreen", "maroon", "olivedrab", "gold", "lightblue", "navy.yellow", "purple.seagreen", "navy.orange", "navy.cyan", "blue.red", "green.red"))
 			)
 			),
-			numericInput("transparencyTrack2", HTML("<table><tr><td>color transparency:</td>
+			numericInput("transparencyTrack2", HTML("<table><tr><td>Color transparency:</td>
 <td>
 <div class='help-tip'>
 	<p>A decimal number in [0, 1] to adjust the color transparency. The higher the value, the deeper the color.</p>
@@ -400,7 +400,7 @@ For data with four columns, a single character representing a color should be pr
 			HTML('<br>'),
 			HTML('<p>Data separated by commas.</p>'),
 			actionButton('clearText_button2','Clear data'),
-			numericInput("transparencyHlt2", HTML("<table><tr><td>color transparency:</td>
+			numericInput("transparencyHlt2", HTML("<table><tr><td>Color transparency:</td>
 <td>
 <div class='help-tip'>
 	<p>A decimal number in [0, 1] to adjust the color transparency. The higher the value, the deeper the color.</p>
@@ -453,7 +453,7 @@ For data with four columns, a single character representing a color should be pr
 			selectInput("colrectTrack3", NULL, choices = c("blue", "red", "green", "cyan", "purple", "pink", "orange", "yellow", "navy", "seagreen", "maroon", "olivedrab", "gold", "lightblue", "navy.yellow", "purple.seagreen", "navy.orange", "navy.cyan", "blue.red", "green.red"))
 			)
 			),
-			numericInput("transparencyTrack3", HTML("<table><tr><td>color transparency:</td>
+			numericInput("transparencyTrack3", HTML("<table><tr><td>Color transparency:</td>
 <td>
 <div class='help-tip'>
 	<p>A decimal number in [0, 1] to adjust the color transparency. The higher the value, the deeper the color.</p>
@@ -511,7 +511,7 @@ For data with four columns, a single character representing a color should be pr
 			HTML('<br>'),
 			HTML('<p>Data separated by commas.</p>'),
 			actionButton('clearText_button3','Clear data'),
-			numericInput("transparencyHlt3", HTML("<table><tr><td>color transparency:</td>
+			numericInput("transparencyHlt3", HTML("<table><tr><td>Color transparency:</td>
 <td>
 <div class='help-tip'>
 	<p>A decimal number in [0, 1] to adjust the color transparency. The higher the value, the deeper the color.</p>
@@ -564,7 +564,7 @@ For data with four columns, a single character representing a color should be pr
 			selectInput("colrectTrack4", NULL, choices = c("blue", "red", "green", "cyan", "purple", "pink", "orange", "yellow", "navy", "seagreen", "maroon", "olivedrab", "gold", "lightblue", "navy.yellow", "purple.seagreen", "navy.orange", "navy.cyan", "blue.red", "green.red"))
 			)
 			),
-			numericInput("transparencyTrack4", HTML("<table><tr><td>color transparency:</td>
+			numericInput("transparencyTrack4", HTML("<table><tr><td>Color transparency:</td>
 <td>
 <div class='help-tip'>
 	<p>A decimal number in [0, 1] to adjust the color transparency. The higher the value, the deeper the color.</p>
@@ -623,7 +623,7 @@ For example, 'grey95' or 'grey95,grey,pink,yellow'. Hex color codes as '#FF0000'
 			HTML('<br>'),
 			HTML('<p>Data separated by commas.</p>'),
 			actionButton('clearText_button4','Clear data'),
-			numericInput("transparencyHlt4", HTML("<table><tr><td>color transparency:</td>
+			numericInput("transparencyHlt4", HTML("<table><tr><td>Color transparency:</td>
 <td>
 <div class='help-tip'>
 	<p>A decimal number in [0, 1] to adjust the color transparency. The higher the value, the deeper the color.</p>
@@ -676,7 +676,7 @@ For data with four columns, a single character representing a color should be pr
 			selectInput("colrectTrack5", NULL, choices = c("blue", "red", "green", "cyan", "purple", "pink", "orange", "yellow", "navy", "seagreen", "maroon", "olivedrab", "gold", "lightblue", "navy.yellow", "purple.seagreen", "navy.orange", "navy.cyan", "blue.red", "green.red"))
 			)
 			),
-			numericInput("transparencyTrack5", HTML("<table><tr><td>color transparency:</td>
+			numericInput("transparencyTrack5", HTML("<table><tr><td>Color transparency:</td>
 <td>
 <div class='help-tip'>
 	<p>A decimal number in [0, 1] to adjust the color transparency. The higher the value, the deeper the color.</p>
@@ -734,7 +734,7 @@ For data with four columns, a single character representing a color should be pr
 			HTML('<br>'),
 			HTML('<p>Data separated by commas.</p>'),
 			actionButton('clearText_button5','Clear data'),
-			numericInput("transparencyHlt5", HTML("<table><tr><td>color transparency:</td>
+			numericInput("transparencyHlt5", HTML("<table><tr><td>Color transparency:</td>
 <td>
 <div class='help-tip'>
 	<p>A decimal number in [0, 1] to adjust the color transparency. The higher the value, the deeper the color.</p>
@@ -787,7 +787,7 @@ For data with four columns, a single character representing a color should be pr
 			selectInput("colrectTrack6", NULL, choices = c("blue", "red", "green", "cyan", "purple", "pink", "orange", "yellow", "navy", "seagreen", "maroon", "olivedrab", "gold", "lightblue", "navy.yellow", "purple.seagreen", "navy.orange", "navy.cyan", "blue.red", "green.red"))
 			)
 			),
-			numericInput("transparencyTrack6", HTML("<table><tr><td>color transparency:</td>
+			numericInput("transparencyTrack6", HTML("<table><tr><td>Color transparency:</td>
 <td>
 <div class='help-tip'>
 	<p>A decimal number in [0, 1] to adjust the color transparency. The higher the value, the deeper the color.</p>
@@ -845,7 +845,7 @@ For data with four columns, a single character representing a color should be pr
 			HTML('<br>'),
 			HTML('<p>Data separated by commas.</p>'),
 			actionButton('clearText_button6','Clear data'),
-			numericInput("transparencyHlt6", HTML("<table><tr><td>color transparency:</td>
+			numericInput("transparencyHlt6", HTML("<table><tr><td>Color transparency:</td>
 <td>
 <div class='help-tip'>
 	<p>A decimal number in [0, 1] to adjust the color transparency. The higher the value, the deeper the color.</p>
@@ -898,7 +898,7 @@ For data with four columns, a single character representing a color should be pr
 			selectInput("colrectTrack7", NULL, choices = c("blue", "red", "green", "cyan", "purple", "pink", "orange", "yellow", "navy", "seagreen", "maroon", "olivedrab", "gold", "lightblue", "navy.yellow", "purple.seagreen", "navy.orange", "navy.cyan", "blue.red", "green.red"))
 			)
 			),
-			numericInput("transparencyTrack7", HTML("<table><tr><td>color transparency:</td>
+			numericInput("transparencyTrack7", HTML("<table><tr><td>Color transparency:</td>
 <td>
 <div class='help-tip'>
 	<p>A decimal number in [0, 1] to adjust the color transparency. The higher the value, the deeper the color.</p>
@@ -956,7 +956,7 @@ For data with four columns, a single character representing a color should be pr
 			HTML('<br>'),
 			HTML('<p>Data separated by commas.</p>'),
 			actionButton('clearText_button7','Clear data'),
-			numericInput("transparencyHlt7", HTML("<table><tr><td>color transparency:</td>
+			numericInput("transparencyHlt7", HTML("<table><tr><td>Color transparency:</td>
 <td>
 <div class='help-tip'>
 	<p>A decimal number in [0, 1] to adjust the color transparency. The higher the value, the deeper the color.</p>
@@ -1009,7 +1009,7 @@ For data with four columns, a single character representing a color should be pr
 			selectInput("colrectTrack8", NULL, choices = c("blue", "red", "green", "cyan", "purple", "pink", "orange", "yellow", "navy", "seagreen", "maroon", "olivedrab", "gold", "lightblue", "navy.yellow", "purple.seagreen", "navy.orange", "navy.cyan", "blue.red", "green.red"))
 			)
 			),
-			numericInput("transparencyTrack8", HTML("<table><tr><td>color transparency:</td>
+			numericInput("transparencyTrack8", HTML("<table><tr><td>Color transparency:</td>
 <td>
 <div class='help-tip'>
 	<p>A decimal number in [0, 1] to adjust the color transparency. The higher the value, the deeper the color.</p>
@@ -1067,7 +1067,7 @@ For data with four columns, a single character representing a color should be pr
 			HTML('<br>'),
 			HTML('<p>Data separated by commas.</p>'),
 			actionButton('clearText_button8','Clear data'),
-			numericInput("transparencyHlt8", HTML("<table><tr><td>color transparency:</td>
+			numericInput("transparencyHlt8", HTML("<table><tr><td>Color transparency:</td>
 <td>
 <div class='help-tip'>
 	<p>A decimal number in [0, 1] to adjust the color transparency. The higher the value, the deeper the color.</p>
@@ -1120,7 +1120,7 @@ For data with four columns, a single character representing a color should be pr
 			selectInput("colrectTrack9", NULL, choices = c("blue", "red", "green", "cyan", "purple", "pink", "orange", "yellow", "navy", "seagreen", "maroon", "olivedrab", "gold", "lightblue", "navy.yellow", "purple.seagreen", "navy.orange", "navy.cyan", "blue.red", "green.red"))
 			)
 			),
-			numericInput("transparencyTrack9", HTML("<table><tr><td>color transparency:</td>
+			numericInput("transparencyTrack9", HTML("<table><tr><td>Color transparency:</td>
 <td>
 <div class='help-tip'>
 	<p>A decimal number in [0, 1] to adjust the color transparency. The higher the value, the deeper the color.</p>
@@ -1178,7 +1178,7 @@ For data with four columns, a single character representing a color should be pr
 			HTML('<br>'),
 			HTML('<p>Data separated by commas.</p>'),
 			actionButton('clearText_button9','Clear data'),
-			numericInput("transparencyHlt9", HTML("<table><tr><td>color transparency:</td>
+			numericInput("transparencyHlt9", HTML("<table><tr><td>Color transparency:</td>
 <td>
 <div class='help-tip'>
 	<p>A decimal number in [0, 1] to adjust the color transparency. The higher the value, the deeper the color.</p>
@@ -1231,7 +1231,7 @@ For data with four columns, a single character representing a color should be pr
 			selectInput("colrectTrack10", NULL, choices = c("blue", "red", "green", "cyan", "purple", "pink", "orange", "yellow", "navy", "seagreen", "maroon", "olivedrab", "gold", "lightblue", "navy.yellow", "purple.seagreen", "navy.orange", "navy.cyan", "blue.red", "green.red"))
 			)
 			),
-			numericInput("transparencyTrack10", HTML("<table><tr><td>color transparency:</td>
+			numericInput("transparencyTrack10", HTML("<table><tr><td>Color transparency:</td>
 <td>
 <div class='help-tip'>
 	<p>A decimal number in [0, 1] to adjust the color transparency. The higher the value, the deeper the color.</p>
@@ -1289,7 +1289,7 @@ For data with four columns, a single character representing a color should be pr
 			HTML('<br>'),
 			HTML('<p>Data separated by commas.</p>'),
 			actionButton('clearText_button10','Clear data'),
-			numericInput("transparencyHlt10", HTML("<table><tr><td>color transparency:</td>
+			numericInput("transparencyHlt10", HTML("<table><tr><td>Color transparency:</td>
 <td>
 <div class='help-tip'>
 	<p>A decimal number in [0, 1] to adjust the color transparency. The higher the value, the deeper the color.</p>
@@ -1312,7 +1312,7 @@ For data with four columns, a single character representing a color should be pr
 			conditionalPanel(condition="input.colorLinks==2",
 			textInput("selcolorLinks", NULL, value="yellowgreen")
 			),
-			numericInput("transparencyLinks", HTML("<table><tr><td>color transparency:</td>
+			numericInput("transparencyLinks", HTML("<table><tr><td>Color transparency:</td>
 <td>
 <div class='help-tip'>
 	<p>A decimal number in [0, 1] to adjust the color transparency. The higher the value, the deeper the color.</p>
@@ -1345,7 +1345,7 @@ For data with four columns, a single character representing a color should be pr
 			HTML('<br>'),
 			HTML('<p>Data separated by commas.</p>'),
 			actionButton('clearText_buttonLinks','Clear data'),
-			numericInput("transparencyhltLinks", HTML("<table><tr><td>color transparency:</td>
+			numericInput("transparencyhltLinks", HTML("<table><tr><td>Color transparency:</td>
 <td>
 <div class='help-tip'>
 	<p>A decimal number in [0, 1] to adjust the color transparency. The higher the value, the deeper the color.</p>
