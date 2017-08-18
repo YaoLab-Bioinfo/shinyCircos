@@ -7,7 +7,7 @@ This is the repository for the Shiny application presented in "shinyCircos: an R
 
 #	Use shinyCircos online
 
-shinyCircos is deployed at https://circos.shinyapps.io/shinycircos/ for online use.  
+shinyCircos is deployed at https://yimingyu.shinyapps.io/shinycircos/ for online use.  
 shinyCircos is idle until you activate it by accessing this URL.  
 So it may take some time when you access this URL for the first time.   
 Once it was activated, shinyCircos could be used smoothly and easily.
