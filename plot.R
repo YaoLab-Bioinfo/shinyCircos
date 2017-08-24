@@ -372,7 +372,7 @@ circos.genomicInitialize.new.font <-
     }
   }
 
-plotfigg <- function(input, output, trackindx, data.L, data.L1, data.L2, data.C, data.T, hltTrack.List, hltdata.List, heightSize, widthSize, colorChr, gap.width, cexAxis, cexAxislabel, unitChr, labelChr, fontsizeChr, trackChr, datatypeChr, transparencyHlt, transparencyhltLinks, transparencyTrack, transparencyLinks, marginLinks, selcolorLinks, barBoundary, coldir1Track, coldir2Track, colrectTrack, colorTrack, colorLinks, linksTrack, typeTrack, coltypeTk, rectTrack, borderTrack, directionTrack, colorlineTrack, heightTrack, marginTrack , bgcolTrack){       
+plotfigg <- function(input, output, trackindx, data.L, data.L1, data.L2, data.C, data.T, hltTrack.List, hltdata.List, heightSize, widthSize, colorChr, gap.width, cexAxis, cexAxislabel, unitChr, labelChr, fontsizeChr, trackChr, datatypeChr, transparencyHlt, transparencyhltLinks, transparencyTrack, transparencyLinks, marginLinks, selcolorLinks, barBoundary, coldir1Track, coldir2Track, colrectTrack, colorTrack, colorLinks, linksTrack, typeTrack, coltypeTk, rectTrack, rectcolTrack, rectcoldisTrack, borderTrack, directionTrack, colorlineTrack, baselineTrack, heightTrack, midhmapTrack, midpointTrack, colhmapTrack, lineshmapTrack, heightlinesTrack, marginlinesTrack, marginTrack , bgcolTrack){       
 	   ## *** The highlight regions ***
 	   if(!is.null(data.L)){
 		assign("highlightLinks",input$highlightLinks)
@@ -473,12 +473,30 @@ plotfigg <- function(input, output, trackindx, data.L, data.L1, data.L2, data.C,
 			## *** The track height ***
 			tkheight <- heightTrack[i]
 			tkheight <- as.numeric(tkheight)
+			## *** The y coordinates of baselines ***
+			tklinecoord <- baselineTrack[i]
+			tklinecoord <- as.numeric(unlist(strsplit(tklinecoord,",")))
 			## *** The baselines color ***
 			tklinecolor <- colorlineTrack[i]
 			if (nchar(tklinecolor)!=0){
 			tklinecolor <<- gsub('\\"',"",tklinecolor)
 			tklinecolor <<- gsub("0x","#", tklinecolor)
+			tklinecolor <- unlist(strsplit(tklinecolor,","))
+			tklinecolor <- rep(tklinecolor, length(tklinecoord))[1:length(tklinecoord)]  
 			}
+			## *** The fill color for track ***
+			hmapcols <- gsub('\\"',"",colhmapTrack[i])    
+			hmapcols <- unlist(strsplit(hmapcols,"\\."))   
+			## *** The midpoint ***
+			midhmap <- midhmapTrack[i]
+			## *** Select midpoint ***
+			midpoint <- midpointTrack[i]			
+			## *** Add connection ***
+			lineshmap <- lineshmapTrack[i]
+			if (lineshmap==1){
+			heightlines <<- heightlinesTrack[i]			
+			marginlines <<- marginlinesTrack[i]
+			}			
 			## *** Add border ***
 			tkborder <- borderTrack[i]
 			## *** The bar direction ***
@@ -491,7 +509,10 @@ plotfigg <- function(input, output, trackindx, data.L, data.L1, data.L2, data.C,
 			tkbarcol1 <- adjustcolor(tkbarcol1, alpha.f = tktransparency)
             tkbarcol2 <- adjustcolor(tkbarcol2, alpha.f = tktransparency)
 			}
+			## *** The data color ***
 			tkrectcol <- rectTrack[i]
+			## *** Select color ***
+			selrectcol <- rectcolTrack[i]
 			if (tkrectcol==1){
 			rectcol <- colrectTrack[i]
 			if (rectcol=="blue"){
@@ -535,6 +556,8 @@ plotfigg <- function(input, output, trackindx, data.L, data.L1, data.L2, data.C,
 			}else if (rectcol=="green.red") {
 			rectcols <<- c("#00EE00","#757800","#EE0000")
 			}
+			}else if (tkrectcol==2 & selrectcol==2) {
+			rectcols <<- rectcoldisTrack[i]
 			}
 			## *** The transparency of color ***
 			tktransparency <- transparencyTrack[i]
@@ -558,13 +581,13 @@ plotfigg <- function(input, output, trackindx, data.L, data.L1, data.L2, data.C,
 			data.TT[,ncol(data.TT)] <- as.numeric(data.TT[,ncol(data.TT)])
 			circos.genomicTrackPlotRegion(data.TT, numeric.column= columns, track.height = tkheight, track.margin=c(lkmargin,tkmargin),
                               bg.col = tkbgcol, bg.border = tkborder, panel.fun = function(region,value,...){
-							  if(nchar(tklinecolor)!=0){
+							  if(nchar(tklinecolor[1])!=0){               
 							    xlim <- get.cell.meta.data("xlim")
                                 ylim <- get.cell.meta.data("ylim")
-                                y1 <- as.numeric(quantile(ylim,probs=0.25))
-                                y2 <- as.numeric(quantile(ylim,probs=0.75))
-                                circos.lines(x=xlim,y=c(y1,y1), col=tklinecolor, lwd=0.1)
-                                circos.lines(x=xlim,y=c(y2,y2), col=tklinecolor, lwd=0.1)
+								for(i in 1:length(tklinecoord)){
+                                y1 <- as.numeric(quantile(ylim,probs=tklinecoord[i]))
+                                circos.lines(x=xlim,y=c(y1,y1), col=tklinecolor[i], lwd=0.1)
+								}
 							  }
                                 circos.genomicLines(region, value, col=tkcolor, lwd=1, lty=1, ...)
                               })
@@ -587,14 +610,14 @@ plotfigg <- function(input, output, trackindx, data.L, data.L1, data.L2, data.C,
 				  }else{
 				      circos.updatePlotRegion(sector.index = x, track.index=i+1, bg.col = tkbgcol[which(unique(data.C[,1])==x)], bg.border = tkborder)
 				  }
-				  if (nchar(tklinecolor)!=0) {
-                      xlim <- get.cell.meta.data("xlim")
-                      ylim <- get.cell.meta.data("ylim")
-                      y1 <- as.numeric(quantile(ylim,probs=0.25))
-                      y2 <- as.numeric(quantile(ylim,probs=0.75))
-                      circos.lines(x=xlim,y=c(y1,y1), col=tklinecolor, lwd=0.1)
-                      circos.lines(x=xlim,y=c(y2,y2), col=tklinecolor, lwd=0.1)
-                  }    
+				  if(nchar(tklinecolor[1])!=0){               
+					xlim <- get.cell.meta.data("xlim")
+                    ylim <- get.cell.meta.data("ylim")
+					for(i in 1:length(tklinecoord)){
+                    y1 <- as.numeric(quantile(ylim,probs=tklinecoord[i]))
+                    circos.lines(x=xlim,y=c(y1,y1), col=tklinecolor[i], lwd=0.1)
+					}
+				  }				  
                   lapply(col, function(m){
                        dattt <- datt[datt$color %in% m,]
                        ind <- which(data.TTT$id %in% dattt$id)
@@ -613,14 +636,14 @@ plotfigg <- function(input, output, trackindx, data.L, data.L1, data.L2, data.C,
 			data.TT[,ncol(data.TT)] <- as.numeric(data.TT[,ncol(data.TT)])
 			circos.genomicTrackPlotRegion(data.TT, track.height = tkheight, track.margin=c(lkmargin,tkmargin),
                               bg.col = tkbgcol, bg.border = tkborder, panel.fun = function(region,value,...){
-							  if(nchar(tklinecolor)!=0){
-							    xlim <- get.cell.meta.data("xlim")
+							  if(nchar(tklinecolor[1])!=0){               
+					            xlim <- get.cell.meta.data("xlim")
                                 ylim <- get.cell.meta.data("ylim")
-                                y1 <- as.numeric(quantile(ylim,probs=0.25))
-                                y2 <- as.numeric(quantile(ylim,probs=0.75))
-                                circos.lines(x=xlim,y=c(y1,y1), col=tklinecolor, lwd=0.1)
-                                circos.lines(x=xlim,y=c(y2,y2), col=tklinecolor, lwd=0.1)
-							  }
+					            for(i in 1:length(tklinecoord)){
+                                y1 <- as.numeric(quantile(ylim,probs=tklinecoord[i]))
+                                circos.lines(x=xlim,y=c(y1,y1), col=tklinecolor[i], lwd=0.1)
+					            }
+				              }
                                 circos.genomicPoints(region, value, numeric.column=columns-3, col=tkcolor, cex=0.5, pch=16, ...)
                               })							 		
 			assign("hltTrack",hltTrack.List[[i]])
@@ -642,14 +665,14 @@ plotfigg <- function(input, output, trackindx, data.L, data.L1, data.L2, data.C,
 				  }else{
 				      circos.updatePlotRegion(sector.index = x, track.index=i+1, bg.col = tkbgcol[which(unique(data.C[,1])==x)], bg.border = tkborder)
 				  }
-				  if (nchar(tklinecolor)!=0) {
-                      xlim <- get.cell.meta.data("xlim")
-                      ylim <- get.cell.meta.data("ylim")
-                      y1 <- as.numeric(quantile(ylim,probs=0.25))
-                      y2 <- as.numeric(quantile(ylim,probs=0.75))
-                      circos.lines(x=xlim,y=c(y1,y1), col=tklinecolor, lwd=0.1)
-                      circos.lines(x=xlim,y=c(y2,y2), col=tklinecolor, lwd=0.1)
-                  }   
+				  if(nchar(tklinecolor[1])!=0){               
+					xlim <- get.cell.meta.data("xlim")
+                    ylim <- get.cell.meta.data("ylim")
+					for(i in 1:length(tklinecoord)){
+                    y1 <- as.numeric(quantile(ylim,probs=tklinecoord[i]))
+                    circos.lines(x=xlim,y=c(y1,y1), col=tklinecolor[i], lwd=0.1)
+					}
+				  }   
                   lapply(col, function(m){
                        dattt <- datt[datt$color %in% m,]
                        circos.points((dattt[,2]+dattt[,3])/2,dattt[,4], col=m, cex=0.6, pch=16)
@@ -661,24 +684,24 @@ plotfigg <- function(input, output, trackindx, data.L, data.L1, data.L2, data.C,
 			data.TT[,ncol(data.TT)] <- as.numeric(data.TT[,ncol(data.TT)])
 			circos.genomicTrackPlotRegion(data.TT, numeric.column= columns, track.height = tkheight, track.margin=c(lkmargin,tkmargin), bg.col = tkbgcol, bg.border = tkborder, panel.fun = function(region,value,...){
 			        if(length(columns)==1 & tkbardir==1){
-					if(nchar(tklinecolor)!=0){
-							    xlim <- get.cell.meta.data("xlim")
-                                ylim <- get.cell.meta.data("ylim")
-                                y1 <- as.numeric(quantile(ylim,probs=0.25))
-                                y2 <- as.numeric(quantile(ylim,probs=0.75))
-                                circos.lines(x=xlim,y=c(y1,y1), col=tklinecolor, lwd=0.1)
-                                circos.lines(x=xlim,y=c(y2,y2), col=tklinecolor, lwd=0.1)
-							  }
+					if(nchar(tklinecolor[1])!=0){               
+					  xlim <- get.cell.meta.data("xlim")
+                      ylim <- get.cell.meta.data("ylim")
+					  for(i in 1:length(tklinecoord)){
+                      y1 <- as.numeric(quantile(ylim,probs=tklinecoord[i]))
+                      circos.lines(x=xlim,y=c(y1,y1), col=tklinecolor[i], lwd=0.1)
+					  }
+				    }
                         circos.genomicRect(region, value, ytop.column = 1, ybottom = min(data.TT[,4]), col=tkcolor, border = NA, ...)
                     }else if (length(columns)==1 & tkbardir==2) {
-					if(nchar(tklinecolor)!=0){
-							    xlim <- get.cell.meta.data("xlim")
-                                ylim <- get.cell.meta.data("ylim")
-                                y1 <- as.numeric(quantile(ylim,probs=0.25))
-                                y2 <- as.numeric(quantile(ylim,probs=0.75))
-                                circos.lines(x=xlim,y=c(y1,y1), col=tklinecolor, lwd=0.1)
-                                circos.lines(x=xlim,y=c(y2,y2), col=tklinecolor, lwd=0.1)
-							  }
+					if(nchar(tklinecolor[1])!=0){               
+					  xlim <- get.cell.meta.data("xlim")
+                      ylim <- get.cell.meta.data("ylim")
+					  for(i in 1:length(tklinecoord)){
+                      y1 <- as.numeric(quantile(ylim,probs=tklinecoord[i]))
+                      circos.lines(x=xlim,y=c(y1,y1), col=tklinecolor[i], lwd=0.1)
+					  }
+				    }
 				    tkbarvalue <- as.numeric(tkbarvalue)
 					indx <- value[,1] > tkbarvalue
                     if (length(value[indx,])!=0 & length(value[!indx,])!=0) {
@@ -690,25 +713,25 @@ plotfigg <- function(input, output, trackindx, data.L, data.L1, data.L2, data.C,
                              circos.genomicRect(region[!indx,], value[!indx,], ytop.column = 1, ybottom =  tkbarvalue, col=tkbarcol2, border = NA, ...)
                     }
 					}else if(length(columns)==2 & tkbardir==1){
-					if(nchar(tklinecolor)!=0){
-							    xlim <- get.cell.meta.data("xlim")
-                                ylim <- get.cell.meta.data("ylim")
-                                y1 <- as.numeric(quantile(ylim,probs=0.25))
-                                y2 <- as.numeric(quantile(ylim,probs=0.75))
-                                circos.lines(x=xlim,y=c(y1,y1), col=tklinecolor, lwd=0.1)
-                                circos.lines(x=xlim,y=c(y2,y2), col=tklinecolor, lwd=0.1)
-							  }
+					if(nchar(tklinecolor[1])!=0){               
+					   xlim <- get.cell.meta.data("xlim")
+                       ylim <- get.cell.meta.data("ylim")
+					   for(i in 1:length(tklinecoord)){
+                       y1 <- as.numeric(quantile(ylim,probs=tklinecoord[i]))
+                       circos.lines(x=xlim,y=c(y1,y1), col=tklinecolor[i], lwd=0.1)
+					   }
+				    }
 						circos.genomicRect(region, value, ytop.column = 1, ybottom = min(c(data.TT[,4],data.TT[,5])), col=tkcolor[1], border = NA, ...)
                         circos.genomicRect(region, value, ytop.column = 2, ybottom = min(c(data.TT[,4],data.TT[,5])), col=tkcolor[length(tkcolor)], border = NA, ...)						
 					}else if (length(columns)==2 & tkbardir==2) {
-					if(nchar(tklinecolor)!=0){
-							    xlim <- get.cell.meta.data("xlim")
-                                ylim <- get.cell.meta.data("ylim")
-                                y1 <- as.numeric(quantile(ylim,probs=0.25))
-                                y2 <- as.numeric(quantile(ylim,probs=0.75))
-                                circos.lines(x=xlim,y=c(y1,y1), col=tklinecolor, lwd=0.1)
-                                circos.lines(x=xlim,y=c(y2,y2), col=tklinecolor, lwd=0.1)
-							  }
+					if(nchar(tklinecolor[1])!=0){               
+					  xlim <- get.cell.meta.data("xlim")
+                      ylim <- get.cell.meta.data("ylim")
+					  for(i in 1:length(tklinecoord)){
+                      y1 <- as.numeric(quantile(ylim,probs=tklinecoord[i]))
+                      circos.lines(x=xlim,y=c(y1,y1), col=tklinecolor[i], lwd=0.1)
+					  }
+				    }
 						circos.genomicRect(region, value, ytop.column = 1, ybottom = min(c(data.TT[,4],data.TT[,5])), col=tkbarcol1, border = NA, ...)
                         circos.genomicRect(region, value, ytop.column = 2, ybottom = min(c(data.TT[,4],data.TT[,5])), col=tkbarcol2, border = NA, ...)						
 					}
@@ -732,14 +755,14 @@ plotfigg <- function(input, output, trackindx, data.L, data.L1, data.L2, data.C,
 				  }else{
 				      circos.updatePlotRegion(sector.index = x, track.index=i+1, bg.col = tkbgcol[which(unique(data.C[,1])==x)], bg.border = tkborder)
 				  }
-				  if (nchar(tklinecolor)!=0) {
-                      xlim <- get.cell.meta.data("xlim")
-                      ylim <- get.cell.meta.data("ylim")
-                      y1 <- as.numeric(quantile(ylim,probs=0.25))
-                      y2 <- as.numeric(quantile(ylim,probs=0.75))
-                      circos.lines(x=xlim,y=c(y1,y1), col=tklinecolor, lwd=0.1)
-                      circos.lines(x=xlim,y=c(y2,y2), col=tklinecolor, lwd=0.1)
-                  }    
+				  if(nchar(tklinecolor[1])!=0){               
+					xlim <- get.cell.meta.data("xlim")
+                    ylim <- get.cell.meta.data("ylim")
+					for(i in 1:length(tklinecoord)){
+                    y1 <- as.numeric(quantile(ylim,probs=tklinecoord[i]))
+                    circos.lines(x=xlim,y=c(y1,y1), col=tklinecolor[i], lwd=0.1)
+					}
+				  }    
                   lapply(col, function(m){
                        dattt <- datt[datt$color %in% m,]
                        ylim <- get.cell.meta.data("ylim")
@@ -763,14 +786,14 @@ plotfigg <- function(input, output, trackindx, data.L, data.L1, data.L2, data.C,
 				  }else{
 				      circos.updatePlotRegion(sector.index = x, track.index=i+1, bg.col = tkbgcol[which(unique(data.C[,1])==x)], bg.border = tkborder)
 				  }
-				  if (nchar(tklinecolor)!=0) {
-                      xlim <- get.cell.meta.data("xlim")
-                      ylim <- get.cell.meta.data("ylim")
-                      y1 <- as.numeric(quantile(ylim,probs=0.25))
-                      y2 <- as.numeric(quantile(ylim,probs=0.75))
-                      circos.lines(x=xlim,y=c(y1,y1), col=tklinecolor, lwd=0.1)
-                      circos.lines(x=xlim,y=c(y2,y2), col=tklinecolor, lwd=0.1)
-                  }    
+				  if(nchar(tklinecolor[1])!=0){               
+					xlim <- get.cell.meta.data("xlim")
+                    ylim <- get.cell.meta.data("ylim")
+					for(i in 1:length(tklinecoord)){
+                    y1 <- as.numeric(quantile(ylim,probs=tklinecoord[i]))
+                    circos.lines(x=xlim,y=c(y1,y1), col=tklinecolor[i], lwd=0.1)
+					}
+				  }    
                   lapply(col, function(m){
                        dattt <- datt[datt$color %in% m,]
                        ylim <- get.cell.meta.data("ylim")
@@ -803,6 +826,7 @@ plotfigg <- function(input, output, trackindx, data.L, data.L1, data.L2, data.C,
 			}
 			}else if (tktype=="rect") {
 			if (tkrectcol==2){
+			if (selrectcol==1){
 			data.TT[,4] <- as.numeric(as.factor(data.TT[,4]))   
 			cols=c(brewer.pal(11,'Set3'),brewer.pal(9,'Set1')[c(-1,-3,-6)],brewer.pal(8,'Dark2'),"chartreuse","aquamarine","cornflowerblue","blue","cyan","bisque1","darkorchid2","firebrick1","gold1","magenta1","olivedrab1","navy","maroon1","tan","yellow3","black","bisque4","seagreen3","plum2","yellow1","springgreen","slateblue1","lightsteelblue1","lightseagreen","limegreen")
 			selcol <- sample(cols,length(unique(data.TT[,4])))
@@ -811,12 +835,41 @@ plotfigg <- function(input, output, trackindx, data.L, data.L1, data.L2, data.C,
             circos.genomicRect(region, value, col=adjustcolor(value[[1]],alpha.f = tktransparency), border = NA, ...)  
             })
 			}else{
+			data.TT[,4] <- rectcols
+			circos.genomicTrackPlotRegion(data.TT, ylim=c(0,1),track.height = tkheight, track.margin=c(lkmargin,tkmargin), bg.col = tkbgcol, bg.border = tkborder, panel.fun = function(region,value,...){
+            circos.genomicRect(region, value, col=adjustcolor(value[[1]],alpha.f = tktransparency), border = NA, ...)  
+            })
+			}
+			}else{
 			f <- colorRamp2(breaks = c(min(data.TT[,4]), mean(data.TT[,4]), max(data.TT[,4])), colors = rectcols)
 			circos.genomicTrackPlotRegion(data.TT, ylim=c(0,1),track.height = tkheight, track.margin=c(lkmargin,tkmargin), bg.col = tkbgcol, bg.border = tkborder, panel.fun = function(region,value,...){
             circos.genomicRect(region, value, col=adjustcolor(f(value[[1]]),alpha.f = tktransparency), border = NA, ...) 
 			})
 			}
+			}		
+			else if (tktype=="heatmap") {
+			break1 <- min(as.numeric(as.matrix(data.TT[,-c(1:3)])))
+			break2 <- max(as.numeric(as.matrix(data.TT[,-c(1:3)])))
+			if (midhmap==1) {
+			midpoint <<- (break1+break2)/2
 			}
+			f <- colorRamp2(breaks = c(break1, midpoint, break2), colors = hmapcols)
+			if (lineshmap==2){
+            circos.genomicTrackPlotRegion(data.TT, track.height = tkheight, track.margin=c(lkmargin,tkmargin), stack = TRUE,
+                              panel.fun = function(region, value, ...) {
+                                circos.genomicRect(region, value, col = f(value[[1]]),
+                                                   border = f(value[[1]]), posTransform = posTransform.default, ...)
+                              }, bg.border = NA)
+            }else{
+			circos.genomicPosTransformLines(data.TT, posTransform = posTransform.default,
+                                horizontalLine = "top", track.height = heightlines, track.margin = c(0,marginlines))
+            circos.genomicTrackPlotRegion(data.TT, track.height=tkheight, track.margin=c(lkmargin,tkmargin), stack = TRUE,
+                              panel.fun = function(region, value, ...) {
+                                circos.genomicRect(region, value, col = f(value[[1]]),
+                                                   border = f(value[[1]]), posTransform = posTransform.default, ...)
+                              }, bg.border = NA)			
+			}			
+			}			
 			}}			
 			if (!is.null(data.L) && linksTrack){	
             if (is.null(data.T)){
@@ -995,12 +1048,27 @@ plotfig <- function(input, trackindx, data.L, data.L1, data.L2, data.C, data.T, 
 			## *** The track height ***
 			assign("tkheight",input[[paste("heightTrack",trackindx[i],sep="")]])
 			tkheight <- as.numeric(tkheight)
+			## *** The y coordinates of baselines ***
+			tklinecoord <- baselineTrack[i]
+			tklinecoord <- as.numeric(unlist(strsplit(tklinecoord,",")))
 			## *** The baselines color ***
-			assign("tklinecolor",input[[paste("colorlineTrack",trackindx[i],sep="")]])
+			tklinecolor <- colorlineTrack[i]
 			if (nchar(tklinecolor)!=0){
 			tklinecolor <<- gsub('\\"',"",tklinecolor)
 			tklinecolor <<- gsub("0x","#", tklinecolor)
-			}
+			tklinecolor <- unlist(strsplit(tklinecolor,","))
+			tklinecolor <- rep(tklinecolor, length(tklinecoord))[1:length(tklinecoord)]  
+			}			
+			## *** The fill color for track ***
+			assign("hmapcols",input[[paste("colhmapTrack",trackindx[i],sep="")]])
+			hmapcols <- gsub('\\"',"",hmapcols)    
+			hmapcols <- unlist(strsplit(hmapcols,"\\."))   
+			## *** Add connection ***
+			assign("lineshmap",input[[paste("lineshmapTrack",trackindx[i],sep="")]])
+			if (lineshmap==1){
+			assign("heightlines",input[[paste("heightlinesTrack",trackindx[i],sep="")]])
+			assign("marginlines",input[[paste("marginlinesTrack",trackindx[i],sep="")]])
+			}			
 			## *** Add border ***
 			assign("tkborder",input[[paste("borderTrack",trackindx[i],sep="")]])
 			## *** The bar direction ***
@@ -1013,7 +1081,10 @@ plotfig <- function(input, trackindx, data.L, data.L1, data.L2, data.C, data.T, 
 			tkbarcol1 <<- adjustcolor(tkbarcol1, alpha.f = tktransparency)
             tkbarcol2 <<- adjustcolor(tkbarcol2, alpha.f = tktransparency)
 			}
+			## *** The data color ***
 			assign("tkrectcol",input[[paste("rectTrack",trackindx[i],sep="")]])
+			## *** Select color ***
+			assign("selrectcol",input[[paste("rectcolTrack",trackindx[i],sep="")]])
 			if (tkrectcol==1){
 			assign("rectcol",input[[paste("colrectTrack",trackindx[i],sep="")]])
 			if (rectcol=="blue"){
@@ -1080,13 +1151,13 @@ plotfig <- function(input, trackindx, data.L, data.L1, data.L2, data.C, data.T, 
 			data.TT[,ncol(data.TT)] <- as.numeric(data.TT[,ncol(data.TT)])
 			circos.genomicTrackPlotRegion(data.TT, numeric.column= columns, track.height = tkheight, track.margin=c(lkmargin,tkmargin),
                               bg.col = tkbgcol, bg.border = tkborder, panel.fun = function(region,value,...){
-							  if(nchar(tklinecolor)!=0){
+							  if(nchar(tklinecolor[1])!=0){
 							    xlim <- get.cell.meta.data("xlim")
                                 ylim <- get.cell.meta.data("ylim")
-                                y1 <- as.numeric(quantile(ylim,probs=0.25))
-                                y2 <- as.numeric(quantile(ylim,probs=0.75))
-                                circos.lines(x=xlim,y=c(y1,y1), col=tklinecolor, lwd=0.1)
-                                circos.lines(x=xlim,y=c(y2,y2), col=tklinecolor, lwd=0.1)
+                                for(i in 1:length(tklinecoord)){
+                                y1 <- as.numeric(quantile(ylim,probs=tklinecoord[i]))
+                                circos.lines(x=xlim,y=c(y1,y1), col=tklinecolor[i], lwd=0.1)
+								}
 							  }
                                 circos.genomicLines(region, value, col=tkcolor, lwd=1, lty=1, ...)
                               })
@@ -1109,14 +1180,14 @@ plotfig <- function(input, trackindx, data.L, data.L1, data.L2, data.C, data.T, 
 				  }else{
 				      circos.updatePlotRegion(sector.index = x, track.index=i+1, bg.col = tkbgcol[which(unique(data.C[,1])==x)], bg.border = tkborder)
 				  }
-				  if (nchar(tklinecolor)!=0) {
-                      xlim <- get.cell.meta.data("xlim")
-                      ylim <- get.cell.meta.data("ylim")
-                      y1 <- as.numeric(quantile(ylim,probs=0.25))
-                      y2 <- as.numeric(quantile(ylim,probs=0.75))
-                      circos.lines(x=xlim,y=c(y1,y1), col=tklinecolor, lwd=0.1)
-                      circos.lines(x=xlim,y=c(y2,y2), col=tklinecolor, lwd=0.1)
-                  }    
+				  if(nchar(tklinecolor[1])!=0){               
+					xlim <- get.cell.meta.data("xlim")
+                    ylim <- get.cell.meta.data("ylim")
+					for(i in 1:length(tklinecoord)){
+                    y1 <- as.numeric(quantile(ylim,probs=tklinecoord[i]))
+                    circos.lines(x=xlim,y=c(y1,y1), col=tklinecolor[i], lwd=0.1)
+					}
+				  }    
                   lapply(col, function(m){
                        dattt <- datt[datt$color %in% m,]
                        ind <- which(data.TTT$id %in% dattt$id)
@@ -1135,14 +1206,14 @@ plotfig <- function(input, trackindx, data.L, data.L1, data.L2, data.C, data.T, 
 			data.TT[,ncol(data.TT)] <- as.numeric(data.TT[,ncol(data.TT)])
 			circos.genomicTrackPlotRegion(data.TT, track.height = tkheight, track.margin=c(lkmargin,tkmargin),
                               bg.col = tkbgcol, bg.border = tkborder, panel.fun = function(region,value,...){
-							  if(nchar(tklinecolor)!=0){
-							    xlim <- get.cell.meta.data("xlim")
+							  if(nchar(tklinecolor[1])!=0){               
+					            xlim <- get.cell.meta.data("xlim")
                                 ylim <- get.cell.meta.data("ylim")
-                                y1 <- as.numeric(quantile(ylim,probs=0.25))
-                                y2 <- as.numeric(quantile(ylim,probs=0.75))
-                                circos.lines(x=xlim,y=c(y1,y1), col=tklinecolor, lwd=0.1)
-                                circos.lines(x=xlim,y=c(y2,y2), col=tklinecolor, lwd=0.1)
-							  }
+					            for(i in 1:length(tklinecoord)){
+                                y1 <- as.numeric(quantile(ylim,probs=tklinecoord[i]))
+                                circos.lines(x=xlim,y=c(y1,y1), col=tklinecolor[i], lwd=0.1)
+					            }
+				              }
                                 circos.genomicPoints(region, value, numeric.column=columns-3, col=tkcolor, cex=0.5, pch=16, ...)
                               })							 		
 			assign("hltTrack",hltTrack.List[[i]])
@@ -1164,14 +1235,14 @@ plotfig <- function(input, trackindx, data.L, data.L1, data.L2, data.C, data.T, 
 				  }else{
 				      circos.updatePlotRegion(sector.index = x, track.index=i+1, bg.col = tkbgcol[which(unique(data.C[,1])==x)], bg.border = tkborder)
 				  }
-				  if (nchar(tklinecolor)!=0) {
-                      xlim <- get.cell.meta.data("xlim")
-                      ylim <- get.cell.meta.data("ylim")
-                      y1 <- as.numeric(quantile(ylim,probs=0.25))
-                      y2 <- as.numeric(quantile(ylim,probs=0.75))
-                      circos.lines(x=xlim,y=c(y1,y1), col=tklinecolor, lwd=0.1)
-                      circos.lines(x=xlim,y=c(y2,y2), col=tklinecolor, lwd=0.1)
-                  }   
+				  if(nchar(tklinecolor[1])!=0){               
+					xlim <- get.cell.meta.data("xlim")
+                    ylim <- get.cell.meta.data("ylim")
+					for(i in 1:length(tklinecoord)){
+                    y1 <- as.numeric(quantile(ylim,probs=tklinecoord[i]))
+                    circos.lines(x=xlim,y=c(y1,y1), col=tklinecolor[i], lwd=0.1)
+					}
+				  }   
                   lapply(col, function(m){
                        dattt <- datt[datt$color %in% m,]
                        circos.points((dattt[,2]+dattt[,3])/2,dattt[,4], col=m, cex=0.6, pch=16)
@@ -1183,24 +1254,24 @@ plotfig <- function(input, trackindx, data.L, data.L1, data.L2, data.C, data.T, 
 			data.TT[,ncol(data.TT)] <- as.numeric(data.TT[,ncol(data.TT)])
 			circos.genomicTrackPlotRegion(data.TT, numeric.column= columns, track.height = tkheight, track.margin=c(lkmargin,tkmargin), bg.col = tkbgcol, bg.border = tkborder, panel.fun = function(region,value,...){
 			        if(length(columns)==1 & tkbardir==1){
-					if(nchar(tklinecolor)!=0){
-							    xlim <- get.cell.meta.data("xlim")
-                                ylim <- get.cell.meta.data("ylim")
-                                y1 <- as.numeric(quantile(ylim,probs=0.25))
-                                y2 <- as.numeric(quantile(ylim,probs=0.75))
-                                circos.lines(x=xlim,y=c(y1,y1), col=tklinecolor, lwd=0.1)
-                                circos.lines(x=xlim,y=c(y2,y2), col=tklinecolor, lwd=0.1)
-							  }
+					if(nchar(tklinecolor[1])!=0){               
+					  xlim <- get.cell.meta.data("xlim")
+                      ylim <- get.cell.meta.data("ylim")
+					  for(i in 1:length(tklinecoord)){
+                      y1 <- as.numeric(quantile(ylim,probs=tklinecoord[i]))
+                      circos.lines(x=xlim,y=c(y1,y1), col=tklinecolor[i], lwd=0.1)
+					  }
+				    }
                         circos.genomicRect(region, value, ytop.column = 1, ybottom = min(data.TT[,4]), col=tkcolor, border = NA, ...)
                     }else if (length(columns)==1 & tkbardir==2) {
-					if(nchar(tklinecolor)!=0){
-							    xlim <- get.cell.meta.data("xlim")
-                                ylim <- get.cell.meta.data("ylim")
-                                y1 <- as.numeric(quantile(ylim,probs=0.25))
-                                y2 <- as.numeric(quantile(ylim,probs=0.75))
-                                circos.lines(x=xlim,y=c(y1,y1), col=tklinecolor, lwd=0.1)
-                                circos.lines(x=xlim,y=c(y2,y2), col=tklinecolor, lwd=0.1)
-							  }
+					if(nchar(tklinecolor[1])!=0){               
+					  xlim <- get.cell.meta.data("xlim")
+                      ylim <- get.cell.meta.data("ylim")
+					  for(i in 1:length(tklinecoord)){
+                      y1 <- as.numeric(quantile(ylim,probs=tklinecoord[i]))
+                      circos.lines(x=xlim,y=c(y1,y1), col=tklinecolor[i], lwd=0.1)
+					  }
+				    }
 				    tkbarvalue <- as.numeric(tkbarvalue)
 					indx <- value[,1] > tkbarvalue
                     if (length(value[indx,])!=0 & length(value[!indx,])!=0) {
@@ -1212,25 +1283,25 @@ plotfig <- function(input, trackindx, data.L, data.L1, data.L2, data.C, data.T, 
                              circos.genomicRect(region[!indx,], value[!indx,], ytop.column = 1, ybottom =  tkbarvalue, col=tkbarcol2, border = NA, ...)
                     }
 					}else if(length(columns)==2 & tkbardir==1){
-					if(nchar(tklinecolor)!=0){
-							    xlim <- get.cell.meta.data("xlim")
-                                ylim <- get.cell.meta.data("ylim")
-                                y1 <- as.numeric(quantile(ylim,probs=0.25))
-                                y2 <- as.numeric(quantile(ylim,probs=0.75))
-                                circos.lines(x=xlim,y=c(y1,y1), col=tklinecolor, lwd=0.1)
-                                circos.lines(x=xlim,y=c(y2,y2), col=tklinecolor, lwd=0.1)
-							  }
+					if(nchar(tklinecolor[1])!=0){               
+					  xlim <- get.cell.meta.data("xlim")
+                      ylim <- get.cell.meta.data("ylim")
+					  for(i in 1:length(tklinecoord)){
+                      y1 <- as.numeric(quantile(ylim,probs=tklinecoord[i]))
+                      circos.lines(x=xlim,y=c(y1,y1), col=tklinecolor[i], lwd=0.1)
+					  }
+				    }
 						circos.genomicRect(region, value, ytop.column = 1, ybottom = min(c(data.TT[,4],data.TT[,5])), col=tkcolor[1], border = NA, ...)
                         circos.genomicRect(region, value, ytop.column = 2, ybottom = min(c(data.TT[,4],data.TT[,5])), col=tkcolor[length(tkcolor)], border = NA, ...)						
 					}else if (length(columns)==2 & tkbardir==2) {
-					if(nchar(tklinecolor)!=0){
-							    xlim <- get.cell.meta.data("xlim")
-                                ylim <- get.cell.meta.data("ylim")
-                                y1 <- as.numeric(quantile(ylim,probs=0.25))
-                                y2 <- as.numeric(quantile(ylim,probs=0.75))
-                                circos.lines(x=xlim,y=c(y1,y1), col=tklinecolor, lwd=0.1)
-                                circos.lines(x=xlim,y=c(y2,y2), col=tklinecolor, lwd=0.1)
-							  }
+					if(nchar(tklinecolor[1])!=0){               
+					  xlim <- get.cell.meta.data("xlim")
+                      ylim <- get.cell.meta.data("ylim")
+					  for(i in 1:length(tklinecoord)){
+                      y1 <- as.numeric(quantile(ylim,probs=tklinecoord[i]))
+                      circos.lines(x=xlim,y=c(y1,y1), col=tklinecolor[i], lwd=0.1)
+					  }
+				    }
 						circos.genomicRect(region, value, ytop.column = 1, ybottom = min(c(data.TT[,4],data.TT[,5])), col=tkbarcol1, border = NA, ...)
                         circos.genomicRect(region, value, ytop.column = 2, ybottom = min(c(data.TT[,4],data.TT[,5])), col=tkbarcol2, border = NA, ...)						
 					}
@@ -1254,14 +1325,14 @@ plotfig <- function(input, trackindx, data.L, data.L1, data.L2, data.C, data.T, 
 				  }else{
 				      circos.updatePlotRegion(sector.index = x, track.index=i+1, bg.col = tkbgcol[which(unique(data.C[,1])==x)], bg.border = tkborder)
 				  }
-				  if (nchar(tklinecolor)!=0) {
-                      xlim <- get.cell.meta.data("xlim")
-                      ylim <- get.cell.meta.data("ylim")
-                      y1 <- as.numeric(quantile(ylim,probs=0.25))
-                      y2 <- as.numeric(quantile(ylim,probs=0.75))
-                      circos.lines(x=xlim,y=c(y1,y1), col=tklinecolor, lwd=0.1)
-                      circos.lines(x=xlim,y=c(y2,y2), col=tklinecolor, lwd=0.1)
-                  }   
+				  if(nchar(tklinecolor[1])!=0){               
+					xlim <- get.cell.meta.data("xlim")
+                    ylim <- get.cell.meta.data("ylim")
+					for(i in 1:length(tklinecoord)){
+                    y1 <- as.numeric(quantile(ylim,probs=tklinecoord[i]))
+                    circos.lines(x=xlim,y=c(y1,y1), col=tklinecolor[i], lwd=0.1)
+					}
+				  }   
                   lapply(col, function(m){
                        dattt <- datt[datt$color %in% m,]
                        ylim <- get.cell.meta.data("ylim")
@@ -1285,14 +1356,14 @@ plotfig <- function(input, trackindx, data.L, data.L1, data.L2, data.C, data.T, 
 				  }else{
 				      circos.updatePlotRegion(sector.index = x, track.index=i+1, bg.col = tkbgcol[which(unique(data.C[,1])==x)], bg.border = tkborder)
 				  }
-				  if (nchar(tklinecolor)!=0) {
-                      xlim <- get.cell.meta.data("xlim")
-                      ylim <- get.cell.meta.data("ylim")
-                      y1 <- as.numeric(quantile(ylim,probs=0.25))
-                      y2 <- as.numeric(quantile(ylim,probs=0.75))
-                      circos.lines(x=xlim,y=c(y1,y1), col=tklinecolor, lwd=0.1)
-                      circos.lines(x=xlim,y=c(y2,y2), col=tklinecolor, lwd=0.1)
-                  }    
+				  if(nchar(tklinecolor[1])!=0){               
+					xlim <- get.cell.meta.data("xlim")
+                    ylim <- get.cell.meta.data("ylim")
+					for(i in 1:length(tklinecoord)){
+                    y1 <- as.numeric(quantile(ylim,probs=tklinecoord[i]))
+                    circos.lines(x=xlim,y=c(y1,y1), col=tklinecolor[i], lwd=0.1)
+					}
+				  }    
                   lapply(col, function(m){
                        dattt <- datt[datt$color %in% m,]
                        ylim <- get.cell.meta.data("ylim")
@@ -1325,20 +1396,52 @@ plotfig <- function(input, trackindx, data.L, data.L1, data.L2, data.C, data.T, 
 			}
 			}else if (tktype=="rect") {
 			if (tkrectcol==2){
+			if (selrectcol==1){
 			data.TT[,4] <- as.numeric(as.factor(data.TT[,4]))   
 			cols=c(brewer.pal(11,'Set3'),brewer.pal(9,'Set1')[c(-1,-3,-6)],brewer.pal(8,'Dark2'),"chartreuse","aquamarine","cornflowerblue","blue","cyan","bisque1","darkorchid2","firebrick1","gold1","magenta1","olivedrab1","navy","maroon1","tan","yellow3","black","bisque4","seagreen3","plum2","yellow1","springgreen","slateblue1","lightsteelblue1","lightseagreen","limegreen")
 			selcol <- sample(cols,length(unique(data.TT[,4])))
 			data.TT[,4] <- selcol[data.TT[,4]]
 			circos.genomicTrackPlotRegion(data.TT, ylim=c(0,1),track.height = tkheight, track.margin=c(lkmargin,tkmargin), bg.col = tkbgcol, bg.border = tkborder, panel.fun = function(region,value,...){
-            circos.genomicRect(region, value, col=adjustcolor(value[[1]],alpha.f = tktransparency), border = NA, ...)   
+            circos.genomicRect(region, value, col=adjustcolor(value[[1]],alpha.f = tktransparency), border = NA, ...)  
             })
+			}else{
+			data.TT[,4] <- rectcols
+			circos.genomicTrackPlotRegion(data.TT, ylim=c(0,1),track.height = tkheight, track.margin=c(lkmargin,tkmargin), bg.col = tkbgcol, bg.border = tkborder, panel.fun = function(region,value,...){
+            circos.genomicRect(region, value, col=adjustcolor(value[[1]],alpha.f = tktransparency), border = NA, ...)  
+            })
+			}
 			}else{
 			f <- colorRamp2(breaks = c(min(data.TT[,4]), mean(data.TT[,4]), max(data.TT[,4])), colors = rectcols)
 			circos.genomicTrackPlotRegion(data.TT, ylim=c(0,1),track.height = tkheight, track.margin=c(lkmargin,tkmargin), bg.col = tkbgcol, bg.border = tkborder, panel.fun = function(region,value,...){
-            circos.genomicRect(region, value, col=adjustcolor(f(value[[1]]),alpha.f = tktransparency), border = NA, ...)   
+            circos.genomicRect(region, value, col=adjustcolor(f(value[[1]]),alpha.f = tktransparency), border = NA, ...) 
 			})
 			}
+			}			
+			else if (tktype=="heatmap") {
+			break1 <- min(as.numeric(as.matrix(data.TT[,-c(1:3)])))
+			break2 <- max(as.numeric(as.matrix(data.TT[,-c(1:3)])))
+			if (midhmapTrack[i]==1) {
+			midpoint <<- (break1+break2)/2
+			}else{
+			midpoint <<- midpointTrack[i]
 			}
+			f <- colorRamp2(breaks = c(break1, midpoint, break2), colors = hmapcols)
+			if (lineshmap==2){
+            circos.genomicTrackPlotRegion(data.TT, track.height = tkheight, track.margin=c(lkmargin,tkmargin), stack = TRUE,
+                              panel.fun = function(region, value, ...) {
+                                circos.genomicRect(region, value, col = f(value[[1]]),
+                                                   border = f(value[[1]]), posTransform = posTransform.default, ...)
+                              }, bg.border = NA)
+            }else{
+			circos.genomicPosTransformLines(data.TT, posTransform = posTransform.default,
+                                horizontalLine = "top", track.height = heightlines, track.margin = c(0,marginlines))
+            circos.genomicTrackPlotRegion(data.TT, track.height=tkheight, track.margin=c(lkmargin,tkmargin), stack = TRUE,
+                              panel.fun = function(region, value, ...) {
+                                circos.genomicRect(region, value, col = f(value[[1]]),
+                                                   border = f(value[[1]]), posTransform = posTransform.default, ...)
+                              }, bg.border = NA)
+			}			
+			}		
 			}}			
 			if (!is.null(data.L) && input$linksTrack){
             if (is.null(data.T)){

@@ -12,7 +12,7 @@ shinyServer(function(input, output, session) {
     if (input$submit1>0) {
       isolate({
           inFile <- input$uploadChr
-          if (is.null(input$uploadChr))  {
+          if (is.null(input$uploadChr)) {
 		  data.C <<- NULL
 		  }else{
           data.C <<- read.table(inFile$datapath, as.is=TRUE, head=TRUE, sep=",")
@@ -104,9 +104,18 @@ shinyServer(function(input, output, session) {
 		  colrectTrack <<- c()
 		  transparencyTrack <<- c()
 		  rectTrack <<- c()
+		  rectcolTrack <<- c()
+		  rectcoldisTrack <<- c()
 		  borderTrack <<- c()
 		  directionTrack <<- c()
 		  colorlineTrack <<- c()
+		  baselineTrack <<- c()
+		  midpointTrack <<- c()
+		  midhmapTrack <<- c()
+		  colhmapTrack <<- c()
+		  lineshmapTrack <<- c()
+		  heightlinesTrack <<- c()
+		  marginlinesTrack <<- c()
 		  heightTrack <<- c()
 		  marginTrack <<- c()
 		  bgcolTrack <<- c()
@@ -153,9 +162,18 @@ shinyServer(function(input, output, session) {
 			colrectTrack <<- c(colrectTrack,input[[paste("colrectTrack",trackindx[k],sep="")]])
 			transparencyTrack <<- c(transparencyTrack,input[[paste("transparencyTrack",trackindx[k],sep="")]])
 			rectTrack <<- c(rectTrack,input[[paste("rectTrack",trackindx[k],sep="")]])
+			rectcolTrack <<- c(rectcolTrack,input[[paste("rectcolTrack",trackindx[k],sep="")]])
+			rectcoldisTrack <<- c(rectcoldisTrack,input[[paste("rectcoldisTrack",trackindx[k],sep="")]])
 			borderTrack <<- c(borderTrack,input[[paste("borderTrack",trackindx[k],sep="")]])
 			directionTrack <<- c(directionTrack,input[[paste("directionTrack",trackindx[k],sep="")]])
 			colorlineTrack <<- c(colorlineTrack,input[[paste("colorlineTrack",trackindx[k],sep="")]])
+			baselineTrack <<- c(baselineTrack,input[[paste("baselineTrack",trackindx[k],sep="")]])
+			midpointTrack <<- c(midpointTrack,input[[paste("midpointTrack",trackindx[k],sep="")]])
+			midhmapTrack <<- c(midhmapTrack,input[[paste("midhmapTrack",trackindx[k],sep="")]])
+			colhmapTrack <<- c(colhmapTrack,input[[paste("colhmapTrack",trackindx[k],sep="")]])
+			lineshmapTrack <<- c(lineshmapTrack,input[[paste("lineshmapTrack",trackindx[k],sep="")]])
+			heightlinesTrack <<- c(heightlinesTrack,input[[paste("heightlinesTrack",trackindx[k],sep="")]])
+			marginlinesTrack <<- c(marginlinesTrack,input[[paste("marginlinesTrack",trackindx[k],sep="")]])
 			heightTrack <<- c(heightTrack,input[[paste("heightTrack",trackindx[k],sep="")]])
 			marginTrack <<- c(marginTrack,input[[paste("marginTrack",trackindx[k],sep="")]])
 			bgcolTrack <<- c(bgcolTrack,input[[paste("bgcolTrack",trackindx[k],sep="")]])
@@ -183,7 +201,7 @@ shinyServer(function(input, output, session) {
 	gap.width = gap.width, cexAxis = cexAxis, cexAxislabel = cexAxislabel, unitChr = unitChr, labelChr = labelChr, fontsizeChr = fontsizeChr, colorTrack = colorTrack, transparencyHlt = transparencyHlt,
 	trackChr = trackChr, datatypeChr = datatypeChr, transparencyhltLinks = transparencyhltLinks, transparencyTrack = transparencyTrack, transparencyLinks = transparencyLinks,
 	colorLinks = colorLinks, linksTrack = linksTrack, typeTrack = typeTrack, coltypeTk = coltypeTk, marginLinks = marginLinks, selcolorLinks = selcolorLinks, colrectTrack = colrectTrack,
-	rectTrack = rectTrack, borderTrack = borderTrack, directionTrack = directionTrack, colorlineTrack = colorlineTrack, heightTrack = heightTrack, marginTrack = marginTrack , bgcolTrack = bgcolTrack)
+	rectTrack = rectTrack, rectcolTrack = rectcolTrack, rectcoldisTrack = rectcoldisTrack, borderTrack = borderTrack, directionTrack = directionTrack, colorlineTrack = colorlineTrack, baselineTrack = baselineTrack, midpointTrack = midpointTrack, midhmapTrack = midhmapTrack, colhmapTrack = colhmapTrack, lineshmapTrack = lineshmapTrack, heightlinesTrack = heightlinesTrack, marginlinesTrack = marginlinesTrack, heightTrack = heightTrack, marginTrack = marginTrack , bgcolTrack = bgcolTrack)
 	    })
 	  } else {NULL}
 	})

@@ -25,6 +25,7 @@ shinyUI(fluidPage(theme="newstyle.css",
 	                                      </div></td></tr>
 	                                      </table>
 	                                      "), multiple = FALSE),
+				tags$script('$( "#uploadChr" ).on( "click", function() { this.value = null; });'),
 				radioButtons("datatypeChr", HTML("<table><tr><td><strong>Data type</strong></td>
 <td>
 <div class='help-tip'>
@@ -47,7 +48,8 @@ shinyUI(fluidPage(theme="newstyle.css",
 				radioButtons("uploadtrack1", NULL, c("NULL" = "1", "Upload" = "2"), "1"),
 				conditionalPanel(condition="input.uploadtrack1 == '2'",
 				fileInput("uploadTrackfile1", "Upload track1 data:", multiple = FALSE),
-				selectInput("typeTrack1", "Plot type:", choices = c("point", "line", "bar", "rect"), selected="point")
+				tags$script('$( "#uploadTrackfile1" ).on( "click", function() { this.value = null; });'),
+				selectInput("typeTrack1", "Plot type:", choices = c("point", "line", "bar", "rect", "heatmap"), selected="point")
 				)
 				),
 				checkboxInput("seltrack2", HTML("<font color='red'>Track2</font>"), FALSE),
@@ -55,7 +57,8 @@ shinyUI(fluidPage(theme="newstyle.css",
 				radioButtons("uploadtrack2", NULL, c("NULL" = "1", "Upload" = "2"), "1"),
 				conditionalPanel(condition="input.uploadtrack2 == '2'",
 				fileInput("uploadTrackfile2", "Upload track2 data:", multiple = FALSE),
-				selectInput("typeTrack2", "Plot type:", choices = c("point", "line", "bar", "rect"), selected="line")
+				tags$script('$( "#uploadTrackfile2" ).on( "click", function() { this.value = null; });'),
+				selectInput("typeTrack2", "Plot type:", choices = c("point", "line", "bar", "rect", "heatmap"), selected="line")
 				)
 				),
 				checkboxInput("seltrack3", HTML("<font color='red'>Track3</font>"), FALSE),
@@ -63,7 +66,8 @@ shinyUI(fluidPage(theme="newstyle.css",
 				radioButtons("uploadtrack3", NULL, c("NULL" = "1", "Upload" = "2"), "1"),
 				conditionalPanel(condition="input.uploadtrack3 == '2'",
 				fileInput("uploadTrackfile3", "Upload track3 data:", multiple = FALSE),
-				selectInput("typeTrack3", "Plot type:", choices = c("point", "line", "bar", "rect"), selected="bar")
+				tags$script('$( "#uploadTrackfile3" ).on( "click", function() { this.value = null; });'),
+				selectInput("typeTrack3", "Plot type:", choices = c("point", "line", "bar", "rect", "heatmap"), selected="bar")
 				)
 				),
 				checkboxInput("seltrack4", HTML("<font color='red'>Track4</font>"), FALSE),
@@ -71,7 +75,8 @@ shinyUI(fluidPage(theme="newstyle.css",
 				radioButtons("uploadtrack4", NULL, c("NULL" = "1", "Upload" = "2"), "1"),
 				conditionalPanel(condition="input.uploadtrack4 == '2'",
 				fileInput("uploadTrackfile4", "Upload track4 data:", multiple = FALSE),
-				selectInput("typeTrack4", "Plot type:", choices = c("point", "line", "bar", "rect"), selected="bar")
+				tags$script('$( "#uploadTrackfile4" ).on( "click", function() { this.value = null; });'),
+				selectInput("typeTrack4", "Plot type:", choices = c("point", "line", "bar", "rect", "heatmap"), selected="heatmap")
 				)
 				),
 				checkboxInput("seltrack5", HTML("<font color='red'>Track5</font>"), FALSE),
@@ -79,7 +84,8 @@ shinyUI(fluidPage(theme="newstyle.css",
 				radioButtons("uploadtrack5", NULL, c("NULL" = "1", "Upload" = "2"), "1"),
 				conditionalPanel(condition="input.uploadtrack5 == '2'",
 				fileInput("uploadTrackfile5", "Upload track5 data:", multiple = FALSE),
-				selectInput("typeTrack5", "Plot type:", choices = c("point", "line", "bar", "rect"), selected="rect")
+				tags$script('$( "#uploadTrackfile5" ).on( "click", function() { this.value = null; });'),
+				selectInput("typeTrack5", "Plot type:", choices = c("point", "line", "bar", "rect", "heatmap"), selected="bar")
 				)
 				),
 				checkboxInput("seltrack6", HTML("<font color='red'>Track6</font>"), FALSE),
@@ -87,7 +93,8 @@ shinyUI(fluidPage(theme="newstyle.css",
 				radioButtons("uploadtrack6", NULL, c("NULL" = "1", "Upload" = "2"), "1"),
 				conditionalPanel(condition="input.uploadtrack6 == '2'",
 				fileInput("uploadTrackfile6", "Upload track6 data:", multiple = FALSE),
-				selectInput("typeTrack6", "Plot type:", choices = c("point", "line", "bar", "rect"), selected="point")
+				tags$script('$( "#uploadTrackfile6" ).on( "click", function() { this.value = null; });'),
+				selectInput("typeTrack6", "Plot type:", choices = c("point", "line", "bar", "rect", "heatmap"), selected="rect")
 				)
 				),
 				checkboxInput("seltrack7", HTML("<font color='red'>Track7</font>"), FALSE),
@@ -95,7 +102,8 @@ shinyUI(fluidPage(theme="newstyle.css",
 				radioButtons("uploadtrack7", NULL, c("NULL" = "1", "Upload" = "2"), "1"),
 				conditionalPanel(condition="input.uploadtrack7 == '2'",
 				fileInput("uploadTrackfile7", "Upload track7 data:", multiple = FALSE),
-				selectInput("typeTrack7", "Plot type:", choices = c("point", "line", "bar", "rect"), selected="bar")
+				tags$script('$( "#uploadTrackfile7" ).on( "click", function() { this.value = null; });'),
+				selectInput("typeTrack7", "Plot type:", choices = c("point", "line", "bar", "rect", "heatmap"), selected="point")
 				)
 				),
 				checkboxInput("seltrack8", HTML("<font color='red'>Track8</font>"), FALSE),
@@ -103,7 +111,8 @@ shinyUI(fluidPage(theme="newstyle.css",
 				radioButtons("uploadtrack8", NULL, c("NULL" = "1", "Upload" = "2"), "1"),
 				conditionalPanel(condition="input.uploadtrack8 == '2'",
 				fileInput("uploadTrackfile8", "Upload track8 data:", multiple = FALSE),
-				selectInput("typeTrack8", "Plot type:", choices = c("point", "line", "bar", "rect"), selected="bar")
+				tags$script('$( "#uploadTrackfile8" ).on( "click", function() { this.value = null; });'),
+				selectInput("typeTrack8", "Plot type:", choices = c("point", "line", "bar", "rect" ,"heatmap"), selected="bar")
 				)
 				),
 				checkboxInput("seltrack9", HTML("<font color='red'>Track9</font>"), FALSE),
@@ -111,7 +120,8 @@ shinyUI(fluidPage(theme="newstyle.css",
 				radioButtons("uploadtrack9", NULL, c("NULL" = "1", "Upload" = "2"), "1"),
 				conditionalPanel(condition="input.uploadtrack9 == '2'",
 				fileInput("uploadTrackfile9", "Upload track9 data:", multiple = FALSE),
-				selectInput("typeTrack9", "Plot type:", choices = c("point", "line", "bar", "rect"), selected="rect")
+				tags$script('$( "#uploadTrackfile9" ).on( "click", function() { this.value = null; });'),
+				selectInput("typeTrack9", "Plot type:", choices = c("point", "line", "bar", "rect", "heatmap"), selected="rect")
 				)
 				),
 				checkboxInput("seltrack10", HTML("<font color='red'>Track10</font>"), FALSE),
@@ -119,7 +129,8 @@ shinyUI(fluidPage(theme="newstyle.css",
 				radioButtons("uploadtrack10", NULL, c("NULL" = "1", "Upload" = "2"), "1"),
 				conditionalPanel(condition="input.uploadtrack10 == '2'",
 				fileInput("uploadTrackfile10", "Upload track10 data:", multiple = FALSE),
-				selectInput("typeTrack10", "Plot type:", choices = c("point", "line", "bar", "rect"), selected="line")
+				tags$script('$( "#uploadTrackfile10" ).on( "click", function() { this.value = null; });'),
+				selectInput("typeTrack10", "Plot type:", choices = c("point", "line", "bar", "rect", "heatmap"), selected="line")
 			    )
 				),	
 				HTML('<br>'),
@@ -134,7 +145,8 @@ shinyUI(fluidPage(theme="newstyle.css",
 	                                      "),
 				checkboxInput("linksTrack", "Links data", FALSE),
 				conditionalPanel(condition="input.linksTrack",
-				fileInput("linksFile", "Upload region data:", multiple = FALSE)
+				fileInput("linksFile", "Upload region data:", multiple = FALSE),
+				tags$script('$( "#linksFile" ).on( "click", function() { this.value = null; });')
 				),
 				HTML('<br>'),
 				HTML('<p>All uploaded data should bes in .csv format.</p>'),
@@ -199,7 +211,7 @@ the fourth column of the uploaded data will be divided into two groups based on 
 			textInput("coldir2Track1", "Inside color:", value="cyan")
 			)
 			),
-			conditionalPanel(condition="input.typeTrack1!='rect'",
+			conditionalPanel(condition="input.typeTrack1!='rect' & input.typeTrack1!='heatmap'",
 			conditionalPanel(condition="input.typeTrack1!='bar' | input.directionTrack1=='1'",
 			radioButtons("coltypeTrack1", HTML("<table><tr><td><strong>Data color</strong></td>
 <td>
@@ -221,28 +233,49 @@ For data with four columns, a single character representing a color should be pr
 	<p>The rects are filled with discrete or gradual colors. For discrete data, the fourth column should be a discrete character vector with no more than 50 groups. For gradual data, the fourth column should be a numeric vector. See example data for more details.</p>
 	                                      </div></td></tr>
 	                                      </table>
-	                                      "), c("Gradual" = "1", "Discrete" = "2"), selected="1"),
+	                                      "), c("Gradual" = "1", "Discrete" = "2"), selected="1"),										  
+			conditionalPanel(condition="input.rectTrack1=='2'",
+			radioButtons("rectcolTrack1", HTML("<table><tr><td><strong>Select color</strong></td>
+<td>
+<div class='help-tip'>
+	<p>The color to be used to plot the data, which can be random assigned by the application or specified by the users. For random type, the fourth column of data should be a discrete character vector with no more than 50 groups. For specific type, all groups of data will be filled in a specific color. Hex color codes as '#FF0000' are also supported.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), c("Random" = "1", "Specific" = "2"), selected="1"),
+			conditionalPanel(condition="input.rectcolTrack1=='2'",
+			textInput("rectcoldisTrack1", NULL, value="red")
+			)
+			),							  			
 			conditionalPanel(condition="input.rectTrack1=='1'",
 			selectInput("colrectTrack1", NULL, choices = c("blue", "red", "green", "cyan", "purple", "pink", "orange", "yellow", "navy", "seagreen", "maroon", "olivedrab", "gold", "lightblue", "navy.yellow", "purple.seagreen", "navy.orange", "navy.cyan", "blue.red", "green.red"))
 			)
 			),
+			conditionalPanel(condition="input.typeTrack1!='heatmap'",
 			numericInput("transparencyTrack1", HTML("<table><tr><td>Color transparency:</td>
 <td>
 <div class='help-tip'>
 	<p>A decimal number in [0, 1] to adjust the color transparency. The higher the value, the deeper the color.</p>
 	                                      </div></td></tr>
 	                                      </table>
-	                                      "), value=1, min=0, max=1, step=0.1),
-			conditionalPanel(condition="input.typeTrack1!='rect'",
-			textInput("colorlineTrack1", HTML("<table><tr><td><strong>Baselines color:</strong></td>
+	                                      "), value=1, min=0, max=1, step=0.1)
+			),
+			conditionalPanel(condition="input.typeTrack1!='rect' & input.typeTrack1!='heatmap'",
+			textInput("baselineTrack1", HTML("<table><tr><td><strong>Y coordinates of baselines:</strong></td>
 <td>
 <div class='help-tip'>
-	<p>The color to be used for the baselines which can be null or a single character representing a color.
-Hex color codes as '#FF0000' are also supported.</p>
+	<p>Decimal numbers in [0, 1] to adjust y coordinates of baselines. Numeric vector of arbitrary length is accepted and represent the number of baselines. For example, '0.5' or '0.25,0.5,0.75'.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), value="0.25,0.75"),
+			textInput("colorlineTrack1", HTML("<table><tr><td><strong>Baselines color(s):</strong></td>
+<td>
+<div class='help-tip'>
+	<p>The color to be used for the baselines which can be null or a character vector of arbitrary length, which can be adjusted automatically to the number of baselines. For example, 'grey' or 'red,green'. Hex color codes as '#FF0000' are also supported.</p>
 	                                      </div></td></tr>
 	                                      </table>
 	                                      "), value="grey")
 			),
+			conditionalPanel(condition="input.typeTrack1!='heatmap'",
 			textInput("bgcolTrack1", HTML("<table><tr><td><strong>Background color(s):</strong></td>
 <td>
 <div class='help-tip'>
@@ -251,7 +284,52 @@ If it is a vector, colors of arbitrary length can be accepted and adjusted autom
 For example, 'grey95' or 'grey95,grey,pink,yellow'. Hex color codes as '#FF0000' are also supported.</p>
 	                                      </div></td></tr>
 	                                      </table>
-	                                      "), value="grey95"),
+	                                      "), value="grey95")
+			),
+			
+			conditionalPanel(condition="input.typeTrack1=='heatmap'",
+			selectInput("colhmapTrack1", HTML("<table><tr><td><strong>Colors:</strong></td>
+<td>
+<div class='help-tip'>
+	<p>Colors used for the heatmap.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), choices = c("blue.white.red", "green.black.red", "green.yellow.red", "purple.yellow.red", "blue.green.red", "blue.yellow.green", "cyan.white.deeppink1"), selected="blue.white.red"),
+			radioButtons("midhmapTrack1", HTML("<table><tr><td><strong>Midpoint</strong></td>
+<td>
+<div class='help-tip'>
+	<p>The midpoint of track's data. Default to (max+min)/2.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), c("Default" = "1", "Custom" = "2"), selected="1"),
+			conditionalPanel(condition="input.midhmapTrack1=='2'",						  
+			numericInput("midpointTrack1", NULL, value=0, min=-1000000, max=1000000, step=0.5)
+			),
+			radioButtons("lineshmapTrack1", HTML("<table><tr><td><strong>Add position lines</strong></td>
+<td>
+<div class='help-tip'>
+	<p>Add genomic position lines between tracks.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), c("Yes" = "1", "No" = "2"),selected="2"),
+			conditionalPanel(condition="input.lineshmapTrack1=='1'",
+			numericInput("heightlinesTrack1", HTML("<table><tr><td><strong>Lines height:</strong></td>
+<td>
+<div class='help-tip'>
+	<p>Height of the lines.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), value=0.06, min=0, max=0.8, step=0.01),
+			numericInput("marginlinesTrack1", HTML("<table><tr><td><strong>Lines margin:</strong></td>
+<td>
+<div class='help-tip'>
+	<p>Margin size of the lines.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), value=0.01, min=0, max=0.8, step=0.005)
+			)
+			),
+					
 			numericInput("heightTrack1", HTML("<table><tr><td><strong>Track height:</strong></td>
 <td>
 <div class='help-tip'>
@@ -266,8 +344,10 @@ For example, 'grey95' or 'grey95,grey,pink,yellow'. Hex color codes as '#FF0000'
 	                                      </div></td></tr>
 	                                      </table>
 	                                      "), value=0.01, min=0, max=0.8, step=0.005),
-			radioButtons("borderTrack1", "Add borders", c("Yes" = "add", "No" = ""),selected=""),
-			conditionalPanel(condition="input.typeTrack1!='rect' & output.trackdat1",
+			conditionalPanel(condition="input.typeTrack1!='heatmap'",							  
+			radioButtons("borderTrack1", "Add borders", c("Yes" = "add", "No" = ""),selected="")
+			),
+			conditionalPanel(condition="input.typeTrack1!='rect' & input.typeTrack1!='heatmap' & output.trackdat1",
 			radioButtons("highlightTrack1", HTML("<table><tr><td><strong>Highlight regions</strong></td>
 <td>
 <div class='help-tip'>
@@ -315,7 +395,7 @@ includes four columns and data will be divided into two groups by boundary value
 			textInput("coldir2Track2", "Inside color:", value="cyan")
 			)
 			),
-			conditionalPanel(condition="input.typeTrack2!='rect'",
+			conditionalPanel(condition="input.typeTrack2!='rect' & input.typeTrack2!='heatmap'",
 			conditionalPanel(condition="input.typeTrack2!='bar' | input.directionTrack2=='1'",
 			radioButtons("coltypeTrack2", HTML("<table><tr><td><strong>Data color</strong></td>
 <td>
@@ -338,33 +418,98 @@ For data with four columns, a single character representing a color should be pr
 	                                      </div></td></tr>
 	                                      </table>
 	                                      "), c("Gradual" = "1", "Discrete" = "2"), selected="1"),
+			conditionalPanel(condition="input.rectTrack2=='2'",
+			radioButtons("rectcolTrack2", HTML("<table><tr><td><strong>Select color</strong></td>
+<td>
+<div class='help-tip'>
+	<p>The color to be used to plot the data, which can be random assigned by the application or specified by the users. For random type, the fourth column of data should be a discrete character vector with no more than 50 groups. For specific type, all groups of data will be filled in a specific color. Hex color codes as '#FF0000' are also supported.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), c("Random" = "1", "Specific" = "2"), selected="1"),
+			conditionalPanel(condition="input.rectcolTrack2=='2'",
+			textInput("rectcoldisTrack2", NULL, value="red")
+			)
+			),
 			conditionalPanel(condition="input.rectTrack2=='1'",
 			selectInput("colrectTrack2", NULL, choices = c("blue", "red", "green", "cyan", "purple", "pink", "orange", "yellow", "navy", "seagreen", "maroon", "olivedrab", "gold", "lightblue", "navy.yellow", "purple.seagreen", "navy.orange", "navy.cyan", "blue.red", "green.red"))
 			)
 			),
+			conditionalPanel(condition="input.typeTrack2!='heatmap'",
 			numericInput("transparencyTrack2", HTML("<table><tr><td>Color transparency:</td>
 <td>
 <div class='help-tip'>
 	<p>A decimal number in [0, 1] to adjust the color transparency. The higher the value, the deeper the color.</p>
 	                                      </div></td></tr>
 	                                      </table>
-	                                      "), value=1, min=0, max=1, step=0.1),
-			conditionalPanel(condition="input.typeTrack2!='rect'",
-			textInput("colorlineTrack2", HTML("<table><tr><td><strong>Baselines color:</strong></td>
+	                                      "), value=1, min=0, max=1, step=0.1)
+		    ),
+			conditionalPanel(condition="input.typeTrack2!='rect' & input.typeTrack2!='heatmap'",
+			textInput("baselineTrack2", HTML("<table><tr><td><strong>Y coordinates of baselines:</strong></td>
 <td>
 <div class='help-tip'>
-	<p>The color to be used for the baselines which can be null or a single character representing a color. Hex color codes as '#FF0000' are also supported.</p>
+	<p>Decimal numbers in [0, 1] to adjust y coordinates of baselines. Numeric vector of arbitrary length is accepted and represent the number of baselines. For example, '0.5' or '0.25,0.5,0.75'.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), value="0.25,0.75"),			
+			textInput("colorlineTrack2", HTML("<table><tr><td><strong>Baselines color(s):</strong></td>
+<td>
+<div class='help-tip'>
+	<p>The color to be used for the baselines which can be null or a character vector of arbitrary length, which can be adjusted automatically to the number of baselines. For example, 'grey' or 'red,green'. Hex color codes as '#FF0000' are also supported.</p>
 	                                      </div></td></tr>
 	                                      </table>
 	                                      "), value="grey")
 			),
+			conditionalPanel(condition="input.typeTrack2!='heatmap'",
 			textInput("bgcolTrack2", HTML("<table><tr><td><strong>Background color(s):</strong></td>
 <td>
 <div class='help-tip'>
 	<p>The color to be used for the background of the plot which can be null or a color vector of arbitrary length adjusted automatically to the number of sectors. For example, 'grey95' or 'grey95,grey,pink,yellow'. Hex color codes as '#FF0000' are also supported.</p>
 	                                      </div></td></tr>
 	                                      </table>
-	                                      "), value="grey95"),
+	                                      "), value="grey95")
+			),
+			conditionalPanel(condition="input.typeTrack2=='heatmap'",
+			selectInput("colhmapTrack2", HTML("<table><tr><td><strong>Colors:</strong></td>
+<td>
+<div class='help-tip'>
+	<p>Colors used for the heatmap.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), choices = c("blue.white.red", "green.black.red", "green.yellow.red", "purple.yellow.red", "blue.green.red", "blue.yellow.green", "cyan.white.deeppink1"), selected="blue.white.red"),
+			radioButtons("midhmapTrack2", HTML("<table><tr><td><strong>Midpoint</strong></td>
+<td>
+<div class='help-tip'>
+	<p>The midpoint of track's data. Default to (max+min)/2.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), c("Default" = "1", "Custom" = "2"), selected="1"),
+			conditionalPanel(condition="input.midhmapTrack2=='2'",						  
+			numericInput("midpointTrack2", NULL, value=0, min=-1000000, max=1000000, step=0.5)
+			),
+			radioButtons("lineshmapTrack2", HTML("<table><tr><td><strong>Add position lines</strong></td>
+<td>
+<div class='help-tip'>
+	<p>Add genomic position lines between tracks.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), c("Yes" = "1", "No" = "2"),selected="2"),
+			conditionalPanel(condition="input.lineshmapTrack2=='1'",
+			numericInput("heightlinesTrack2", HTML("<table><tr><td><strong>Lines height:</strong></td>
+<td>
+<div class='help-tip'>
+	<p>Height of the lines.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), value=0.06, min=0, max=0.8, step=0.01),
+			numericInput("marginlinesTrack2", HTML("<table><tr><td><strong>Lines margin:</strong></td>
+<td>
+<div class='help-tip'>
+	<p>Margin size of the lines.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), value=0.01, min=0, max=0.8, step=0.005)
+			)
+			),
 			numericInput("heightTrack2", HTML("<table><tr><td><strong>Track height:</strong></td>
 <td>
 <div class='help-tip'>
@@ -379,8 +524,10 @@ For data with four columns, a single character representing a color should be pr
 	                                      </div></td></tr>
 	                                      </table>
 	                                      "), value=0.01, min=0, max=0.8, step=0.005),
-			radioButtons("borderTrack2", "Add borders", c("Yes" = "add", "No" = ""),selected=""),
-			conditionalPanel(condition="input.typeTrack2!='rect' & output.trackdat2",
+            conditionalPanel(condition="input.typeTrack2!='heatmap'",										  
+			radioButtons("borderTrack2", "Add borders", c("Yes" = "add", "No" = ""),selected="")
+			),
+			conditionalPanel(condition="input.typeTrack2!='rect' & input.typeTrack2!='heatmap' & output.trackdat2",
 			radioButtons("highlightTrack2", HTML("<table><tr><td><strong>Highlight regions</strong></td>
 <td>
 <div class='help-tip'>
@@ -426,7 +573,7 @@ For data with four columns, a single character representing a color should be pr
 			textInput("coldir2Track3", "Inside color:", value="cyan")
 			)
 			),
-			conditionalPanel(condition="input.typeTrack3!='rect'",
+			conditionalPanel(condition="input.typeTrack3!='rect' & input.typeTrack3!='heatmap'",
 			conditionalPanel(condition="input.typeTrack3!='bar' | input.directionTrack3=='1'",
 			radioButtons("coltypeTrack3", HTML("<table><tr><td><strong>Data color</strong></td>
 <td>
@@ -449,33 +596,98 @@ For data with four columns, a single character representing a color should be pr
 	                                      </div></td></tr>
 	                                      </table>
 	                                      "), c("Gradual" = "1", "Discrete" = "2"), selected="1"),
+			conditionalPanel(condition="input.rectTrack3=='2'",
+			radioButtons("rectcolTrack3", HTML("<table><tr><td><strong>Select color</strong></td>
+<td>
+<div class='help-tip'>
+	<p>The color to be used to plot the data, which can be random assigned by the application or specified by the users. For random type, the fourth column of data should be a discrete character vector with no more than 50 groups. For specific type, all groups of data will be filled in a specific color. Hex color codes as '#FF0000' are also supported.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), c("Random" = "1", "Specific" = "2"), selected="1"),
+			conditionalPanel(condition="input.rectcolTrack3=='2'",
+			textInput("rectcoldisTrack3", NULL, value="red")
+			)
+			),
 			conditionalPanel(condition="input.rectTrack3=='1'",
 			selectInput("colrectTrack3", NULL, choices = c("blue", "red", "green", "cyan", "purple", "pink", "orange", "yellow", "navy", "seagreen", "maroon", "olivedrab", "gold", "lightblue", "navy.yellow", "purple.seagreen", "navy.orange", "navy.cyan", "blue.red", "green.red"))
 			)
 			),
+			conditionalPanel(condition="input.typeTrack3!='heatmap'",
 			numericInput("transparencyTrack3", HTML("<table><tr><td>Color transparency:</td>
 <td>
 <div class='help-tip'>
 	<p>A decimal number in [0, 1] to adjust the color transparency. The higher the value, the deeper the color.</p>
 	                                      </div></td></tr>
 	                                      </table>
-	                                      "), value=1, min=0, max=1, step=0.1),
-			conditionalPanel(condition="input.typeTrack3!='rect'",
-			textInput("colorlineTrack3", HTML("<table><tr><td><strong>Baselines color:</strong></td>
+	                                      "), value=1, min=0, max=1, step=0.1)
+			),
+			conditionalPanel(condition="input.typeTrack3!='rect' & input.typeTrack3!='heatmap'",
+			textInput("baselineTrack3", HTML("<table><tr><td><strong>Y coordinates of baselines:</strong></td>
 <td>
 <div class='help-tip'>
-	<p>The color to be used for the baselines which can be null or a single character representing a color.  Hex color codes as '#FF0000' are also supported.</p>
+	<p>Decimal numbers in [0, 1] to adjust y coordinates of baselines. Numeric vector of arbitrary length is accepted and represent the number of baselines. For example, '0.5' or '0.25,0.5,0.75'.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), value="0.25,0.75"),
+			textInput("colorlineTrack3", HTML("<table><tr><td><strong>Baselines color(s):</strong></td>
+<td>
+<div class='help-tip'>
+	<p>The color to be used for the baselines which can be null or a character vector of arbitrary length, which can be adjusted automatically to the number of baselines. For example, 'grey' or 'red,green'. Hex color codes as '#FF0000' are also supported.</p>
 	                                      </div></td></tr>
 	                                      </table>
 	                                      "), value="grey")
 			),
+			conditionalPanel(condition="input.typeTrack3!='heatmap'",
 			textInput("bgcolTrack3", HTML("<table><tr><td><strong>Background color(s):</strong></td>
 <td>
 <div class='help-tip'>
 	<p>The color to be used for the background of the plot which can be null or a color vector of arbitrary length adjusted automatically to the number of sectors. For example, 'grey95' or 'grey95,grey,pink,yellow'. Hex color codes as '#FF0000' are also supported.</p>
 	                                      </div></td></tr>
 	                                      </table>
-	                                      "), value="grey95"),
+	                                      "), value="grey95")
+			),
+			conditionalPanel(condition="input.typeTrack3=='heatmap'",
+			selectInput("colhmapTrack3", HTML("<table><tr><td><strong>Colors:</strong></td>
+<td>
+<div class='help-tip'>
+	<p>Colors used for the heatmap.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), choices = c("blue.white.red", "green.black.red", "green.yellow.red", "purple.yellow.red", "blue.green.red", "blue.yellow.green", "cyan.white.deeppink1"), selected="blue.white.red"),
+			radioButtons("midhmapTrack3", HTML("<table><tr><td><strong>Midpoint</strong></td>
+<td>
+<div class='help-tip'>
+	<p>The midpoint of track's data. Default to (max+min)/2.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), c("Default" = "1", "Custom" = "2"), selected="1"),
+			conditionalPanel(condition="input.midhmapTrack3=='2'",						  
+			numericInput("midpointTrack3", NULL, value=0, min=-1000000, max=1000000, step=0.5)
+			),
+			radioButtons("lineshmapTrack3", HTML("<table><tr><td><strong>Add position lines</strong></td>
+<td>
+<div class='help-tip'>
+	<p>Add genomic position lines between tracks.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), c("Yes" = "1", "No" = "2"),selected="2"),
+			conditionalPanel(condition="input.lineshmapTrack3=='1'",
+			numericInput("heightlinesTrack3", HTML("<table><tr><td><strong>Lines height:</strong></td>
+<td>
+<div class='help-tip'>
+	<p>Height of the lines.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), value=0.06, min=0, max=0.8, step=0.01),
+			numericInput("marginlinesTrack3", HTML("<table><tr><td><strong>Lines margin:</strong></td>
+<td>
+<div class='help-tip'>
+	<p>Margin size of the lines.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), value=0.01, min=0, max=0.8, step=0.005)
+			)
+			),			
 			numericInput("heightTrack3", HTML("<table><tr><td><strong>Track height:</strong></td>
 <td>
 <div class='help-tip'>
@@ -490,8 +702,10 @@ For data with four columns, a single character representing a color should be pr
 	                                      </div></td></tr>
 	                                      </table>
 	                                      "), value=0.01, min=0, max=0.8, step=0.005),
-			radioButtons("borderTrack3", "Add borders", c("Yes" = "add", "No" = ""),selected=""),
-			conditionalPanel(condition="input.typeTrack3!='rect' & output.trackdat3",
+            conditionalPanel(condition="input.typeTrack3!='heatmap'",										  
+			radioButtons("borderTrack3", "Add borders", c("Yes" = "add", "No" = ""),selected="")
+			),
+			conditionalPanel(condition="input.typeTrack3!='rect' & input.typeTrack3!='heatmap' & output.trackdat3",
 			radioButtons("highlightTrack3", HTML("<table><tr><td><strong>Highlight regions</strong></td>
 <td>
 <div class='help-tip'>
@@ -537,7 +751,7 @@ For data with four columns, a single character representing a color should be pr
 			textInput("coldir2Track4", "Inside color:", value="cyan")
 			)
 			),
-			conditionalPanel(condition="input.typeTrack4!='rect'",
+			conditionalPanel(condition="input.typeTrack4!='rect' & input.typeTrack4!='heatmap'",
 			conditionalPanel(condition="input.typeTrack4!='bar' | input.directionTrack4=='1'",
 			radioButtons("coltypeTrack4", HTML("<table><tr><td><strong>Data color</strong></td>
 <td>
@@ -560,26 +774,48 @@ For data with four columns, a single character representing a color should be pr
 	                                      </div></td></tr>
 	                                      </table>
 	                                      "), c("Gradual" = "1", "Discrete" = "2"), selected="1"),
+			conditionalPanel(condition="input.rectTrack4=='2'",
+			radioButtons("rectcolTrack4", HTML("<table><tr><td><strong>Select color</strong></td>
+<td>
+<div class='help-tip'>
+	<p>The color to be used to plot the data, which can be random assigned by the application or specified by the users. For random type, the fourth column of data should be a discrete character vector with no more than 50 groups. For specific type, all groups of data will be filled in a specific color. Hex color codes as '#FF0000' are also supported.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), c("Random" = "1", "Specific" = "2"), selected="1"),
+			conditionalPanel(condition="input.rectcolTrack4=='2'",
+			textInput("rectcoldisTrack4", NULL, value="red")
+			)
+			),
 			conditionalPanel(condition="input.rectTrack4=='1'",
 			selectInput("colrectTrack4", NULL, choices = c("blue", "red", "green", "cyan", "purple", "pink", "orange", "yellow", "navy", "seagreen", "maroon", "olivedrab", "gold", "lightblue", "navy.yellow", "purple.seagreen", "navy.orange", "navy.cyan", "blue.red", "green.red"))
 			)
 			),
+			conditionalPanel(condition="input.typeTrack4!='heatmap'",
 			numericInput("transparencyTrack4", HTML("<table><tr><td>Color transparency:</td>
 <td>
 <div class='help-tip'>
 	<p>A decimal number in [0, 1] to adjust the color transparency. The higher the value, the deeper the color.</p>
 	                                      </div></td></tr>
 	                                      </table>
-	                                      "), value=1, min=0, max=1, step=0.1),
-			conditionalPanel(condition="input.typeTrack4!='rect'",
-			textInput("colorlineTrack4", HTML("<table><tr><td><strong>Baselines color:</strong></td>
+	                                      "), value=1, min=0, max=1, step=0.1)
+		    ),
+			conditionalPanel(condition="input.typeTrack4!='rect' & input.typeTrack4!='heatmap'",
+			textInput("baselineTrack4", HTML("<table><tr><td><strong>Y coordinates of baselines:</strong></td>
 <td>
 <div class='help-tip'>
-	<p>The color to be used for the baselines which can be null or a single character representing a color.  Hex color codes as '#FF0000' are also supported.</p>
+	<p>Decimal numbers in [0, 1] to adjust y coordinates of baselines. Numeric vector of arbitrary length is accepted and represent the number of baselines. For example, '0.5' or '0.25,0.5,0.75'.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), value="0.25,0.75"),			
+			textInput("colorlineTrack4", HTML("<table><tr><td><strong>Baselines color(s):</strong></td>
+<td>
+<div class='help-tip'>
+	<p>The color to be used for the baselines which can be null or a character vector of arbitrary length, which can be adjusted automatically to the number of baselines. For example, 'grey' or 'red,green'. Hex color codes as '#FF0000' are also supported.</p>
 	                                      </div></td></tr>
 	                                      </table>
 	                                      "), value="grey")
 			),
+			conditionalPanel(condition="input.typeTrack4!='heatmap'",
 			textInput("bgcolTrack4", HTML("<table><tr><td><strong>Background color(s):</strong></td>
 <td>
 <div class='help-tip'>
@@ -587,7 +823,50 @@ For data with four columns, a single character representing a color should be pr
 For example, 'grey95' or 'grey95,grey,pink,yellow'. Hex color codes as '#FF0000' are also supported.</p>
 	                                      </div></td></tr>
 	                                      </table>
-	                                      "), value="grey95"),
+	                                      "), value="grey95")
+			),
+			conditionalPanel(condition="input.typeTrack4=='heatmap'",
+			selectInput("colhmapTrack4", HTML("<table><tr><td><strong>Colors:</strong></td>
+<td>
+<div class='help-tip'>
+	<p>Colors used for the heatmap.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), choices = c("blue.white.red", "green.black.red", "green.yellow.red", "purple.yellow.red", "blue.green.red", "blue.yellow.green", "cyan.white.deeppink1"), selected="blue.white.red"),
+			radioButtons("midhmapTrack4", HTML("<table><tr><td><strong>Midpoint</strong></td>
+<td>
+<div class='help-tip'>
+	<p>The midpoint of track's data. Default to (max+min)/2.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), c("Default" = "1", "Custom" = "2"), selected="1"),
+			conditionalPanel(condition="input.midhmapTrack4=='2'",						  
+			numericInput("midpointTrack4", NULL, value=0, min=-1000000, max=1000000, step=0.5)
+			),
+			radioButtons("lineshmapTrack4", HTML("<table><tr><td><strong>Add position lines</strong></td>
+<td>
+<div class='help-tip'>
+	<p>Add genomic position lines between tracks.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), c("Yes" = "1", "No" = "2"),selected="2"),
+			conditionalPanel(condition="input.lineshmapTrack4=='1'",
+			numericInput("heightlinesTrack4", HTML("<table><tr><td><strong>Lines height:</strong></td>
+<td>
+<div class='help-tip'>
+	<p>Height of the lines.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), value=0.06, min=0, max=0.8, step=0.01),
+			numericInput("marginlinesTrack4", HTML("<table><tr><td><strong>Lines margin:</strong></td>
+<td>
+<div class='help-tip'>
+	<p>Margin size of the lines.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), value=0.01, min=0, max=0.8, step=0.005)
+			)
+			),			
 			numericInput("heightTrack4", HTML("<table><tr><td><strong>Track height:</strong></td>
 <td>
 <div class='help-tip'>
@@ -602,8 +881,10 @@ For example, 'grey95' or 'grey95,grey,pink,yellow'. Hex color codes as '#FF0000'
 	                                      </div></td></tr>
 	                                      </table>
 	                                      "), value=0.01, min=0, max=0.8, step=0.005),
-			radioButtons("borderTrack4", "Add borders", c("Yes" = "add", "No" = ""),selected=""),
-			conditionalPanel(condition="input.typeTrack4!='rect' & output.trackdat4",
+            conditionalPanel(condition="input.typeTrack4!='heatmap'",										  
+			radioButtons("borderTrack4", "Add borders", c("Yes" = "add", "No" = ""),selected="")
+			),
+			conditionalPanel(condition="input.typeTrack4!='rect' & input.typeTrack4!='heatmap' & output.trackdat4",
 			radioButtons("highlightTrack4", HTML("<table><tr><td><strong>Highlight regions</strong></td>
 <td>
 <div class='help-tip'>
@@ -642,14 +923,14 @@ For example, 'grey95' or 'grey95,grey,pink,yellow'. Hex color codes as '#FF0000'
 	<p>Bars can be shown in unidirectional or bidirectional type. Bidirectional type can be used only when track's data includes four columns and data will be divided into two groups by boundary value.</p>
 	                                      </div></td></tr>
 	                                      </table>
-	                                      "), c("Unidirectional" = "1", "Bidirectional" = "2"), selected="1"),
+	                                      "), c("Unidirectional" = "1", "Bidirectional" = "2"), selected="2"),
 			conditionalPanel(condition="input.directionTrack5=='2'",
 			numericInput("barBoundary5", "Boundary value:", value=0, step=0.01),     
 			textInput("coldir1Track5", "Outside color:", value="red"),
 			textInput("coldir2Track5", "Inside color:", value="cyan")
 			)
 			),
-			conditionalPanel(condition="input.typeTrack5!='rect'",
+			conditionalPanel(condition="input.typeTrack5!='rect' & input.typeTrack5!='heatmap'",
 			conditionalPanel(condition="input.typeTrack5!='bar' | input.directionTrack5=='1'",
 			radioButtons("coltypeTrack5", HTML("<table><tr><td><strong>Data color</strong></td>
 <td>
@@ -672,33 +953,98 @@ For data with four columns, a single character representing a color should be pr
 	                                      </div></td></tr>
 	                                      </table>
 	                                      "), c("Gradual" = "1", "Discrete" = "2"), selected="2"),
+			conditionalPanel(condition="input.rectTrack5=='2'",
+			radioButtons("rectcolTrack5", HTML("<table><tr><td><strong>Select color</strong></td>
+<td>
+<div class='help-tip'>
+	<p>The color to be used to plot the data, which can be random assigned by the application or specified by the users. For random type, the fourth column of data should be a discrete character vector with no more than 50 groups. For specific type, all groups of data will be filled in a specific color. Hex color codes as '#FF0000' are also supported.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), c("Random" = "1", "Specific" = "2"), selected="1"),
+			conditionalPanel(condition="input.rectcolTrack5=='2'",
+			textInput("rectcoldisTrack5", NULL, value="red")
+			)
+			),
 			conditionalPanel(condition="input.rectTrack5=='1'",
 			selectInput("colrectTrack5", NULL, choices = c("blue", "red", "green", "cyan", "purple", "pink", "orange", "yellow", "navy", "seagreen", "maroon", "olivedrab", "gold", "lightblue", "navy.yellow", "purple.seagreen", "navy.orange", "navy.cyan", "blue.red", "green.red"))
 			)
 			),
+			conditionalPanel(condition="input.typeTrack5!='heatmap'",
 			numericInput("transparencyTrack5", HTML("<table><tr><td>Color transparency:</td>
 <td>
 <div class='help-tip'>
 	<p>A decimal number in [0, 1] to adjust the color transparency. The higher the value, the deeper the color.</p>
 	                                      </div></td></tr>
 	                                      </table>
-	                                      "), value=1, min=0, max=1, step=0.1),
-			conditionalPanel(condition="input.typeTrack5!='rect'",
-			textInput("colorlineTrack5", HTML("<table><tr><td><strong>Baselines color:</strong></td>
+	                                      "), value=1, min=0, max=1, step=0.1)
+			),
+			conditionalPanel(condition="input.typeTrack5!='rect' & input.typeTrack5!='heatmap'",
+			textInput("baselineTrack5", HTML("<table><tr><td><strong>Y coordinates of baselines:</strong></td>
 <td>
 <div class='help-tip'>
-	<p>The color to be used for the baselines which can be null or a single character representing a color.  Hex color codes as '#FF0000' are also supported.</p>
+	<p>Decimal numbers in [0, 1] to adjust y coordinates of baselines. Numeric vector of arbitrary length is accepted and represent the number of baselines. For example, '0.5' or '0.25,0.5,0.75'.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), value="0.25,0.75"),
+			textInput("colorlineTrack5", HTML("<table><tr><td><strong>Baselines color(s):</strong></td>
+<td>
+<div class='help-tip'>
+	<p>The color to be used for the baselines which can be null or a character vector of arbitrary length, which can be adjusted automatically to the number of baselines. For example, 'grey' or 'red,green'. Hex color codes as '#FF0000' are also supported.</p>
 	                                      </div></td></tr>
 	                                      </table>
 	                                      "), value="grey")
 			),
+			conditionalPanel(condition="input.typeTrack5!='heatmap'",
 			textInput("bgcolTrack5", HTML("<table><tr><td><strong>Background color(s):</strong></td>
 <td>
 <div class='help-tip'>
 	<p>The color to be used for the background of the plot which can be null or a color vector of arbitrary length adjusted automatically to the number of sectors. For example, 'grey95' or 'grey95,grey,pink,yellow'. Hex color codes as '#FF0000' are also supported.</p>
 	                                      </div></td></tr>
 	                                      </table>
-	                                      "), value="grey95"),
+	                                      "), value="grey95")
+			),
+			conditionalPanel(condition="input.typeTrack5=='heatmap'",
+			selectInput("colhmapTrack5", HTML("<table><tr><td><strong>Colors:</strong></td>
+<td>
+<div class='help-tip'>
+	<p>Colors used for the heatmap.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), choices = c("blue.white.red", "green.black.red", "green.yellow.red", "purple.yellow.red", "blue.green.red", "blue.yellow.green", "cyan.white.deeppink1"), selected="blue.white.red"),
+			radioButtons("midhmapTrack5", HTML("<table><tr><td><strong>Midpoint</strong></td>
+<td>
+<div class='help-tip'>
+	<p>The midpoint of track's data. Default to (max+min)/2.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), c("Default" = "1", "Custom" = "2"), selected="1"),
+			conditionalPanel(condition="input.midhmapTrack5=='2'",						  
+			numericInput("midpointTrack5", NULL, value=0, min=-1000000, max=1000000, step=0.5)
+			),
+			radioButtons("lineshmapTrack5", HTML("<table><tr><td><strong>Add position lines</strong></td>
+<td>
+<div class='help-tip'>
+	<p>Add genomic position lines between tracks.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), c("Yes" = "1", "No" = "2"),selected="2"),
+			conditionalPanel(condition="input.lineshmapTrack5=='1'",
+			numericInput("heightlinesTrack5", HTML("<table><tr><td><strong>Lines height:</strong></td>
+<td>
+<div class='help-tip'>
+	<p>Height of the lines.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), value=0.06, min=0, max=0.8, step=0.01),
+			numericInput("marginlinesTrack5", HTML("<table><tr><td><strong>Lines margin:</strong></td>
+<td>
+<div class='help-tip'>
+	<p>Margin size of the lines.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), value=0.01, min=0, max=0.8, step=0.005)
+			)
+			),			
 			numericInput("heightTrack5", HTML("<table><tr><td><strong>Track height:</strong></td>
 <td>
 <div class='help-tip'>
@@ -713,8 +1059,10 @@ For data with four columns, a single character representing a color should be pr
 	                                      </div></td></tr>
 	                                      </table>
 	                                      "), value=0.01, min=0, max=0.8, step=0.005),
-			radioButtons("borderTrack5", "Add borders", c("Yes" = "add", "No" = ""),selected=""),
-			conditionalPanel(condition="input.typeTrack5!='rect' & output.trackdat5",
+            conditionalPanel(condition="input.typeTrack5!='heatmap'",										  
+			radioButtons("borderTrack5", "Add borders", c("Yes" = "add", "No" = ""),selected="")
+			),
+			conditionalPanel(condition="input.typeTrack5!='rect' & input.typeTrack5!='heatmap' & output.trackdat5",
 			radioButtons("highlightTrack5", HTML("<table><tr><td><strong>Highlight regions</strong></td>
 <td>
 <div class='help-tip'>
@@ -760,7 +1108,7 @@ For data with four columns, a single character representing a color should be pr
 			textInput("coldir2Track6", "Inside color:", value="cyan")
 			)
 			),
-			conditionalPanel(condition="input.typeTrack6!='rect'",
+			conditionalPanel(condition="input.typeTrack6!='rect' & input.typeTrack6!='heatmap'",
 			conditionalPanel(condition="input.typeTrack6!='bar' | input.directionTrack6=='1'",
 			radioButtons("coltypeTrack6", HTML("<table><tr><td><strong>Data color</strong></td>
 <td>
@@ -782,34 +1130,99 @@ For data with four columns, a single character representing a color should be pr
 	<p>The rects are filled with discrete or gradual colors. For discrete data, the fourth column should be a discrete character vector with no more than 50 groups. For gradual data, the fourth column should be a numeric vector. See example data for more details.</p>
 	                                      </div></td></tr>
 	                                      </table>
-	                                      "), c("Gradual" = "1", "Discrete" = "2"), selected="1"),
+	                                      "), c("Gradual" = "1", "Discrete" = "2"), selected="2"),
+			conditionalPanel(condition="input.rectTrack6=='2'",
+			radioButtons("rectcolTrack6", HTML("<table><tr><td><strong>Select color</strong></td>
+<td>
+<div class='help-tip'>
+	<p>The color to be used to plot the data, which can be random assigned by the application or specified by the users. For random type, the fourth column of data should be a discrete character vector with no more than 50 groups. For specific type, all groups of data will be filled in a specific color. Hex color codes as '#FF0000' are also supported.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), c("Random" = "1", "Specific" = "2"), selected="1"),
+			conditionalPanel(condition="input.rectcolTrack6=='2'",
+			textInput("rectcoldisTrack6", NULL, value="red")
+			)
+			),
 			conditionalPanel(condition="input.rectTrack6=='1'",
 			selectInput("colrectTrack6", NULL, choices = c("blue", "red", "green", "cyan", "purple", "pink", "orange", "yellow", "navy", "seagreen", "maroon", "olivedrab", "gold", "lightblue", "navy.yellow", "purple.seagreen", "navy.orange", "navy.cyan", "blue.red", "green.red"))
 			)
 			),
+			conditionalPanel(condition="input.typeTrack6!='heatmap'",
 			numericInput("transparencyTrack6", HTML("<table><tr><td>Color transparency:</td>
 <td>
 <div class='help-tip'>
 	<p>A decimal number in [0, 1] to adjust the color transparency. The higher the value, the deeper the color.</p>
 	                                      </div></td></tr>
 	                                      </table>
-	                                      "), value=1, min=0, max=1, step=0.1),
-			conditionalPanel(condition="input.typeTrack6!='rect'",
-			textInput("colorlineTrack6", HTML("<table><tr><td><strong>Baselines color:</strong></td>
+	                                      "), value=1, min=0, max=1, step=0.1)
+			),
+			conditionalPanel(condition="input.typeTrack6!='rect' & input.typeTrack6!='heatmap'",
+			textInput("baselineTrack6", HTML("<table><tr><td><strong>Y coordinates of baselines:</strong></td>
 <td>
 <div class='help-tip'>
-	<p>The color to be used for the baselines which can be null or a single character representing a color.  Hex color codes as '#FF0000' are also supported.</p>
+	<p>Decimal numbers in [0, 1] to adjust y coordinates of baselines. Numeric vector of arbitrary length is accepted and represent the number of baselines. For example, '0.5' or '0.25,0.5,0.75'.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), value="0.25,0.75"),
+			textInput("colorlineTrack6", HTML("<table><tr><td><strong>Baselines color(s):</strong></td>
+<td>
+<div class='help-tip'>
+	<p>The color to be used for the baselines which can be null or a character vector of arbitrary length, which can be adjusted automatically to the number of baselines. For example, 'grey' or 'red,green'. Hex color codes as '#FF0000' are also supported.</p>
 	                                      </div></td></tr>
 	                                      </table>
 	                                      "), value="grey")
 			),
+			conditionalPanel(condition="input.typeTrack6!='heatmap'",
 			textInput("bgcolTrack6", HTML("<table><tr><td><strong>Background color(s):</strong></td>
 <td>
 <div class='help-tip'>
 	<p>The color to be used for the background of the plot which can be null or a color vector of arbitrary length adjusted automatically to the number of sectors. For example, 'grey95' or 'grey95,grey,pink,yellow'. Hex color codes as '#FF0000' are also supported.</p>
 	                                      </div></td></tr>
 	                                      </table>
-	                                      "), value="grey95"),
+	                                      "), value="grey95")
+			),
+			conditionalPanel(condition="input.typeTrack6=='heatmap'",
+			selectInput("colhmapTrack6", HTML("<table><tr><td><strong>Colors:</strong></td>
+<td>
+<div class='help-tip'>
+	<p>Colors used for the heatmap.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), choices = c("blue.white.red", "green.black.red", "green.yellow.red", "purple.yellow.red", "blue.green.red", "blue.yellow.green", "cyan.white.deeppink1"), selected="blue.white.red"),
+			radioButtons("midhmapTrack6", HTML("<table><tr><td><strong>Midpoint</strong></td>
+<td>
+<div class='help-tip'>
+	<p>The midpoint of track's data. Default to (max+min)/2.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), c("Default" = "1", "Custom" = "2"), selected="1"),
+			conditionalPanel(condition="input.midhmapTrack6=='2'",						  
+			numericInput("midpointTrack6", NULL, value=0, min=-1000000, max=1000000, step=0.5)
+			),
+			radioButtons("lineshmapTrack6", HTML("<table><tr><td><strong>Add position lines</strong></td>
+<td>
+<div class='help-tip'>
+	<p>Add genomic position lines between tracks.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), c("Yes" = "1", "No" = "2"),selected="2"),
+			conditionalPanel(condition="input.lineshmapTrack6=='1'",
+			numericInput("heightlinesTrack6", HTML("<table><tr><td><strong>Lines height:</strong></td>
+<td>
+<div class='help-tip'>
+	<p>Height of the lines.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), value=0.06, min=0, max=0.8, step=0.01),
+			numericInput("marginlinesTrack6", HTML("<table><tr><td><strong>Lines margin:</strong></td>
+<td>
+<div class='help-tip'>
+	<p>Margin size of the lines.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), value=0.01, min=0, max=0.8, step=0.005)
+			)
+			),			
 			numericInput("heightTrack6", HTML("<table><tr><td><strong>Track height:</strong></td>
 <td>
 <div class='help-tip'>
@@ -824,8 +1237,10 @@ For data with four columns, a single character representing a color should be pr
 	                                      </div></td></tr>
 	                                      </table>
 	                                      "), value=0.01, min=0, max=0.8, step=0.005),
-			radioButtons("borderTrack6", "Add borders", c("Yes" = "add", "No" = ""),selected=""),
-			conditionalPanel(condition="input.typeTrack6!='rect' & output.trackdat6",
+            conditionalPanel(condition="input.typeTrack6!='heatmap'",										  
+			radioButtons("borderTrack6", "Add borders", c("Yes" = "add", "No" = ""),selected="")
+			),
+			conditionalPanel(condition="input.typeTrack6!='rect' & input.typeTrack6!='heatmap' & output.trackdat6",
 			radioButtons("highlightTrack6", HTML("<table><tr><td><strong>Highlight regions</strong></td>
 <td>
 <div class='help-tip'>
@@ -871,7 +1286,7 @@ For data with four columns, a single character representing a color should be pr
 			textInput("coldir2Track7", "Inside color:", value="mediumblue")
 			)
 			),
-			conditionalPanel(condition="input.typeTrack7!='rect'",
+			conditionalPanel(condition="input.typeTrack7!='rect' & input.typeTrack7!='heatmap'",
 			conditionalPanel(condition="input.typeTrack7!='bar' | input.directionTrack7=='1'",
 			radioButtons("coltypeTrack7", HTML("<table><tr><td><strong>Data color</strong></td>
 <td>
@@ -894,33 +1309,98 @@ For data with four columns, a single character representing a color should be pr
 	                                      </div></td></tr>
 	                                      </table>
 	                                      "), c("Gradual" = "1", "Discrete" = "2"), selected="1"),
+			conditionalPanel(condition="input.rectTrack7=='2'",
+			radioButtons("rectcolTrack7", HTML("<table><tr><td><strong>Select color</strong></td>
+<td>
+<div class='help-tip'>
+	<p>The color to be used to plot the data, which can be random assigned by the application or specified by the users. For random type, the fourth column of data should be a discrete character vector with no more than 50 groups. For specific type, all groups of data will be filled in a specific color. Hex color codes as '#FF0000' are also supported.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), c("Random" = "1", "Specific" = "2"), selected="1"),
+			conditionalPanel(condition="input.rectcolTrack7=='2'",
+			textInput("rectcoldisTrack7", NULL, value="red")
+			)
+			),										
 			conditionalPanel(condition="input.rectTrack7=='1'",
 			selectInput("colrectTrack7", NULL, choices = c("blue", "red", "green", "cyan", "purple", "pink", "orange", "yellow", "navy", "seagreen", "maroon", "olivedrab", "gold", "lightblue", "navy.yellow", "purple.seagreen", "navy.orange", "navy.cyan", "blue.red", "green.red"))
 			)
 			),
+			conditionalPanel(condition="input.typeTrack7!='heatmap'",
 			numericInput("transparencyTrack7", HTML("<table><tr><td>Color transparency:</td>
 <td>
 <div class='help-tip'>
 	<p>A decimal number in [0, 1] to adjust the color transparency. The higher the value, the deeper the color.</p>
 	                                      </div></td></tr>
 	                                      </table>
-	                                      "), value=1, min=0, max=1, step=0.1),
-			conditionalPanel(condition="input.typeTrack7!='rect'",
-			textInput("colorlineTrack7", HTML("<table><tr><td><strong>Baselines color:</strong></td>
+	                                      "), value=1, min=0, max=1, step=0.1)
+			),
+			conditionalPanel(condition="input.typeTrack7!='rect' & input.typeTrack7!='heatmap'",
+			textInput("baselineTrack7", HTML("<table><tr><td><strong>Y coordinates of baselines:</strong></td>
 <td>
 <div class='help-tip'>
-	<p>The color to be used for the baselines which can be null or a single character representing a color.  Hex color codes as '#FF0000' are also supported.</p>
+	<p>Decimal numbers in [0, 1] to adjust y coordinates of baselines. Numeric vector of arbitrary length is accepted and represent the number of baselines. For example, '0.5' or '0.25,0.5,0.75'.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), value="0.25,0.75"),
+			textInput("colorlineTrack7", HTML("<table><tr><td><strong>Baselines color(s):</strong></td>
+<td>
+<div class='help-tip'>
+	<p>The color to be used for the baselines which can be null or a character vector of arbitrary length, which can be adjusted automatically to the number of baselines. For example, 'grey' or 'red,green'. Hex color codes as '#FF0000' are also supported.</p>
 	                                      </div></td></tr>
 	                                      </table>
 	                                      "), value="grey")
 			),
+			conditionalPanel(condition="input.typeTrack7!='heatmap'",
 			textInput("bgcolTrack7", HTML("<table><tr><td><strong>Background color(s):</strong></td>
 <td>
 <div class='help-tip'>
 	<p>The color to be used for the background of the plot which can be null or a color vector of arbitrary length adjusted automatically to the number of sectors. For example, 'grey95' or 'grey95,grey,pink,yellow'. Hex color codes as '#FF0000' are also supported.</p>
 	                                      </div></td></tr>
 	                                      </table>
-	                                      "), value="grey95"),
+	                                      "), value="grey95")
+			),
+			conditionalPanel(condition="input.typeTrack7=='heatmap'",
+			selectInput("colhmapTrack7", HTML("<table><tr><td><strong>Colors:</strong></td>
+<td>
+<div class='help-tip'>
+	<p>Colors used for the heatmap.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), choices = c("blue.white.red", "green.black.red", "green.yellow.red", "purple.yellow.red", "blue.green.red", "blue.yellow.green", "cyan.white.deeppink1"), selected="blue.white.red"),
+			radioButtons("midhmapTrack7", HTML("<table><tr><td><strong>Midpoint</strong></td>
+<td>
+<div class='help-tip'>
+	<p>The midpoint of track's data. Default to (max+min)/2.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), c("Default" = "1", "Custom" = "2"), selected="1"),
+			conditionalPanel(condition="input.midhmapTrack7=='2'",						  
+			numericInput("midpointTrack7", NULL, value=0, min=-1000000, max=1000000, step=0.5)
+			),
+			radioButtons("lineshmapTrack7", HTML("<table><tr><td><strong>Add position lines</strong></td>
+<td>
+<div class='help-tip'>
+	<p>Add genomic position lines between tracks.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), c("Yes" = "1", "No" = "2"),selected="2"),
+			conditionalPanel(condition="input.lineshmapTrack7=='1'",
+			numericInput("heightlinesTrack7", HTML("<table><tr><td><strong>Lines height:</strong></td>
+<td>
+<div class='help-tip'>
+	<p>Height of the lines.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), value=0.06, min=0, max=0.8, step=0.01),
+			numericInput("marginlinesTrack7", HTML("<table><tr><td><strong>Lines margin:</strong></td>
+<td>
+<div class='help-tip'>
+	<p>Margin size of the lines.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), value=0.01, min=0, max=0.8, step=0.005)
+			)
+			),			
 			numericInput("heightTrack7", HTML("<table><tr><td><strong>Track height:</strong></td>
 <td>
 <div class='help-tip'>
@@ -935,8 +1415,10 @@ For data with four columns, a single character representing a color should be pr
 	                                      </div></td></tr>
 	                                      </table>
 	                                      "), value=0.01, min=0, max=0.8, step=0.005),
-			radioButtons("borderTrack7", "Add borders", c("Yes" = "add", "No" = ""),selected=""),
-			conditionalPanel(condition="input.typeTrack7!='rect' & output.trackdat7",
+            conditionalPanel(condition="input.typeTrack7!='heatmap'",										  
+			radioButtons("borderTrack7", "Add borders", c("Yes" = "add", "No" = ""),selected="")
+			),
+			conditionalPanel(condition="input.typeTrack7!='rect' & input.typeTrack7!='heatmap' & output.trackdat7",
 			radioButtons("highlightTrack7", HTML("<table><tr><td><strong>Highlight regions</strong></td>
 <td>
 <div class='help-tip'>
@@ -975,14 +1457,14 @@ For data with four columns, a single character representing a color should be pr
 	<p>Bars can be shown in unidirectional or bidirectional type. Bidirectional type can be used only when track's data includes four columns and data will be divided into two groups by boundary value.</p>
 	                                      </div></td></tr>
 	                                      </table>
-	                                      "), c("Unidirectional" = "1", "Bidirectional" = "2"), selected="1"),
+	                                      "), c("Unidirectional" = "1", "Bidirectional" = "2"), selected="2"),
 			conditionalPanel(condition="input.directionTrack8=='2'",
 			numericInput("barBoundary8", "Boundary value:", value=0, step=0.01),     
-			textInput("coldir1Track8", "Outside color:", value="red"),
-			textInput("coldir2Track8", "Inside color:", value="cyan")
+			textInput("coldir1Track8", "Outside color:", value="deeppink"),
+			textInput("coldir2Track8", "Inside color:", value="mediumblue")
 			)
 			),
-			conditionalPanel(condition="input.typeTrack8!='rect'",
+			conditionalPanel(condition="input.typeTrack8!='rect' & input.typeTrack8!='heatmap'",
 			conditionalPanel(condition="input.typeTrack8!='bar' | input.directionTrack8=='1'",
 			radioButtons("coltypeTrack8", HTML("<table><tr><td><strong>Data color</strong></td>
 <td>
@@ -1005,33 +1487,98 @@ For data with four columns, a single character representing a color should be pr
 	                                      </div></td></tr>
 	                                      </table>
 	                                      "), c("Gradual" = "1", "Discrete" = "2"), selected="1"),
+			conditionalPanel(condition="input.rectTrack8=='2'",
+			radioButtons("rectcolTrack8", HTML("<table><tr><td><strong>Select color</strong></td>
+<td>
+<div class='help-tip'>
+	<p>The color to be used to plot the data, which can be random assigned by the application or specified by the users. For random type, the fourth column of data should be a discrete character vector with no more than 50 groups. For specific type, all groups of data will be filled in a specific color. Hex color codes as '#FF0000' are also supported.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), c("Random" = "1", "Specific" = "2"), selected="1"),
+			conditionalPanel(condition="input.rectcolTrack8=='2'",
+			textInput("rectcoldisTrack8", NULL, value="red")
+			)
+			),										  
 			conditionalPanel(condition="input.rectTrack8=='1'",
 			selectInput("colrectTrack8", NULL, choices = c("blue", "red", "green", "cyan", "purple", "pink", "orange", "yellow", "navy", "seagreen", "maroon", "olivedrab", "gold", "lightblue", "navy.yellow", "purple.seagreen", "navy.orange", "navy.cyan", "blue.red", "green.red"))
 			)
 			),
+			conditionalPanel(condition="input.typeTrack8!='heatmap'",
 			numericInput("transparencyTrack8", HTML("<table><tr><td>Color transparency:</td>
 <td>
 <div class='help-tip'>
 	<p>A decimal number in [0, 1] to adjust the color transparency. The higher the value, the deeper the color.</p>
 	                                      </div></td></tr>
 	                                      </table>
-	                                      "), value=1, min=0, max=1, step=0.1),
-			conditionalPanel(condition="input.typeTrack8!='rect'",
-			textInput("colorlineTrack8", HTML("<table><tr><td><strong>Baselines color:</strong></td>
+	                                      "), value=1, min=0, max=1, step=0.1)
+			),
+			conditionalPanel(condition="input.typeTrack8!='rect' & input.typeTrack8!='heatmap'",
+			textInput("baselineTrack8", HTML("<table><tr><td><strong>Y coordinates of baselines:</strong></td>
 <td>
 <div class='help-tip'>
-	<p>The color to be used for the baselines which can be null or a single character representing a color.  Hex color codes as '#FF0000' are also supported.</p>
+	<p>Decimal numbers in [0, 1] to adjust y coordinates of baselines. Numeric vector of arbitrary length is accepted and represent the number of baselines. For example, '0.5' or '0.25,0.5,0.75'.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), value="0.25,0.75"),
+			textInput("colorlineTrack8", HTML("<table><tr><td><strong>Baselines color(s):</strong></td>
+<td>
+<div class='help-tip'>
+	<p>The color to be used for the baselines which can be null or a character vector of arbitrary length, which can be adjusted automatically to the number of baselines. For example, 'grey' or 'red,green'. Hex color codes as '#FF0000' are also supported.</p>
 	                                      </div></td></tr>
 	                                      </table>
 	                                      "), value="grey")
 			),
+			conditionalPanel(condition="input.typeTrack8!='heatmap'",
 			textInput("bgcolTrack8", HTML("<table><tr><td><strong>Background color(s):</strong></td>
 <td>
 <div class='help-tip'>
 	<p>The color to be used for the background of the plot which can be null or a color vector of arbitrary length adjusted automatically to the number of sectors. For example, 'grey95' or 'grey95,grey,pink,yellow'. Hex color codes as '#FF0000' are also supported.</p>
 	                                      </div></td></tr>
 	                                      </table>
-	                                      "), value="grey95"),
+	                                      "), value="grey95")
+			),
+			conditionalPanel(condition="input.typeTrack8=='heatmap'",
+			selectInput("colhmapTrack8", HTML("<table><tr><td><strong>Colors:</strong></td>
+<td>
+<div class='help-tip'>
+	<p>Colors used for the heatmap.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), choices = c("blue.white.red", "green.black.red", "green.yellow.red", "purple.yellow.red", "blue.green.red", "blue.yellow.green", "cyan.white.deeppink1"), selected="blue.white.red"),
+			radioButtons("midhmapTrack8", HTML("<table><tr><td><strong>Midpoint</strong></td>
+<td>
+<div class='help-tip'>
+	<p>The midpoint of track's data. Default to (max+min)/2.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), c("Default" = "1", "Custom" = "2"), selected="1"),
+			conditionalPanel(condition="input.midhmapTrack8=='2'",						  
+			numericInput("midpointTrack8", NULL, value=0, min=-1000000, max=1000000, step=0.5)
+			),
+			radioButtons("lineshmapTrack8", HTML("<table><tr><td><strong>Add position lines</strong></td>
+<td>
+<div class='help-tip'>
+	<p>Add genomic position lines between tracks.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), c("Yes" = "1", "No" = "2"),selected="2"),
+			conditionalPanel(condition="input.lineshmapTrack8=='1'",
+			numericInput("heightlinesTrack8", HTML("<table><tr><td><strong>Lines height:</strong></td>
+<td>
+<div class='help-tip'>
+	<p>Height of the lines.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), value=0.06, min=0, max=0.8, step=0.01),
+			numericInput("marginlinesTrack8", HTML("<table><tr><td><strong>Lines margin:</strong></td>
+<td>
+<div class='help-tip'>
+	<p>Margin size of the lines.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), value=0.01, min=0, max=0.8, step=0.005)
+			)
+			),			
 			numericInput("heightTrack8", HTML("<table><tr><td><strong>Track height:</strong></td>
 <td>
 <div class='help-tip'>
@@ -1046,8 +1593,10 @@ For data with four columns, a single character representing a color should be pr
 	                                      </div></td></tr>
 	                                      </table>
 	                                      "), value=0.01, min=0, max=0.8, step=0.005),
-			radioButtons("borderTrack8", "Add borders", c("Yes" = "add", "No" = ""),selected=""),
-			conditionalPanel(condition="input.typeTrack8!='rect' & output.trackdat8",
+            conditionalPanel(condition="input.typeTrack8!='heatmap'",										  
+			radioButtons("borderTrack8", "Add borders", c("Yes" = "add", "No" = ""),selected="")
+			),
+			conditionalPanel(condition="input.typeTrack8!='rect' & input.typeTrack8!='heatmap' & output.trackdat8",
 			radioButtons("highlightTrack8", HTML("<table><tr><td><strong>Highlight regions</strong></td>
 <td>
 <div class='help-tip'>
@@ -1093,7 +1642,7 @@ For data with four columns, a single character representing a color should be pr
 			textInput("coldir2Track9", "Inside color:", value="cyan")
 			)
 			),
-			conditionalPanel(condition="input.typeTrack9!='rect'",
+			conditionalPanel(condition="input.typeTrack9!='rect' & input.typeTrack9!='heatmap'",
 			conditionalPanel(condition="input.typeTrack9!='bar' | input.directionTrack9=='1'",
 			radioButtons("coltypeTrack9", HTML("<table><tr><td><strong>Data color</strong></td>
 <td>
@@ -1116,33 +1665,98 @@ For data with four columns, a single character representing a color should be pr
 	                                      </div></td></tr>
 	                                      </table>
 	                                      "), c("Gradual" = "1", "Discrete" = "2"), selected="1"),
+			conditionalPanel(condition="input.rectTrack9=='2'",
+			radioButtons("rectcolTrack9", HTML("<table><tr><td><strong>Select color</strong></td>
+<td>
+<div class='help-tip'>
+	<p>The color to be used to plot the data, which can be random assigned by the application or specified by the users. For random type, the fourth column of data should be a discrete character vector with no more than 50 groups. For specific type, all groups of data will be filled in a specific color. Hex color codes as '#FF0000' are also supported.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), c("Random" = "1", "Specific" = "2"), selected="1"),
+			conditionalPanel(condition="input.rectcolTrack9=='2'",
+			textInput("rectcoldisTrack9", NULL, value="red")
+			)
+			),										  
 			conditionalPanel(condition="input.rectTrack9=='1'",
 			selectInput("colrectTrack9", NULL, choices = c("blue", "red", "green", "cyan", "purple", "pink", "orange", "yellow", "navy", "seagreen", "maroon", "olivedrab", "gold", "lightblue", "navy.yellow", "purple.seagreen", "navy.orange", "navy.cyan", "blue.red", "green.red"))
 			)
 			),
+			conditionalPanel(condition="input.typeTrack9!='heatmap'",
 			numericInput("transparencyTrack9", HTML("<table><tr><td>Color transparency:</td>
 <td>
 <div class='help-tip'>
 	<p>A decimal number in [0, 1] to adjust the color transparency. The higher the value, the deeper the color.</p>
 	                                      </div></td></tr>
 	                                      </table>
-	                                      "), value=1, min=0, max=1, step=0.1),
-			conditionalPanel(condition="input.typeTrack9!='rect'",
-			textInput("colorlineTrack9", HTML("<table><tr><td><strong>Baselines color:</strong></td>
+	                                      "), value=1, min=0, max=1, step=0.1)
+			),
+			conditionalPanel(condition="input.typeTrack9!='rect' & input.typeTrack9!='heatmap'",
+			textInput("baselineTrack9", HTML("<table><tr><td><strong>Y coordinates of baselines:</strong></td>
 <td>
 <div class='help-tip'>
-	<p>The color to be used for the baselines which can be null or a single character representing a color.  Hex color codes as '#FF0000' are also supported.</p>
+	<p>Decimal numbers in [0, 1] to adjust y coordinates of baselines. Numeric vector of arbitrary length is accepted and represent the number of baselines. For example, '0.5' or '0.25,0.5,0.75'.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), value="0.25,0.75"),
+			textInput("colorlineTrack9", HTML("<table><tr><td><strong>Baselines color(s):</strong></td>
+<td>
+<div class='help-tip'>
+	<p>The color to be used for the baselines which can be null or a character vector of arbitrary length, which can be adjusted automatically to the number of baselines. For example, 'grey' or 'red,green'. Hex color codes as '#FF0000' are also supported.</p>
 	                                      </div></td></tr>
 	                                      </table>
 	                                      "), value="grey")
 			),
+			conditionalPanel(condition="input.typeTrack9!='heatmap'",
 			textInput("bgcolTrack9", HTML("<table><tr><td><strong>Background color(s):</strong></td>
 <td>
 <div class='help-tip'>
 	<p>The color to be used for the background of the plot which can be null or a color vector of arbitrary length adjusted automatically to the number of sectors. For example, 'grey95' or 'grey95,grey,pink,yellow'. Hex color codes as '#FF0000' are also supported.</p>
 	                                      </div></td></tr>
 	                                      </table>
-	                                      "), value="grey95"),
+	                                      "), value="grey95")
+			),
+			conditionalPanel(condition="input.typeTrack9=='heatmap'",
+			selectInput("colhmapTrack9", HTML("<table><tr><td><strong>Colors:</strong></td>
+<td>
+<div class='help-tip'>
+	<p>Colors used for the heatmap.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), choices = c("blue.white.red", "green.black.red", "green.yellow.red", "purple.yellow.red", "blue.green.red", "blue.yellow.green", "cyan.white.deeppink1"), selected="blue.white.red"),
+			radioButtons("midhmapTrack9", HTML("<table><tr><td><strong>Midpoint</strong></td>
+<td>
+<div class='help-tip'>
+	<p>The midpoint of track's data. Default to (max+min)/2.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), c("Default" = "1", "Custom" = "2"), selected="1"),
+			conditionalPanel(condition="input.midhmapTrack9=='2'",						  
+			numericInput("midpointTrack9", NULL, value=0, min=-1000000, max=1000000, step=0.5)
+			),
+			radioButtons("lineshmapTrack9", HTML("<table><tr><td><strong>Add position lines</strong></td>
+<td>
+<div class='help-tip'>
+	<p>Add genomic position lines between tracks.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), c("Yes" = "1", "No" = "2"),selected="2"),
+			conditionalPanel(condition="input.lineshmapTrack9=='1'",
+			numericInput("heightlinesTrack9", HTML("<table><tr><td><strong>Lines height:</strong></td>
+<td>
+<div class='help-tip'>
+	<p>Height of the lines.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), value=0.06, min=0, max=0.8, step=0.01),
+			numericInput("marginlinesTrack9", HTML("<table><tr><td><strong>Lines margin:</strong></td>
+<td>
+<div class='help-tip'>
+	<p>Margin size of the lines.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), value=0.01, min=0, max=0.8, step=0.005)
+			)
+			),			
 			numericInput("heightTrack9", HTML("<table><tr><td><strong>Track height:</strong></td>
 <td>
 <div class='help-tip'>
@@ -1157,8 +1771,10 @@ For data with four columns, a single character representing a color should be pr
 	                                      </div></td></tr>
 	                                      </table>
 	                                      "), value=0.01, min=0, max=0.8, step=0.005),
-			radioButtons("borderTrack9", "Add borders", c("Yes" = "add", "No" = ""),selected=""),
-			conditionalPanel(condition="input.typeTrack9!='rect' & output.trackdat9",
+            conditionalPanel(condition="input.typeTrack9!='heatmap'",										  
+			radioButtons("borderTrack9", "Add borders", c("Yes" = "add", "No" = ""),selected="")
+			),
+			conditionalPanel(condition="input.typeTrack9!='rect' & input.typeTrack9!='heatmap' & output.trackdat9",
 			radioButtons("highlightTrack9", HTML("<table><tr><td><strong>Highlight regions</strong></td>
 <td>
 <div class='help-tip'>
@@ -1204,7 +1820,7 @@ For data with four columns, a single character representing a color should be pr
 			textInput("coldir2Track10", "Inside color:", value="cyan")
 			)
 			),
-			conditionalPanel(condition="input.typeTrack10!='rect'",
+			conditionalPanel(condition="input.typeTrack10!='rect' & input.typeTrack10!='heatmap'",
 			conditionalPanel(condition="input.typeTrack10!='bar' | input.directionTrack10=='1'",
 			radioButtons("coltypeTrack10", HTML("<table><tr><td><strong>Data color</strong></td>
 <td>
@@ -1227,33 +1843,98 @@ For data with four columns, a single character representing a color should be pr
 	                                      </div></td></tr>
 	                                      </table>
 	                                      "), c("Gradual" = "1", "Discrete" = "2"), selected="1"),
+			conditionalPanel(condition="input.rectTrack10=='2'",
+			radioButtons("rectcolTrack10", HTML("<table><tr><td><strong>Select color</strong></td>
+<td>
+<div class='help-tip'>
+	<p>The color to be used to plot the data, which can be random assigned by the application or specified by the users. For random type, the fourth column of data should be a discrete character vector with no more than 50 groups. For specific type, all groups of data will be filled in a specific color. Hex color codes as '#FF0000' are also supported.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), c("Random" = "1", "Specific" = "2"), selected="1"),
+			conditionalPanel(condition="input.rectcolTrack10=='2'",
+			textInput("rectcoldisTrack10", NULL, value="red")
+			)
+			),										  
 			conditionalPanel(condition="input.rectTrack10=='1'",
 			selectInput("colrectTrack10", NULL, choices = c("blue", "red", "green", "cyan", "purple", "pink", "orange", "yellow", "navy", "seagreen", "maroon", "olivedrab", "gold", "lightblue", "navy.yellow", "purple.seagreen", "navy.orange", "navy.cyan", "blue.red", "green.red"))
 			)
 			),
+			conditionalPanel(condition="input.typeTrack10!='heatmap'",
 			numericInput("transparencyTrack10", HTML("<table><tr><td>Color transparency:</td>
 <td>
 <div class='help-tip'>
 	<p>A decimal number in [0, 1] to adjust the color transparency. The higher the value, the deeper the color.</p>
 	                                      </div></td></tr>
 	                                      </table>
-	                                      "), value=1, min=0, max=1, step=0.1),
-			conditionalPanel(condition="input.typeTrack10!='rect'",
-			textInput("colorlineTrack10", HTML("<table><tr><td><strong>Baselines color:</strong></td>
+	                                      "), value=1, min=0, max=1, step=0.1)
+			),
+			conditionalPanel(condition="input.typeTrack10!='rect' & input.typeTrack10!='heatmap'",
+			textInput("baselineTrack10", HTML("<table><tr><td><strong>Y coordinates of baselines:</strong></td>
 <td>
 <div class='help-tip'>
-	<p>The color to be used for the baselines which can be null or a single character representing a color.  Hex color codes as '#FF0000' are also supported.</p>
+	<p>Decimal numbers in [0, 1] to adjust y coordinates of baselines. Numeric vector of arbitrary length is accepted and represent the number of baselines. For example, '0.5' or '0.25,0.5,0.75'.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), value="0.25,0.75"),			
+			textInput("colorlineTrack10", HTML("<table><tr><td><strong>Baselines color(s):</strong></td>
+<td>
+<div class='help-tip'>
+	<p>The color to be used for the baselines which can be null or a character vector of arbitrary length, which can be adjusted automatically to the number of baselines. For example, 'grey' or 'red,green'. Hex color codes as '#FF0000' are also supported.</p>
 	                                      </div></td></tr>
 	                                      </table>
 	                                      "), value="grey")
 			),
+			conditionalPanel(condition="input.typeTrack10!='heatmap'",
 			textInput("bgcolTrack10", HTML("<table><tr><td><strong>Background color(s):</strong></td>
 <td>
 <div class='help-tip'>
 	<p>The color to be used for the background of the plot which can be null or a color vector of arbitrary length adjusted automatically to the number of sectors. For example, 'grey95' or 'grey95,grey,pink,yellow'. Hex color codes as '#FF0000' are also supported.</p>
 	                                      </div></td></tr>
 	                                      </table>
-	                                      "), value="grey95"),
+	                                      "), value="grey95")
+			),
+			conditionalPanel(condition="input.typeTrack10=='heatmap'",
+			selectInput("colhmapTrack10", HTML("<table><tr><td><strong>Colors:</strong></td>
+<td>
+<div class='help-tip'>
+	<p>Colors used for the heatmap.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), choices = c("blue.white.red", "green.black.red", "green.yellow.red", "purple.yellow.red", "blue.green.red", "blue.yellow.green", "cyan.white.deeppink1"), selected="blue.white.red"),
+			radioButtons("midhmapTrack10", HTML("<table><tr><td><strong>Midpoint</strong></td>
+<td>
+<div class='help-tip'>
+	<p>The midpoint of track's data. Default to (max+min)/2.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), c("Default" = "1", "Custom" = "2"), selected="1"),
+			conditionalPanel(condition="input.midhmapTrack10=='2'",						  
+			numericInput("midpointTrack10", NULL, value=0, min=-1000000, max=1000000, step=0.5)
+			),
+			radioButtons("lineshmapTrack10", HTML("<table><tr><td><strong>Add position lines</strong></td>
+<td>
+<div class='help-tip'>
+	<p>Add genomic position lines between tracks.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), c("Yes" = "1", "No" = "2"),selected="2"),
+			conditionalPanel(condition="input.lineshmapTrack10=='1'",
+			numericInput("heightlinesTrack10", HTML("<table><tr><td><strong>Lines height:</strong></td>
+<td>
+<div class='help-tip'>
+	<p>Height of the lines.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), value=0.06, min=0, max=0.8, step=0.01),
+			numericInput("marginlinesTrack10", HTML("<table><tr><td><strong>Lines margin:</strong></td>
+<td>
+<div class='help-tip'>
+	<p>Margin size of the lines.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), value=0.01, min=0, max=0.8, step=0.005)
+			)
+			),			
 			numericInput("heightTrack10", HTML("<table><tr><td><strong>Track height:</strong></td>
 <td>
 <div class='help-tip'>
@@ -1268,8 +1949,10 @@ For data with four columns, a single character representing a color should be pr
 	                                      </div></td></tr>
 	                                      </table>
 	                                      "), value=0.01, min=0, max=0.8, step=0.005),
-			radioButtons("borderTrack10", "Add borders", c("Yes" = "add", "No" = ""),selected=""),
-			conditionalPanel(condition="input.typeTrack10!='rect' & output.trackdat10",
+            conditionalPanel(condition="input.typeTrack10!='heatmap'",										  
+			radioButtons("borderTrack10", "Add borders", c("Yes" = "add", "No" = ""),selected="")
+			),
+			conditionalPanel(condition="input.typeTrack10!='rect' & input.typeTrack10!='heatmap' & output.trackdat10",
 			radioButtons("highlightTrack10", HTML("<table><tr><td><strong>Highlight regions</strong></td>
 <td>
 <div class='help-tip'>
