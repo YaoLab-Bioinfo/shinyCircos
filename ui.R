@@ -187,6 +187,12 @@ shinyUI(fluidPage(theme="newstyle.css",
 	                                      </table>
 	                                      "), value="1"),          
 			radioButtons("fontsizeChr", "Font size", c("Small" = "1", "Medium" = "1.1","Large"="1.2","Custom"="custom")),
+			conditionalPanel(condition="input.fontsizeChr=='custom'",
+			numericInput("cexAxis", "Axis text size:", value=1, min=0.1, max=3, step=0.1),
+			conditionalPanel(condition="input.labelChr=='labels'",
+			numericInput("cexAxislabel", "Axis label size:", value=1, min=0.1, max=3, step=0.1)
+			)
+			),
 			conditionalPanel(condition="input.trackChr=='track'",
 			textInput("text0", HTML("<table><tr><td><strong>Add legend text</strong></td>
 <td>
@@ -195,12 +201,6 @@ shinyUI(fluidPage(theme="newstyle.css",
 	                                      </div></td></tr>
 	                                      </table>
 	                                      "), value=NULL)
-			),
-			conditionalPanel(condition="input.fontsizeChr=='custom'",
-			numericInput("cexAxis", "Axis text size:", value=1, min=0.1, max=3, step=0.1),
-			conditionalPanel(condition="input.labelChr=='labels'",
-			numericInput("cexAxislabel", "Axis label size:", value=1, min=0.1, max=3, step=0.1)
-			)
 			)
 			),
 			checkboxInput("optionsTrack1", HTML("<font color='red'>Track1</font>"), FALSE),
