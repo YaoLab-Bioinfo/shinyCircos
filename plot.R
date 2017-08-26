@@ -1,37 +1,31 @@
-plotcircos <- function(x, color, plotTypes, units, rotation, gap.width, fontsize){
-	par(mar = c(0.5,0.5,0.5,0.5),cex=fontsize)  
+plotcircos <- function(x, color, plotTypes, units, rotation, gap.width){
 	circos.par("start.degree" = 90-rotation,"gap.degree" = gap.width,cell.padding = c(0, 0, 0, 0), track.margin=c(0,0))
 	circos.genomicInitialize.new(x,plotType=plotTypes,unit=units)
 	circos.genomicTrackPlotRegion(ylim = c(0, 1),bg.col = color, bg.border = NA, track.height = 0.05)
 }
 
-plotcircos.notrack <- function(x, plotTypes, units, rotation, gap.width, fontsize){
-	par(mar = c(0.5,0.5,0.5,0.5),cex=fontsize)  
+plotcircos.notrack <- function(x, plotTypes, units, rotation, gap.width){
 	circos.par("start.degree" = 90-rotation,"gap.degree" = gap.width,cell.padding = c(0, 0, 0, 0), track.margin=c(0,0))
 	circos.genomicInitialize.new(x,plotType=plotTypes,unit=units)
 }
 
 plotcircos.font <- function(x, color, plotTypes, units, rotation, gap.width, cexLabel, cexAxis){
-	par(mar = c(0.5,0.5,0.5,0.5))  
 	circos.par("start.degree" = 90-rotation,"gap.degree" = gap.width,cell.padding = c(0, 0, 0, 0), track.margin=c(0,0))
 	circos.genomicInitialize.new.font(x,plotType=plotTypes,unit=units,cexlabel=cexLabel, cexaxis=cexAxis)
 	circos.genomicTrackPlotRegion(ylim = c(0, 1),bg.col = color, bg.border = NA, track.height = 0.05)
 }
 
-plotcircos.notrack.font <- function(x, plotTypes, units, rotation, gap.width, cexLabel, cexAxis){
-	par(mar = c(0.5,0.5,0.5,0.5))  
+plotcircos.notrack.font <- function(x, plotTypes, units, rotation, gap.width, cexLabel, cexAxis){  
 	circos.par("start.degree" = 90-rotation,"gap.degree" = gap.width,cell.padding = c(0, 0, 0, 0), track.margin=c(0,0))
 	circos.genomicInitialize.new.font(x,plotType=plotTypes,unit=units,cexlabel=cexLabel, cexaxis=cexAxis)
 }
 
-plotcircos.cyto <- function(x, plotTypes, units, rotation, gap.width, fontsize){
-  par(mar = c(0.5,0.5,0.5,0.5),cex=fontsize)  
+plotcircos.cyto <- function(x, plotTypes, units, rotation, gap.width){ 
   circos.par("start.degree" = 90-rotation,"gap.degree" = gap.width,cell.padding = c(0, 0, 0, 0), track.margin=c(0,0))
   circos.initializeWithIdeogram.new(x,plottype=plotTypes,unit=units)
 }
 
 plotcircos.cyto.font <- function(x, plotTypes, units, rotation, gap.width, cexLabel, cexAxis){
-  par(mar = c(0.5,0.5,0.5,0.5))  
   circos.par("start.degree" = 90-rotation,"gap.degree" = gap.width,cell.padding = c(0, 0, 0, 0), track.margin=c(0,0))
   circos.initializeWithIdeogram.new.font(x,plottype=plotTypes,unit=units,cexlabel=cexLabel, cexaxis=cexAxis)
 }
@@ -120,11 +114,11 @@ circos.genomicInitialize.new <-
                                                     labels.cex = 0.49 * par("cex"), labels.facing = "clockwise", 
                                                     major.tick.percentage = 0.2)
                                         circos.text(mean(xlim), 1.2, labels = sector.names[sector.index], 
-                                                    cex = par("cex"), adj = c(0.5, -0.1*par("cex")*2.1-(par("cex")-1)*3), niceFacing = TRUE)
+                                                    cex = par("cex")-0.1, adj = c(0.5, -0.1*par("cex")*6-(par("cex")-1)*3), niceFacing = TRUE)
                                       }
                                       else if ("labels" %in% plotType) {
                                         circos.text(mean(xlim), 0, labels = sector.names[sector.index], 
-                                                    cex = par("cex"), adj = c(0.5, -0.1*par("cex")*2.1-(par("cex")-1)*3), niceFacing = TRUE)
+                                                    cex = par("cex")-0.1, adj = c(0.5, -0.1*par("cex")*6-(par("cex")-1)*3), niceFacing = TRUE)
                                       }
                                       else if ("axis" %in% plotType) {
                                         circos.axis(h = 0, major.at = major.at, labels = major.tick.labels, 
@@ -221,11 +215,11 @@ circos.genomicInitialize.new.font <-
                                                     labels.cex = 0.49 * cexaxis, labels.facing = "clockwise", 
                                                     major.tick.percentage = 0.2)
                                         circos.text(mean(xlim), 1.2, labels = sector.names[sector.index], 
-                                                    cex = cexlabel, adj = c(0.5, -0.1*cexlabel*2.1-(cexlabel-1)*3), niceFacing = TRUE)
+                                                    cex = cexlabel, adj = c(0.5, -0.1*cexlabel*6-(cexlabel-1)*3), niceFacing = TRUE)
                                       }
                                       else if ("labels" %in% plotType) {
                                         circos.text(mean(xlim), 0, labels = sector.names[sector.index], 
-                                                    cex = cexlabel, adj = c(0.5, -0.1*cexlabel*2.1-(cexlabel-1)*3), niceFacing = TRUE)
+                                                    cex = cexlabel, adj = c(0.5, -0.1*cexlabel*6-(cexlabel-1)*3), niceFacing = TRUE)
                                       }
                                       else if ("axis" %in% plotType) {
                                         circos.axis(h = 0, major.at = major.at, labels = major.tick.labels, 
@@ -372,7 +366,7 @@ circos.genomicInitialize.new.font <-
     }
   }
 
-plotfigg <- function(input, output, trackindx, data.L, data.L1, data.L2, data.C, data.T, hltTrack.List, hltdata.List, heightSize, widthSize, colorChr, gap.width, cexAxis, cexAxislabel, unitChr, labelChr, fontsizeChr, trackChr, datatypeChr, transparencyHlt, transparencyhltLinks, transparencyTrack, transparencyLinks, marginLinks, selcolorLinks, barBoundary, coldir1Track, coldir2Track, colrectTrack, colorTrack, colorLinks, linksTrack, typeTrack, coltypeTk, rectTrack, rectcolTrack, rectcoldisTrack, borderTrack, directionTrack, colorlineTrack, baselineTrack, heightTrack, midhmapTrack, midpointTrack, colhmapTrack, lineshmapTrack, heightlinesTrack, marginlinesTrack, marginTrack , bgcolTrack){       
+plotfigg <- function(input, output, trackindx, data.L, data.L1, data.L2, data.C, data.T, hltTrack.List, hltdata.List, heightSize, widthSize, colorChr, gap.width, cexAxis, cexAxislabel, unitChr, labelChr, fontsizeChr, trackChr, datatypeChr, transparencyHlt, legendtext, addlegend, poslegend, transparencyhltLinks, transparencyTrack, transparencyLinks, marginLinks, selcolorLinks, barBoundary, coldir1Track, coldir2Track, colrectTrack, colorTrack, colorLinks, linksTrack, typeTrack, coltypeTk, rectTrack, rectcolTrack, rectcoldisTrack, borderTrack, directionTrack, colorlineTrack, baselineTrack, heightTrack, midhmapTrack, midpointTrack, colhmapTrack, lineshmapTrack, heightlinesTrack, marginlinesTrack, marginTrack , bgcolTrack){       
 	   ## *** The highlight regions ***
 	   if(!is.null(data.L)){
 		assign("highlightLinks",input$highlightLinks)
@@ -424,22 +418,35 @@ plotfigg <- function(input, output, trackindx, data.L, data.L1, data.L2, data.C,
 			repnumgap <- round(length(unique(data.C[,1]))/length(gap.width)) + 1
 			gap.width <- rep(gap.width, repnumgap)[1:length(unique(data.C[,1]))]
 			gap.width <- as.numeric(gap.width)
-			rotation <- gap.width[length(gap.width)]/2			
+			rotation <- gap.width[length(gap.width)]/2	
+			if (fontsizeChr=="custom"){
+			   if (length(legendtext)!=0 && addlegend==1 && poslegend==1){
+	           par(oma=c(0,0,0,0),mar = c(9,0.5,1,9.5),xpd=TRUE,cex=cexAxislabel-0.1)
+	           }else{
+	           par(mar = c(0.6,0.6,0.6,0.6),cex=cexAxislabel-0.1) 
+	           }
+			}else{
+			   	if (length(legendtext)!=0 && addlegend==1 && poslegend==1){
+	            par(oma=c(0,0,0,0),mar = c(9,0.5,1,9.5),xpd=TRUE,cex=as.numeric(fontsizeChr)-0.05)
+	            }else{
+	            par(mar = c(0.6,0.6,0.6,0.6),cex=as.numeric(fontsizeChr)-0.05) 
+	            }			
+			}			
 			if(datatypeChr=="general"){
 			if (trackChr=="track" & fontsizeChr!="custom") {
-				plotcircos(data.C, color = colorChr, plotTypes=unique(c(labelChr,"axis")), units=unitChr, rotation=rotation,  gap.width=gap.width, fontsize=fontsizeChr)
+				plotcircos(data.C, color = colorChr, plotTypes=unique(c(labelChr,"axis")), units=unitChr, rotation=rotation,  gap.width=gap.width)
 			}else if (trackChr=="track" & fontsizeChr=="custom") {
-				plotcircos.font(data.C, color = colorChr, plotTypes=unique(c(labelChr,"axis")), units=unitChr, rotation=rotation,  gap.width=gap.width, cexLabel=cexAxislabel, cexAxis=cexAxis)
+				plotcircos.font(data.C, color = colorChr, plotTypes=unique(c(labelChr,"axis")), units=unitChr, rotation=rotation,  gap.width=gap.width, cexLabel=cexAxislabel-0.1, cexAxis=cexAxis)
 			}else if (trackChr!="track" & fontsizeChr!="custom") {
-				plotcircos.notrack(data.C, plotTypes=unique(c(labelChr,"axis")), units=unitChr, rotation=rotation,  gap.width=gap.width, fontsize=fontsizeChr)
+				plotcircos.notrack(data.C, plotTypes=unique(c(labelChr,"axis")), units=unitChr, rotation=rotation,  gap.width=gap.width)
 			}else if (trackChr!="track" & fontsizeChr=="custom"){
-				plotcircos.notrack.font(data.C, plotTypes=unique(c(labelChr,"axis")), units=unitChr, rotation=rotation,  gap.width=gap.width, cexLabel=cexAxislabel, cexAxis=cexAxis)
+				plotcircos.notrack.font(data.C, plotTypes=unique(c(labelChr,"axis")), units=unitChr, rotation=rotation,  gap.width=gap.width, cexLabel=cexAxislabel-0.1, cexAxis=cexAxis)
 			}
 			}else{
 			if (fontsizeChr!="custom") {
-			    plotcircos.cyto(data.C, plotTypes=unique(c(labelChr,"axis")), units=unitChr, rotation=rotation,  gap.width=gap.width, fontsize=fontsizeChr)
+			    plotcircos.cyto(data.C, plotTypes=unique(c(labelChr,"axis")), units=unitChr, rotation=rotation,  gap.width=gap.width)
 			}else if (fontsizeChr=="custom") {
-				plotcircos.cyto.font(data.C, plotTypes=unique(c(labelChr,"axis")), units=unitChr, rotation=rotation,  gap.width=gap.width, cexLabel=cexAxislabel, cexAxis=cexAxis)
+				plotcircos.cyto.font(data.C, plotTypes=unique(c(labelChr,"axis")), units=unitChr, rotation=rotation,  gap.width=gap.width, cexLabel=cexAxislabel-0.1, cexAxis=cexAxis)
 			}
 			}
 			if(!is.null(data.T)){
@@ -944,12 +951,44 @@ plotfigg <- function(input, output, trackindx, data.L, data.L1, data.L2, data.C,
 			       circos.genomicLink(data.L1, data.L2, col = rand_color(nrow(data.L1), transparency = 1-transparencyLinks), border = NA)
 				}
 			}
+			}							
+			n = length(legendtext)
+			if (n!=0 && addlegend==1){
+			if (poslegend==1 && fontsizeChr!="custom"){
+			xleft = 1.2+(as.numeric(fontsizeChr)-1)*0.25
+			}else if(poslegend==1 && fontsizeChr=="custom"){
+			xleft = 1.2+(as.numeric(cexAxislabel)-1)*0.25
+			}else{
+			xleft = -0.01
 			}
+            xright = xleft+0.02 
+			ybottom = -0.13*0.22/10-n*0.03
+			ytop = -0.13*0.22/10+n*0.03		
+            len = ytop-ybottom
+            gap = len/(n-0.8)
+			for(i in 1:n){
+			assign(paste("n",i,sep=""),legendtext[i])
+			}		
+            rect(xleft, ybottom, xright, ytop, col = "black")
+            polygon(x = c(xleft-0.01, (xleft+xright)/2, xright+0.01), y = c(ybottom, ybottom-0.02, ybottom), col = "black")
+            text(x = xleft-0.08, y = ybottom, labels = "inner", cex = 0.95)
+            if (n!=1){
+			text(x = xleft-0.08, y = ytop-0.02, labels = "outer",cex = 0.95)
+			}
+            if(n==1){
+			text(x = xleft-0.08, y = ytop-0.01, labels = "outer",cex = 0.95)
+			text(x = xright+0.025, y = ytop-0.04, labels = get("n1"), cex=1, adj = c(0,0))
+			}else{
+			for(i in 1:n){
+            text(x = xright+0.028, y = ytop-gap*(i-1)-0.025, labels = get(paste("n",i,sep="")), cex=1, adj = c(0,0))
+            }
+			}
+			}	
 			circos.clear()
 	      }, height = heightSize, width = widthSize)
 		  }
 		  
-plotfig <- function(input, trackindx, data.L, data.L1, data.L2, data.C, data.T, hltTrack.List, hltdata.List){
+plotfig <- function(input, trackindx, data.L, data.L1, data.L2, data.C, data.T, hltTrack.List, hltdata.List, legendtext){
 		if(!is.null(data.L)){
 		assign("highlightLinks",input$highlightLinks)
 		assign("hltdataLinks",input$hltDataLinks)
@@ -1001,22 +1040,24 @@ plotfig <- function(input, trackindx, data.L, data.L1, data.L2, data.C, data.T, 
 			repnumgap <- round(length(unique(data.C[,1]))/length(gap.width)) + 1
 			gap.width <- rep(gap.width, repnumgap)[1:length(unique(data.C[,1]))]
 			gap.width <- as.numeric(gap.width)
-			rotation <- gap.width[length(gap.width)]/2			
+			rotation <- gap.width[length(gap.width)]/2				
+			addlegend <<- input$seladdlegend
+		    poslegend <<- input$selposlegend
 			if(input$datatypeChr=="general"){
 			if (input$trackChr=="track" & input$fontsizeChr!="custom") {
-				plotcircos(data.C, color = colorChr, plotTypes=unique(c(input$labelChr,"axis")), units=input$unitChr, rotation=rotation,  gap.width=gap.width, fontsize=input$fontsizeChr)
+				plotcircos(data.C, color = colorChr, plotTypes=unique(c(input$labelChr,"axis")), units=input$unitChr, rotation=rotation,  gap.width=gap.width)
 			}else if (input$trackChr=="track" & input$fontsizeChr=="custom") {
-				plotcircos.font(data.C, color = colorChr, plotTypes=unique(c(input$labelChr,"axis")), units=input$unitChr, rotation=rotation,  gap.width=gap.width, cexLabel=input$cexAxislabel, cexAxis=input$cexAxis)
+				plotcircos.font(data.C, color = colorChr, plotTypes=unique(c(input$labelChr,"axis")), units=input$unitChr, rotation=rotation,  gap.width=gap.width, cexLabel=input$cexAxislabel-0.1, cexAxis=input$cexAxis)
 			}else if (input$trackChr!="track" & input$fontsizeChr!="custom") {
-				plotcircos.notrack(data.C, plotTypes=unique(c(input$labelChr,"axis")), units=input$unitChr, rotation=rotation,  gap.width=gap.width, fontsize=input$fontsizeChr)
+				plotcircos.notrack(data.C, plotTypes=unique(c(input$labelChr,"axis")), units=input$unitChr, rotation=rotation,  gap.width=gap.width)
 			}else if (input$trackChr!="track" & input$fontsizeChr=="custom"){
-				plotcircos.notrack.font(data.C, plotTypes=unique(c(input$labelChr,"axis")), units=input$unitChr, rotation=rotation,  gap.width=gap.width, cexLabel=input$cexAxislabel, cexAxis=input$cexAxis)
+				plotcircos.notrack.font(data.C, plotTypes=unique(c(input$labelChr,"axis")), units=input$unitChr, rotation=rotation,  gap.width=gap.width, cexLabel=input$cexAxislabel-0.1, cexAxis=input$cexAxis)
 			}
 			}else{
 			if (input$fontsizeChr!="custom") {
-			    plotcircos.cyto(data.C, plotTypes=unique(c(input$labelChr,"axis")), units=input$unitChr, rotation=rotation,  gap.width=gap.width, fontsize=input$fontsizeChr)
+			    plotcircos.cyto(data.C, plotTypes=unique(c(input$labelChr,"axis")), units=input$unitChr, rotation=rotation,  gap.width=gap.width)
 			}else if (input$fontsizeChr=="custom") {
-				plotcircos.cyto.font(data.C, plotTypes=unique(c(input$labelChr,"axis")), units=input$unitChr, rotation=rotation,  gap.width=gap.width, cexLabel=input$cexAxislabel, cexAxis=input$cexAxis)
+				plotcircos.cyto.font(data.C, plotTypes=unique(c(input$labelChr,"axis")), units=input$unitChr, rotation=rotation,  gap.width=gap.width, cexLabel=input$cexAxislabel-0.1, cexAxis=input$cexAxis)
 			}			
 			}
 			if(!is.null(data.T)){
@@ -1516,7 +1557,39 @@ plotfig <- function(input, trackindx, data.L, data.L1, data.L2, data.C, data.T, 
 			       circos.genomicLink(data.L1, data.L2, col = rand_color(nrow(data.L1), transparency = 1-input$transparencyLinks), border = NA)
 				}
 			}
+			}			
+			n = length(legendtext)
+			if (n!=0 && addlegend==1){
+			if (poslegend==1 && input$fontsizeChr!="custom"){
+			xleft = 1.2+(as.numeric(input$fontsizeChr)-1)*0.25
+			}else if(poslegend==1 && input$fontsizeChr=="custom"){
+			xleft = 1.2+(as.numeric(input$cexAxislabel)-1)*0.25
+			}else{
+			xleft = -0.01
 			}
+            xright = xleft+0.02
+            ybottom = -0.13*0.22/10-n*0.03
+			ytop = -0.13*0.22/10+n*0.03			
+            len = ytop-ybottom
+            gap = len/(n-0.8)
+			for(i in 1:n){
+			assign(paste("n",i,sep=""),legendtext[i])
+			}		
+            rect(xleft, ybottom, xright, ytop, col = "black")
+            polygon(x = c(xleft-0.01, (xleft+xright)/2, xright+0.01), y = c(ybottom, ybottom-0.02, ybottom), col = "black")
+            text(x = xleft-0.08, y = ybottom, labels = "inner", cex = 0.95)
+            if (n!=1){
+			text(x = xleft-0.08, y = ytop-0.02, labels = "outer",cex = 0.95)
+			}
+			if(n==1){
+			text(x = xleft-0.08, y = ytop-0.01, labels = "outer",cex = 0.95)
+			text(x = xright+0.025, y = ytop-0.04, labels = get("n1"), cex=1, adj = c(0,0))
+			}else{
+			for(i in 1:n){
+            text(x = xright+0.028, y = ytop-gap*(i-1)-0.025, labels = get(paste("n",i,sep="")), cex=1, adj = c(0,0))
+            }
+			}         
+			}			
 			circos.clear()
 			}
 

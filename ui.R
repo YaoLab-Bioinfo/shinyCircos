@@ -187,6 +187,15 @@ shinyUI(fluidPage(theme="newstyle.css",
 	                                      </table>
 	                                      "), value="1"),          
 			radioButtons("fontsizeChr", "Font size", c("Small" = "1", "Medium" = "1.1","Large"="1.2","Custom"="custom")),
+			conditionalPanel(condition="input.trackChr=='track'",
+			textInput("text0", HTML("<table><tr><td><strong>Add legend text</strong></td>
+<td>
+<div class='help-tip'>
+	<p>The text to appear in the legend which can be null or a character.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), value=NULL)
+			),
 			conditionalPanel(condition="input.fontsizeChr=='custom'",
 			numericInput("cexAxis", "Axis text size:", value=1, min=0.1, max=3, step=0.1),
 			conditionalPanel(condition="input.labelChr=='labels'",
@@ -347,6 +356,13 @@ For example, 'grey95' or 'grey95,grey,pink,yellow'. Hex color codes as '#FF0000'
 			conditionalPanel(condition="input.typeTrack1!='heatmap'",							  
 			radioButtons("borderTrack1", "Add borders", c("Yes" = "add", "No" = ""),selected="")
 			),
+			textInput("text1", HTML("<table><tr><td><strong>Add legend text</strong></td>
+<td>
+<div class='help-tip'>
+	<p>The text to appear in the legend which can be null or a character.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), value=NULL),
 			conditionalPanel(condition="input.typeTrack1!='rect' & input.typeTrack1!='heatmap' & output.trackdat1",
 			radioButtons("highlightTrack1", HTML("<table><tr><td><strong>Highlight regions</strong></td>
 <td>
@@ -527,6 +543,13 @@ For data with four columns, a single character representing a color should be pr
             conditionalPanel(condition="input.typeTrack2!='heatmap'",										  
 			radioButtons("borderTrack2", "Add borders", c("Yes" = "add", "No" = ""),selected="")
 			),
+			textInput("text2", HTML("<table><tr><td><strong>Add legend text</strong></td>
+<td>
+<div class='help-tip'>
+	<p>The text to appear in the legend which can be null or a character.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), value=NULL),
 			conditionalPanel(condition="input.typeTrack2!='rect' & input.typeTrack2!='heatmap' & output.trackdat2",
 			radioButtons("highlightTrack2", HTML("<table><tr><td><strong>Highlight regions</strong></td>
 <td>
@@ -705,6 +728,13 @@ For data with four columns, a single character representing a color should be pr
             conditionalPanel(condition="input.typeTrack3!='heatmap'",										  
 			radioButtons("borderTrack3", "Add borders", c("Yes" = "add", "No" = ""),selected="")
 			),
+			textInput("text3", HTML("<table><tr><td><strong>Add legend text</strong></td>
+<td>
+<div class='help-tip'>
+	<p>The text to appear in the legend which can be null or a character.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), value=NULL),
 			conditionalPanel(condition="input.typeTrack3!='rect' & input.typeTrack3!='heatmap' & output.trackdat3",
 			radioButtons("highlightTrack3", HTML("<table><tr><td><strong>Highlight regions</strong></td>
 <td>
@@ -884,6 +914,13 @@ For example, 'grey95' or 'grey95,grey,pink,yellow'. Hex color codes as '#FF0000'
             conditionalPanel(condition="input.typeTrack4!='heatmap'",										  
 			radioButtons("borderTrack4", "Add borders", c("Yes" = "add", "No" = ""),selected="")
 			),
+			textInput("text4", HTML("<table><tr><td><strong>Add legend text</strong></td>
+<td>
+<div class='help-tip'>
+	<p>The text to appear in the legend which can be null or a character.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), value=NULL),
 			conditionalPanel(condition="input.typeTrack4!='rect' & input.typeTrack4!='heatmap' & output.trackdat4",
 			radioButtons("highlightTrack4", HTML("<table><tr><td><strong>Highlight regions</strong></td>
 <td>
@@ -1062,6 +1099,13 @@ For data with four columns, a single character representing a color should be pr
             conditionalPanel(condition="input.typeTrack5!='heatmap'",										  
 			radioButtons("borderTrack5", "Add borders", c("Yes" = "add", "No" = ""),selected="")
 			),
+			textInput("text5", HTML("<table><tr><td><strong>Add legend text</strong></td>
+<td>
+<div class='help-tip'>
+	<p>The text to appear in the legend which can be null or a character.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), value=NULL),
 			conditionalPanel(condition="input.typeTrack5!='rect' & input.typeTrack5!='heatmap' & output.trackdat5",
 			radioButtons("highlightTrack5", HTML("<table><tr><td><strong>Highlight regions</strong></td>
 <td>
@@ -1240,6 +1284,13 @@ For data with four columns, a single character representing a color should be pr
             conditionalPanel(condition="input.typeTrack6!='heatmap'",										  
 			radioButtons("borderTrack6", "Add borders", c("Yes" = "add", "No" = ""),selected="")
 			),
+			textInput("text6", HTML("<table><tr><td><strong>Add legend text</strong></td>
+<td>
+<div class='help-tip'>
+	<p>The text to appear in the legend which can be null or a character.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), value=NULL),
 			conditionalPanel(condition="input.typeTrack6!='rect' & input.typeTrack6!='heatmap' & output.trackdat6",
 			radioButtons("highlightTrack6", HTML("<table><tr><td><strong>Highlight regions</strong></td>
 <td>
@@ -1418,6 +1469,13 @@ For data with four columns, a single character representing a color should be pr
             conditionalPanel(condition="input.typeTrack7!='heatmap'",										  
 			radioButtons("borderTrack7", "Add borders", c("Yes" = "add", "No" = ""),selected="")
 			),
+			textInput("text7", HTML("<table><tr><td><strong>Add legend text</strong></td>
+<td>
+<div class='help-tip'>
+	<p>The text to appear in the legend which can be null or a character.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), value=NULL),
 			conditionalPanel(condition="input.typeTrack7!='rect' & input.typeTrack7!='heatmap' & output.trackdat7",
 			radioButtons("highlightTrack7", HTML("<table><tr><td><strong>Highlight regions</strong></td>
 <td>
@@ -1596,6 +1654,13 @@ For data with four columns, a single character representing a color should be pr
             conditionalPanel(condition="input.typeTrack8!='heatmap'",										  
 			radioButtons("borderTrack8", "Add borders", c("Yes" = "add", "No" = ""),selected="")
 			),
+			textInput("text8", HTML("<table><tr><td><strong>Add legend text</strong></td>
+<td>
+<div class='help-tip'>
+	<p>The text to appear in the legend which can be null or a character.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), value=NULL),
 			conditionalPanel(condition="input.typeTrack8!='rect' & input.typeTrack8!='heatmap' & output.trackdat8",
 			radioButtons("highlightTrack8", HTML("<table><tr><td><strong>Highlight regions</strong></td>
 <td>
@@ -1774,6 +1839,13 @@ For data with four columns, a single character representing a color should be pr
             conditionalPanel(condition="input.typeTrack9!='heatmap'",										  
 			radioButtons("borderTrack9", "Add borders", c("Yes" = "add", "No" = ""),selected="")
 			),
+			textInput("text9", HTML("<table><tr><td><strong>Add legend text</strong></td>
+<td>
+<div class='help-tip'>
+	<p>The text to appear in the legend which can be null or a character.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), value=NULL),
 			conditionalPanel(condition="input.typeTrack9!='rect' & input.typeTrack9!='heatmap' & output.trackdat9",
 			radioButtons("highlightTrack9", HTML("<table><tr><td><strong>Highlight regions</strong></td>
 <td>
@@ -1952,6 +2024,13 @@ For data with four columns, a single character representing a color should be pr
             conditionalPanel(condition="input.typeTrack10!='heatmap'",										  
 			radioButtons("borderTrack10", "Add borders", c("Yes" = "add", "No" = ""),selected="")
 			),
+			textInput("text10", HTML("<table><tr><td><strong>Add legend text</strong></td>
+<td>
+<div class='help-tip'>
+	<p>The text to appear in the legend which can be null or a character.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), value=NULL),
 			conditionalPanel(condition="input.typeTrack10!='rect' & input.typeTrack10!='heatmap' & output.trackdat10",
 			radioButtons("highlightTrack10", HTML("<table><tr><td><strong>Highlight regions</strong></td>
 <td>
@@ -2009,6 +2088,13 @@ For data with four columns, a single character representing a color should be pr
 	                                      </div></td></tr>
 	                                      </table>
 	                                      "), value=0.01, min=0, max=0.8, step=0.005),
+			textInput("text11", HTML("<table><tr><td><strong>Add legend text</strong></td>
+<td>
+<div class='help-tip'>
+	<p>The text to appear in the legend which can be null or a character.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), value=NULL),
 			radioButtons("highlightLinks", HTML("<table><tr><td><strong>Highlight regions</strong></td>
 <td>
 <div class='help-tip'>
@@ -2042,7 +2128,14 @@ For data with four columns, a single character representing a color should be pr
 			conditionalPanel(condition="input.plotSize",
 				numericInput("myHeight", "Plot height:", value=750),
 				numericInput("myWidth", "Plot width:", value=750)
-			),
+			),			
+			checkboxInput("addlegend", HTML("<font color='red'>Add legend</font>"), FALSE),
+			conditionalPanel(condition="input.addlegend",
+			radioButtons("seladdlegend", NULL, c("Yes" = "1", "No" = "2"), selected="1"),
+			conditionalPanel(condition="input.seladdlegend=='1'",
+			radioButtons("selposlegend", "Adjust legend position", c("Right" = "1", "Center" = "2"), selected="1")
+			)		
+			),	
 			HTML('<br>'),
  		  	actionButton("submit2", HTML("<table><tr><td><strong>Go!</strong></td>
 <td>
@@ -2076,21 +2169,21 @@ For data with four columns, a single character representing a color should be pr
 			tabPanel("Data upload",
 				HTML('<p <ul><li style="list-style-type: none; background-image: url(bullet.jpg); padding-left: 18px; background-size:9px 9px; background-repeat: no-repeat; background-position: 0px 50%"><font size="4">Download example data</font></li></ul></p>'),
 				HTML('<p <ul><li style="list-style-type: none; background-image: url(bullet.jpg); padding-left: 18px; background-size:6px 6px; background-repeat: no-repeat; background-position: 6px 50%"><font size="2">Example chromosomes data</font></li></ul></p>'),
-			    downloadButton("downloadgeneralchrData", "Download general data"),
-				downloadButton("downloadcytobandData", "Download cytoband data"),
+			    downloadButton("general.csv", "Download general data"),
+				downloadButton("cytoband.csv", "Download cytoband data"),
 				HTML('<p <ul><li style="list-style-type: none; background-image: url(bullet.jpg); padding-left: 18px; background-size:6px 6px; background-repeat: no-repeat; background-position: 6px 50%"><font size="2">Example tracks data</font></li></ul></p>'),
-				downloadButton("downloadtrackData1", "Download track1 data"),
-				downloadButton("downloadtrackData2", "Download track2 data"),
-				downloadButton("downloadtrackData3", "Download track3 data"),
-				downloadButton("downloadtrackData4", "Download track4 data"),
-				downloadButton("downloadtrackData5", "Download track5 data"),
-				downloadButton("downloadtrackData6", "Download track6 data"),
-				downloadButton("downloadtrackData7", "Download track7 data"),
-				downloadButton("downloadtrackData8", "Download track8 data"),
-				downloadButton("downloadtrackData9", "Download track9 data"),
-				downloadButton("downloadtrackData10", "Download track10 data"),
+				downloadButton("track1.csv", "Download track1 data"),
+				downloadButton("track2.csv", "Download track2 data"),
+				downloadButton("track3.csv", "Download track3 data"),
+				downloadButton("track4.csv", "Download track4 data"),
+				downloadButton("track5.csv", "Download track5 data"),
+				downloadButton("track6.csv", "Download track6 data"),
+				downloadButton("track7.csv", "Download track7 data"),
+				downloadButton("track8.csv", "Download track8 data"),
+				downloadButton("track9.csv", "Download track9 data"),
+				downloadButton("track10.csv", "Download track10 data"),
 				HTML('<p <ul><li style="list-style-type: none; background-image: url(bullet.jpg); padding-left: 18px; background-size:6px 6px; background-repeat: no-repeat; background-position: 6px 50%"><font size="2">Example links data</font></li></ul></p>'),				
-				downloadButton("downloadlinkData", "Download links data"),
+				downloadButton("links.csv", "Download links data"),
 				HTML('<br>'),
 				HTML('<br>'),
 				HTML('<p <ul><li style="list-style-type: none; background-image: url(bullet.jpg); padding-left: 18px; background-size:9px 9px; background-repeat: no-repeat; background-position: 0px 50%"><font size="4">Glimpse of data uploaded</font></li></ul></p>'),

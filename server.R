@@ -92,6 +92,9 @@ shinyServer(function(input, output, session) {
 		## *** The plot dimensions ***
 	      heightSize <<- input$myHeight
 	      widthSize <<- input$myWidth
+		  addlegend <<- input$seladdlegend
+		  poslegend <<- input$selposlegend
+		  legendtext <<- c()
 		if(!is.null(data.T)){
 		  hltregion.List <<- list()           
 		  hltTrack.List <<- list()
@@ -120,7 +123,7 @@ shinyServer(function(input, output, session) {
 		  marginTrack <<- c()
 		  bgcolTrack <<- c()
 		  typeTrack <<- c()
-		  coltypeTk <<- c()	  
+		  coltypeTk <<- c()  
 		for(k in 1:length(data.T)){
 			data.TT <- data.T[[k]]
 			## *** The highlight regions ***
@@ -179,6 +182,7 @@ shinyServer(function(input, output, session) {
 			bgcolTrack <<- c(bgcolTrack,input[[paste("bgcolTrack",trackindx[k],sep="")]])
 			typeTrack <<- c(typeTrack,input[[paste("typeTrack",trackindx[k],sep="")]])
 			coltypeTk <<- c(coltypeTk,input[[paste("coltypeTrack",trackindx[k],sep="")]])
+			legendtext <<- c(legendtext,input[[paste("text",trackindx[k],sep="")]])
 		}
 		}
 		transparencyhltLinks <<- input$transparencyhltLinks
@@ -194,11 +198,20 @@ shinyServer(function(input, output, session) {
 		fontsizeChr <<- input$fontsizeChr
 		trackChr <<- input$trackChr
 		datatypeChr <<- input$datatypeChr
+		if (input$linksTrack)  {
+		legendtext <<- c(legendtext,input$text11)
+		}
+		if (datatypeChr=="general" && trackChr!="track"){
+		legendtext <<- legendtext
+		}else{
+		legendtext <<- c(input$text0,legendtext)
+		}
+		legendtext <<- legendtext[nchar(legendtext)>0]
 		colorChr <<- gsub("\\s","",strsplit(input$colorChr,",")[[1]])
-        gap.width <<- gsub("\\s","",strsplit(input$gapChr,",")[[1]])
+        gap.width <<- gsub("\\s","",strsplit(input$gapChr,",")[[1]])	
 	plotfigg(input = input, output = output, trackindx = trackindx, data.L = data.L, data.L1 = data.L1, data.L2 = data.L2, data.C = data.C, barBoundary = barBoundary, coldir1Track = coldir1Track, 
-	coldir2Track = coldir2Track, data.T = data.T, hltTrack.List = hltTrack.List, hltdata.List = hltdata.List, heightSize = heightSize, widthSize = widthSize, colorChr = colorChr,
-	gap.width = gap.width, cexAxis = cexAxis, cexAxislabel = cexAxislabel, unitChr = unitChr, labelChr = labelChr, fontsizeChr = fontsizeChr, colorTrack = colorTrack, transparencyHlt = transparencyHlt,
+	coldir2Track = coldir2Track, data.T = data.T, hltTrack.List = hltTrack.List, hltdata.List = hltdata.List, heightSize = heightSize, widthSize = widthSize, addlegend = addlegend, poslegend = poslegend, colorChr = colorChr,
+	gap.width = gap.width, legendtext = legendtext, cexAxis = cexAxis, cexAxislabel = cexAxislabel, unitChr = unitChr, labelChr = labelChr, fontsizeChr = fontsizeChr, colorTrack = colorTrack, transparencyHlt = transparencyHlt,
 	trackChr = trackChr, datatypeChr = datatypeChr, transparencyhltLinks = transparencyhltLinks, transparencyTrack = transparencyTrack, transparencyLinks = transparencyLinks,
 	colorLinks = colorLinks, linksTrack = linksTrack, typeTrack = typeTrack, coltypeTk = coltypeTk, marginLinks = marginLinks, selcolorLinks = selcolorLinks, colrectTrack = colrectTrack,
 	rectTrack = rectTrack, rectcolTrack = rectcolTrack, rectcoldisTrack = rectcoldisTrack, borderTrack = borderTrack, directionTrack = directionTrack, colorlineTrack = colorlineTrack, baselineTrack = baselineTrack, midpointTrack = midpointTrack, midhmapTrack = midhmapTrack, colhmapTrack = colhmapTrack, lineshmapTrack = lineshmapTrack, heightlinesTrack = heightlinesTrack, marginlinesTrack = marginlinesTrack, heightTrack = heightTrack, marginTrack = marginTrack , bgcolTrack = bgcolTrack)
@@ -210,7 +223,33 @@ shinyServer(function(input, output, session) {
 	  filename <- function() { paste('shinyCircos.pdf') },
 	  content <- function(file) {
 	    pdf(file, width = input$myWidth/72, height = input$myHeight/72)
-		plotfig(input = input, trackindx = trackindx, data.L = data.L, data.L1 = data.L1, data.L2 = data.L2, data.C = data.C, data.T = data.T, hltTrack.List = hltTrack.List, hltdata.List = hltdata.List)
+		 legendtext <<- c()
+		 for(k in 1:10){
+         legendtext <<- c(legendtext,input[[paste("text",k,sep="")]])
+		 }
+		 if (input$linksTrack)  {
+		 legendtext <<- c(legendtext,input$text11)
+		 }
+		 if (input$datatypeChr=="general" && input$trackChr!="track"){
+		 legendtext <<- legendtext
+		 }else{
+		 legendtext <<- c(input$text0,legendtext)
+		 }
+		 legendtext <<- legendtext[nchar(legendtext)>0]	 
+		 if (fontsizeChr=="custom"){
+		   if (length(legendtext)!=0 && input$seladdlegend==1 && input$selposlegend==1){
+		   par(oma=c(0,0,0,0),mar = c(5,0.2,5,9.8),xpd=TRUE) 
+		   }else{
+		   par(mar = c(0.6,0.6,0.6,0.6)) 
+		   }
+		 }else{
+		   if (length(legendtext)!=0 && input$seladdlegend==1 && input$selposlegend==1){
+	       par(oma=c(0,0,0,0),mar = c(5,0.2,5,9.8),xpd=TRUE,cex=as.numeric(input$fontsizeChr)-0.05)
+	       }else{
+	       par(mar = c(0.6,0.6,0.6,0.6),cex=as.numeric(input$fontsizeChr)-0.05) 
+	       }		 
+		 }	 	 
+		plotfig(input = input, trackindx = trackindx, data.L = data.L, data.L1 = data.L1, data.L2 = data.L2, data.C = data.C, data.T = data.T, hltTrack.List = hltTrack.List, hltdata.List = hltdata.List, legendtext = legendtext)
 	    dev.off()
 	  }, contentType = 'application/pdf')	  
 	## *** Download SVG file ***
@@ -218,23 +257,49 @@ shinyServer(function(input, output, session) {
 	  filename <- function() { paste('shinyCircos.svg') },
 	  content <- function(file) {
 	    svg(file, width = input$myWidth/72, height = input$myHeight/72)
-		plotfig(input = input, trackindx = trackindx, data.L = data.L, data.L1 = data.L1, data.L2 = data.L2, data.C = data.C, data.T = data.T, hltTrack.List = hltTrack.List, hltdata.List = hltdata.List)
+		 legendtext <<- c()
+		 for(k in 1:10){
+         legendtext <<- c(legendtext,input[[paste("text",k,sep="")]])
+		 }
+		 if (input$linksTrack)  {
+		 legendtext <<- c(legendtext,input$text11)
+		 }
+		 if (input$datatypeChr=="general" && input$trackChr!="track"){
+		 legendtext <<- legendtext
+		 }else{
+		 legendtext <<- c(input$text0,legendtext)
+		 }
+		 legendtext <<- legendtext[nchar(legendtext)>0]
+		 if (fontsizeChr=="custom"){
+		   if (length(legendtext)!=0 && input$seladdlegend==1 && input$selposlegend==1){
+		   par(oma=c(0,0,0,0),mar = c(5,0.2,5,9.8),xpd=TRUE) 
+		   }else{
+		   par(mar = c(0.6,0.6,0.6,0.6)) 
+		   }
+		 }else{
+		   if (length(legendtext)!=0 && input$seladdlegend==1 && input$selposlegend==1){
+	       par(oma=c(0,0,0,0),mar = c(5,0.2,5,9.8),xpd=TRUE,cex=as.numeric(input$fontsizeChr)-0.05)
+	       }else{
+	       par(mar = c(0.6,0.6,0.6,0.6),cex=as.numeric(input$fontsizeChr)-0.05) 
+	       }		 
+		 }	 
+		plotfig(input = input, trackindx = trackindx, data.L = data.L, data.L1 = data.L1, data.L2 = data.L2, data.C = data.C, data.T = data.T, hltTrack.List = hltTrack.List, hltdata.List = hltdata.List, legendtext = legendtext)
 	    dev.off()
 	  }, contentType = 'image/svg')
 	## *** Download sample data in csv format ***
-	output$downloadgeneralchrData <- downloadfile("general.csv")
-	output$downloadcytobandData <- downloadfile("cytoband.csv")
-	output$downloadtrackData1 <- downloadfile("track1.csv")
-	output$downloadtrackData2 <- downloadfile("track2.csv")
-	output$downloadtrackData3 <- downloadfile("track3.csv")
-	output$downloadtrackData4 <- downloadfile("track4.csv")
-	output$downloadtrackData5 <- downloadfile("track5.csv")
-	output$downloadtrackData6 <- downloadfile("track6.csv")
-	output$downloadtrackData7 <- downloadfile("track7.csv")
-	output$downloadtrackData8 <- downloadfile("track8.csv")
-	output$downloadtrackData9 <- downloadfile("track9.csv")
-	output$downloadtrackData10 <- downloadfile("track10.csv")
-	output$downloadlinkData <- downloadfile("links.csv")
+	output$general.csv <- downloadfile("general.csv")
+	output$cytoband.csv <- downloadfile("cytoband.csv")
+	output$track1.csv <- downloadfile("track1.csv")
+	output$track2.csv <- downloadfile("track2.csv")
+	output$track3.csv <- downloadfile("track3.csv")
+	output$track4.csv <- downloadfile("track4.csv")
+	output$track5.csv <- downloadfile("track5.csv")
+	output$track6.csv <- downloadfile("track6.csv")
+	output$track7.csv <- downloadfile("track7.csv")
+	output$track8.csv <- downloadfile("track8.csv")
+	output$track9.csv <- downloadfile("track9.csv")
+	output$track10.csv <- downloadfile("track10.csv")
+	output$links.csv <- downloadfile("links.csv")
 })
 })
 
