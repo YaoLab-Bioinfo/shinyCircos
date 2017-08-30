@@ -193,7 +193,7 @@ shinyUI(fluidPage(theme="newstyle.css",
 			numericInput("cexAxislabel", "Axis label size:", value=1, min=0.1, max=3, step=0.1)
 			)
 			),
-			conditionalPanel(condition="input.trackChr=='track'",
+			conditionalPanel(condition="input.datatypeChr!='general' | input.trackChr=='track'",
 			textInput("text0", HTML("<table><tr><td><strong>Add legend text</strong></td>
 <td>
 <div class='help-tip'>
@@ -2145,6 +2145,9 @@ For data with four columns, a single character representing a color should be pr
 	                                      </table>
 	                                      "), width="49px")
 		),
+		conditionalPanel(condition="input.tabs1=='Gallery'",
+		                 h4("Gallery")
+		),
 		conditionalPanel(condition="input.tabs1=='Help'",
 		                 h4("Help")
 		)
@@ -2248,9 +2251,12 @@ For data with four columns, a single character representing a color should be pr
 				plotOutput("circosfigure", height='100%', width='100%')
 			),
 			## *** FAQ panel***
+			tabPanel("Gallery",
+			    includeHTML("Gallery.html")
+			),
 			tabPanel("Help",
 				includeHTML("README.html")
-			),			
+			),					
 			id="tabs1"
 		)
 	),position="left"    

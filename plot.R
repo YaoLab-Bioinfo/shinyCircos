@@ -457,6 +457,7 @@ plotfigg <- function(input, output, trackindx, data.L, data.L1, data.L2, data.C,
 			}
 			tktype <- typeTrack[i]
 			## *** The fill color for track ***
+			if(tktype!="rect" && tktype!="heatmap"){
 			coltypeTrack <- coltypeTk[i]
 			if(coltypeTrack==2){
 			tkcolor <- colorTrack[i]
@@ -466,6 +467,7 @@ plotfigg <- function(input, output, trackindx, data.L, data.L1, data.L2, data.C,
 			}else{
             selcols <- c("blue", "red", "green", "cyan", "purple", "pink", "orange", "yellow", "navy", "seagreen", "maroon", "burlywood3", "magenta2")
 			tkcolor <- sample(selcols,ncol(data.T[[i]])-3)
+			}
 			}
 			## *** The backgroud color for track ***
 			tkbgcol <- bgcolTrack[i] 
@@ -568,7 +570,9 @@ plotfigg <- function(input, output, trackindx, data.L, data.L1, data.L2, data.C,
 			}
 			## *** The transparency of color ***
 			tktransparency <- transparencyTrack[i]
+			if(tktype!="rect" && tktype!="heatmap"){
 			tkcolor <- adjustcolor(tkcolor, alpha.f = tktransparency)
+			}
 			data.TTT <- data.TT
 			data.TTT$id <- paste(data.TTT[,1],data.TTT[,2],data.TTT[,3],sep="")
 			data.TTT$num <- 1:nrow(data.TTT)
@@ -1068,6 +1072,7 @@ plotfig <- function(input, trackindx, data.L, data.L1, data.L2, data.C, data.T, 
 			}
 			assign("tktype",input[[paste("typeTrack",trackindx[i],sep="")]])      
 			## *** The fill color for track ***
+			if(tktype!="rect" && tktype!="heatmap"){
 			assign("coltypeTrack",input[[paste("coltypeTrack",trackindx[i],sep="")]])
 			if(coltypeTrack==2){
 			assign("tkcolor",input[[paste("colorTrack",trackindx[i],sep="")]])
@@ -1078,11 +1083,14 @@ plotfig <- function(input, trackindx, data.L, data.L1, data.L2, data.C, data.T, 
             selcols <- c("blue", "red", "green", "cyan", "purple", "pink", "orange", "yellow", "navy", "seagreen", "maroon", "burlywood3", "magenta2")
 			tkcolor <- sample(selcols,ncol(data.T[[i]])-3)
 			}
+			}
 			## *** The backgroud color for track ***
 			assign("tkbgcol",input[[paste("bgcolTrack",trackindx[i],sep="")]])
 			tkbgcol <- gsub("\\s","",strsplit(tkbgcol,",")[[1]])
 			tkbgcol <- gsub('\\"',"",tkbgcol)
 			tkbgcol <- gsub("0x","#", tkbgcol)
+			repnumcol <- round(length(unique(data.C[,1]))/length(tkbgcol)) + 1
+			tkbgcol <- rep(tkbgcol, repnumcol)[1:length(unique(data.C[,1]))]
 			## *** The track margin ***
 			assign("tkmargin",input[[paste("marginTrack",trackindx[i],sep="")]])
 			tkmargin <- as.numeric(tkmargin)
@@ -1169,10 +1177,14 @@ plotfig <- function(input, trackindx, data.L, data.L1, data.L2, data.C, data.T, 
 			}else if (rectcol=="green.red") {
 			rectcols <<- c("#00EE00","#757800","#EE0000")
 			}
+			}else if (tkrectcol==2 & selrectcol==2) {
+			rectcols <<- rectcoldisTrack[i]
 			}
 			## *** The transparency of color ***
 			assign("tktransparency",input[[paste("transparencyTrack",trackindx[i],sep="")]])
+			if(tktype!="rect" && tktype!="heatmap"){
 			tkcolor <- adjustcolor(tkcolor, alpha.f = tktransparency)
+			}
 			data.TTT <- data.TT
 			data.TTT$id <- paste(data.TTT[,1],data.TTT[,2],data.TTT[,3],sep="")
 			data.TTT$num <- 1:nrow(data.TTT)
