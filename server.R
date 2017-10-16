@@ -84,9 +84,9 @@ shinyServer(function(input, output, session){
         }
         output$errorinfo1 <- renderPrint({
           for(i in 1:10){
-            if(uploadtrack.export[i]==2){
+            if(input[[paste("uploadtrack",i,sep="")]]==2){
               validate(
-                need(uploadTrackfile.export[i], paste("Warning: Data are empty for Track",i,". Please upload applicable data.",sep=""))		  
+                need(input[[paste("uploadTrackfile",i,sep="")]], paste("Warning: Data are empty for Track",i,". Please upload applicable data.",sep=""))		  
               )
             }
           }		

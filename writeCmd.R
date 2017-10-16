@@ -1,4 +1,4 @@
-cat('## setwd("an absolute filepath including data files")',file="code.R",append=TRUE,sep="\n")
+cat('## setwd("absolute path of a directory containing the input data files")',file="code.R",append=TRUE,sep="\n")
 cat("library(circlize)
 library(RColorBrewer)
 library(GenomicRanges)
@@ -398,6 +398,9 @@ if(!is.null(data.L)){
            hltregion2$color <- datL$color[indx2[,1]]',file="code.R",append=TRUE,sep="\n")				
   }
 }
+cat('for(i in 1:length(data.T.file)){
+  assign(paste("hltdata",i,sep=""),"")
+}',file="code.R",append=TRUE,sep="\n")				
 if(!is.null(data.T)){
   for(k in 1:length(data.T)){			
     if(nchar(hltdata.List[[k]])>0){
@@ -534,7 +537,7 @@ if(!is.null(data.T)){
         tkcolor$group <- gsub(" ","",tkcolor$group)
         tkcolor$cols <- gsub(" ","",tkcolor$cols)
         colname <- colnames(data.TT)
-        tkcolor <- unique(data.TTC$cols)						
+        tkcolor <- unique(data.TTC.export[[i]]$cols)						
         data.TT <- data.TT[,1:4]						
         cat('tkcolor <- data.frame(id=tkcolor,stringsAsFactors=F)
 		tkcolor$group <- gsub("\\\\:.*","",tkcolor$id)
