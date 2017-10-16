@@ -7,14 +7,16 @@ This is the repository for the Shiny application presented in "shinyCircos: an R
 
 #	Use shinyCircos online
 
-shinyCircos is deployed at https://yimingyu.shinyapps.io/shinycircos/ for online use.  
-shinyCircos is idle until you activate it by accessing this URL.  
+shinyCircos is deployed at https://yimingyu.shinyapps.io/shinycircos/ and http://shinycircos.ncpgr.cn/ for online use.  
+shinyCircos is idle until you activate it by accessing the two URLs.  
 So it may take some time when you access this URL for the first time.   
 Once it was activated, shinyCircos could be used smoothly and easily.
 
 *****
 
-#	Launch shinyCircos directly from R and GitHub
+#	<font color="red">Launch shinyCircos directly from R and GitHub (preferred approach)</font>
+
+User can choose to run shinyCircos installed locally for a more preferable experience.
 
 **Step 1: Install R and RStudio**
 
@@ -28,7 +30,8 @@ Start an R session using RStudio and run these lines:
 ```
 install.packages("shiny")  
 install.packages("circlize")  
-install.packages("RColorBrewer")  
+install.packages("RColorBrewer")
+install.packages("data.table")  
 # try http:// if https:// URLs are not supported   
 source("https://bioconductor.org/biocLite.R")  
 biocLite("GenomicRanges")
@@ -57,7 +60,8 @@ Start an R session and run these lines in R:
 ```
 install.packages("shiny")  
 install.packages("circlize")  
-install.packages("RColorBrewer")  
+install.packages("RColorBrewer")
+install.packages("data.table")  
 ## try http:// if https:// URLs are not supported  
 source("https://bioconductor.org/biocLite.R")  
 biocLite("GenomicRanges")  
