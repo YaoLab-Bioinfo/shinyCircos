@@ -416,7 +416,7 @@ shinyServer(function(input, output, session){
       }else{NULL}
     })
     ## *** Download PDF file ***
-    output$downloadPlotPDF <- downloadHandler(
+    output$shinyCircos.pdf <- downloadHandler(
       filename <- function(){ paste('shinyCircos.pdf') },
       content <- function(file){
         pdf(file, width = input$myWidth/72, height = input$myHeight/72)
@@ -424,7 +424,7 @@ shinyServer(function(input, output, session){
         dev.off()
       }, contentType = 'application/pdf')	  
     ## *** Download SVG file ***
-    output$downloadPlotSVG <- downloadHandler(
+    output$shinyCircos.svg <- downloadHandler(
       filename <- function(){ paste('shinyCircos.svg') },
       content <- function(file){
         svg(file, width = input$myWidth/72, height = input$myHeight/72)
@@ -432,7 +432,7 @@ shinyServer(function(input, output, session){
         dev.off()
       }, contentType = 'image/svg')
     ## *** Download Source code file ***  
-    output$downloadCode <- downloadHandler(
+    output$script.R <- downloadHandler(
       filename <- function() { paste('script.R') },
       content <- function(file) {
         source("writeCmd.R")
@@ -440,7 +440,7 @@ shinyServer(function(input, output, session){
         writeLines(out,con=file)
       }, contentType = NULL) 	  
     ## *** Download help manual ***
-    output$downloadHelpPDF <- downloadHandler(
+    output$shinyCircos_Help_Manual.pdf <- downloadHandler(
       filename <- function() { paste("shinyCircos_Help_Manual.pdf") },
       content <- function(file) {
         file.copy("www/shinyCircos_Help_Manual.pdf", file)

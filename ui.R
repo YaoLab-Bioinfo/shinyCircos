@@ -3509,9 +3509,9 @@ For example, 'chr1,1,100000000,red'. Hex color codes as '#FF0000' are also suppo
 			),
 			## *** Circos visualization panel ***
 			tabPanel("Circos visualization", 
-				downloadButton("downloadPlotPDF", "Download pdf-file"),
-				downloadButton("downloadPlotSVG", "Download svg-file"),
-				downloadButton("downloadCode", "Download the R scripts to reproduce the Circos plot"),
+				downloadButton("shinyCircos.pdf", "Download pdf-file"),
+				downloadButton("shinyCircos.svg", "Download svg-file"),
+				downloadButton("script.R", "Download the R scripts to reproduce the Circos plot"),
 				textOutput("errorinfo2"),			
 				textOutput("errorinfo3"),
 				textOutput("errorinfo4"),
@@ -3526,7 +3526,7 @@ For example, 'chr1,1,100000000,red'. Hex color codes as '#FF0000' are also suppo
 			    includeHTML("Gallery.html")
 			),
 			tabPanel("Help",
-			    downloadButton("downloadHelpPDF", "Download the help manual for the usage of shinyCircos"),
+			    downloadButton("shinyCircos_Help_Manual.pdf", "Download the help manual for the usage of shinyCircos"),
 				includeHTML("README.html")
 			),					
 			id="tabs1"
