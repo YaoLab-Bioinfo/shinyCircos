@@ -655,25 +655,7 @@ plotfig <- function(input, output, trackindx, data.L, data.L1, data.L2, data.C, 
           }
           if(poslabels[i]=="inner"){
             takindx <- takindx-2
-          }
-          output$errorinfo4 <- renderPrint({
-            if(!("color" %in% colnames(data.T[[i]])) && colnames(data.T[[i]])[4]!="stack"){					
-              if(input[[paste("uploadtrack",trackindx[i],sep="")]]==2 && input[[paste("coltypeTrack",trackindx[i],sep="")]]==3){						
-                validate(
-                  need(coltypeTrack!=3, paste("Error: Data color error for Track",trackindx[i],". The type of data color should be 'Random' or 'Custom for data with multi-column' based on the uploaded data without column as 'color' or 'stack'.",sep=""))
-                )
-              }
-            }
-          })
-          outputOptions(output, "errorinfo4", suspendWhenHidden = FALSE)	
-          output$errorinfo5 <- renderPrint({			  
-            if(input[[paste("uploadtrack",trackindx[i],sep="")]]==2 && input[[paste("highlightTrack",trackindx[i],sep="")]]==1){		
-              validate(
-                need(nchar(hltdata.List[[i]])>0, paste("Warning: Highlight regions are empty for Track",trackindx[i],". Please input applicable genomic regions.",sep=""))
-              )
-            }
-          })
-          outputOptions(output, "errorinfo5", suspendWhenHidden = FALSE) 			
+          }		
           if(tktype=="line"){
             ## *** Fill the area ***
             if(fillareaTrack[i]!="add"){
