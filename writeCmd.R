@@ -1807,6 +1807,7 @@ if(n!=0 && addlegend==1){
   len <- ytop-ybottom
   gap <- len/(n-0.8)
   cat(paste("n <- ",n,sep=""),paste("xleft <- ",xleft,sep=""),paste("xright <- ",xright,sep=""),paste("ybottom <- ",ybottom,sep=""),paste("ytop <- ",ytop,sep=""),paste("len <- ",len,sep=""),paste("gap <- ",gap,sep=""),file="code.R",append=TRUE,sep="\n")
+  cat(paste('legendtext <- c("',paste(legendtext,collapse ='","'),'")',sep=""),file="code.R",append=TRUE,sep="\n")					
   cat('for(i in 1:n){
 			   assign(paste("n",i,sep=""),legendtext[i])
 			}',file="code.R",append=TRUE,sep="\n")		

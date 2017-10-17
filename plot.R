@@ -655,7 +655,25 @@ plotfig <- function(input, output, trackindx, data.L, data.L1, data.L2, data.C, 
           }
           if(poslabels[i]=="inner"){
             takindx <- takindx-2
-          }		
+          }	
+          output$errorinfo4 <- renderPrint({
+            if(!("color" %in% colnames(data.T[[i]])) & ncol(data.T[[i]])>=4 & colnames(data.T[[i]])[4]!="stack"){	
+              if(input[[paste("uploadtrack",trackindx[i],sep="")]]==2){						
+				validate(  
+                  need(input[[paste("coltypeTrack",trackindx[i],sep="")]]!=3, paste("Error: Data color error for Track",trackindx[i],". The type of data color should be 'Random' or 'Custom for data with multi-column' based on the uploaded data without column as 'color' or 'stack'.",sep=""))
+				)
+              }
+            }
+          })
+          outputOptions(output, "errorinfo4", suspendWhenHidden = FALSE)	
+          output$errorinfo5 <- renderPrint({			  
+            if(input[[paste("uploadtrack",trackindx[i],sep="")]]==2 && input[[paste("highlightTrack",trackindx[i],sep="")]]==1){		
+              validate(
+                need(nchar(hltdata.List[[i]])>0, paste("Warning: Highlight regions are empty for Track",trackindx[i],". Please input applicable genomic regions.",sep=""))
+              )
+            }
+          })
+          outputOptions(output, "errorinfo5", suspendWhenHidden = FALSE) 			  
           if(tktype=="line"){
             ## *** Fill the area ***
             if(fillareaTrack[i]!="add"){
@@ -1727,8 +1745,8 @@ plotfig <- function(input, output, trackindx, data.L, data.L1, data.L2, data.C, 
         ytop <- -0.13*0.22/10+n*0.03		
         len <- ytop-ybottom
         gap <- len/(n-0.8)
-        for(i in 1:n){
-          assign(paste("n",i,sep=""),legendtext[i])
+        for(r in 1:n){
+          assign(paste("n",r,sep=""),legendtext[r])
         }		
         rect(xleft, ybottom, xright, ytop, col = "black")
         polygon(x=c(xleft-0.01,(xleft+xright)/2,xright+0.01), y=c(ybottom,ybottom-0.02,ybottom), col="black")
@@ -1740,8 +1758,8 @@ plotfig <- function(input, output, trackindx, data.L, data.L1, data.L2, data.C, 
           text(x=xleft-0.08, y=ytop-0.01, labels="outer", cex=0.95)
           text(x=xright+0.025, y=ytop-0.04, labels=get("n1"), cex=1, adj=c(0,0))
         }else{
-          for(i in 1:n){
-            text(x=xright+0.028, y=ytop-gap*(i-1)-0.025, labels=get(paste("n",i,sep="")), cex=1, adj=c(0,0))
+          for(w in 1:n){
+            text(x=xright+0.028, y=ytop-gap*(w-1)-0.025, labels=get(paste("n",w,sep="")), cex=1, adj=c(0,0))
           }
         }
       }			
