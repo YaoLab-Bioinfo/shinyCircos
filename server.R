@@ -82,6 +82,52 @@ shinyServer(function(input, output, session){
             rownames(data.L2) <<- data.L2$num
           }
         }
+        ## *** Show uploading data *** 
+        output$viewChr <- renderTable(digits=3,{
+          head(data.C,n=3)
+        })
+        output$viewlabelChr <- renderTable(digits=3,{
+          head(data.CN,n=3)
+        })
+        output$chrdat <- reactive({
+          return(!is.null(input$uploadChr))
+        })
+        output$chrlabel <- reactive({
+          return(!is.null(input$uploadChr) && !is.null(data.CN))
+        }) 
+        outputOptions(output, "chrdat", suspendWhenHidden = FALSE)
+        outputOptions(output, "chrlabel", suspendWhenHidden = FALSE)
+        lapply(1:length(data.T),function(v){
+          viewname <<- paste("viewTrack", trackindx[v],sep="")
+          output[[viewname]] <<- renderTable(digits=3,{
+            head(data.T[[v]],n=3)
+          })		
+          viewnamelabel <<- paste("viewlabelTrack", trackindx[v],sep="")
+          output[[viewnamelabel]] <<- renderTable(digits=3,{
+            head(data.N[[v]],n=3)
+          })				 
+          output[[paste("marklabel",trackindx[v],sep="")]] <- reactive({
+            return(!is.null(data.N[[v]]))
+          })
+          output[[paste("trackdat",trackindx[v],sep="")]] <- reactive({
+            return(ncol(data.T[[v]])==4 | (ncol(data.T[[v]])>=5 && ("color" %in% colnames(data.T[[v]]))) | (ncol(data.T[[v]])>=5 && ("pch" %in% colnames(data.T[[v]]))) | (ncol(data.T[[v]])>=5 && ("cex" %in% colnames(data.T[[v]]))))
+          })
+          
+          output[[paste("stackmd",trackindx[v],sep="")]] <- reactive({
+            return(ncol(data.T[[v]])==4 && colnames(data.T[[v]])[4]=="stack")
+          })
+          
+          output[[paste("labeldat",trackindx[v],sep="")]] <- reactive({
+            return(!is.null(data.N[[v]]))
+          }) 
+          outputOptions(output, paste("marklabel",trackindx[v],sep=""), suspendWhenHidden = FALSE)  
+          outputOptions(output, paste("trackdat",trackindx[v],sep=""), suspendWhenHidden = FALSE)
+          outputOptions(output, paste("labeldat",trackindx[v],sep=""), suspendWhenHidden = FALSE)
+          outputOptions(output, paste("stackmd",trackindx[v],sep=""), suspendWhenHidden = FALSE)   
+        })
+        output$viewLink <- renderTable(digits=3,{
+          head(data.L,n=3)
+        })
         output$errorinfo1 <- renderPrint({
           for(i in 1:10){
             if(input[[paste("uploadtrack",i,sep="")]]==2){
@@ -178,54 +224,8 @@ shinyServer(function(input, output, session){
             need(is.null(data.C), "Please go to the 'Circos visualization' menu to generate the Circos plot!")
           )			  
         })
-        outputOptions(output, "errorinfo1", suspendWhenHidden = FALSE)
-        ## *** Show uploading data *** 
-        output$viewChr <- renderTable(digits=3,{
-          head(data.C,n=3)
-        })
-        output$viewlabelChr <- renderTable(digits=3,{
-          head(data.CN,n=3)
-        })
-        output$chrdat <- reactive({
-          return(!is.null(input$uploadChr))
-        })
-        output$chrlabel <- reactive({
-          return(!is.null(input$uploadChr) && !is.null(data.CN))
-        }) 
-        outputOptions(output, "chrdat", suspendWhenHidden = FALSE)
-        outputOptions(output, "chrlabel", suspendWhenHidden = FALSE)
-        lapply(1:length(data.T),function(v){
-          viewname <<- paste("viewTrack", trackindx[v],sep="")
-          output[[viewname]] <<- renderTable(digits=3,{
-            head(data.T[[v]],n=3)
-          })		
-          viewnamelabel <<- paste("viewlabelTrack", trackindx[v],sep="")
-          output[[viewnamelabel]] <<- renderTable(digits=3,{
-            head(data.N[[v]],n=3)
-          })				 
-          output[[paste("marklabel",trackindx[v],sep="")]] <- reactive({
-            return(!is.null(data.N[[v]]))
-          })
-          output[[paste("trackdat",trackindx[v],sep="")]] <- reactive({
-            return(ncol(data.T[[v]])==4 | (ncol(data.T[[v]])>=5 && ("color" %in% colnames(data.T[[v]]))) | (ncol(data.T[[v]])>=5 && ("pch" %in% colnames(data.T[[v]]))) | (ncol(data.T[[v]])>=5 && ("cex" %in% colnames(data.T[[v]]))))
-          })
-          
-          output[[paste("stackmd",trackindx[v],sep="")]] <- reactive({
-            return(ncol(data.T[[v]])==4 && colnames(data.T[[v]])[4]=="stack")
-          })
-          
-          output[[paste("labeldat",trackindx[v],sep="")]] <- reactive({
-            return(!is.null(data.N[[v]]))
-          }) 
-          outputOptions(output, paste("marklabel",trackindx[v],sep=""), suspendWhenHidden = FALSE)  
-          outputOptions(output, paste("trackdat",trackindx[v],sep=""), suspendWhenHidden = FALSE)
-          outputOptions(output, paste("labeldat",trackindx[v],sep=""), suspendWhenHidden = FALSE)
-          outputOptions(output, paste("stackmd",trackindx[v],sep=""), suspendWhenHidden = FALSE)   
-        })
-        output$viewLink <- renderTable(digits=3,{
-          head(data.L,n=3)
-        })
-      }) 
+        outputOptions(output, "errorinfo1", suspendWhenHidden = FALSE)      
+	  }) 
     }else{NULL}
   })
   observe({
@@ -318,12 +318,14 @@ shinyServer(function(input, output, session){
                   all(x==0)
                 })
                 )
-                output$errorinfo2 <- renderPrint({   
-                  if(input[[paste("uploadtrack",trackindx[k],sep="")]]==2 && input[[paste("highlightTrack",trackindx[k],sep="")]]==1 && nchar(input[[paste("hltData",trackindx[k],sep="")]])>0){						
+                output$errorinfo2 <- renderPrint({
+                  for(f in 1:k){				
+                  if(input[[paste("uploadtrack",trackindx[f],sep="")]]==2 && input[[paste("highlightTrack",trackindx[f],sep="")]]==1 && nchar(input[[paste("hltData",trackindx[f],sep="")]])>0){						
                     validate(
-                      need(all(data.ht1==FALSE), paste("Error: Data to highlight regions for Track",trackindx[k]," is not in correct format. Each row of the input data should contain four components separated by commas including the chromosome ID, start coordinate, end coordinate and the specified color.",sep=""))		  
+                      need(all(data.ht1==FALSE), paste("Error: Data to highlight regions for Track",trackindx[f]," is not in correct format. Each row of the input data should contain four components separated by commas including the chromosome ID, start coordinate, end coordinate and the specified color.",sep=""))		  
                     )
                   }
+				  }
                 })
                 outputOptions(output, "errorinfo2", suspendWhenHidden = FALSE)				
                 data <- data.frame(data,stringsAsFactors = F)

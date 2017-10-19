@@ -656,22 +656,26 @@ plotfig <- function(input, output, trackindx, data.L, data.L1, data.L2, data.C, 
           if(poslabels[i]=="inner"){
             takindx <- takindx-2
           }	
-          output$errorinfo4 <- renderPrint({
-            if(!("color" %in% colnames(data.T[[i]])) & ncol(data.T[[i]])>=4 & colnames(data.T[[i]])[4]!="stack"){	
-              if(input[[paste("uploadtrack",trackindx[i],sep="")]]==2){						
+          output$errorinfo4 <- renderPrint({		  
+		    for(y in 1:length(data.T)){
+            if(input[[paste("uploadtrack",trackindx[y],sep="")]]==2 & input[[paste("coltypeTrack",trackindx[y],sep="")]]==3){								  
+            if(!("color" %in% colnames(data.T[[y]])) & ncol(data.T[[y]])>=4 & colnames(data.T[[y]])[4]!="stack"){	
 				validate(  
-                  need(input[[paste("coltypeTrack",trackindx[i],sep="")]]!=3, paste("Error: Data color error for Track",trackindx[i],". The type of data color should be 'Random' or 'Custom for data with multi-column' based on the uploaded data without column as 'color' or 'stack'.",sep=""))
+                  need(input[[paste("coltypeTrack",trackindx[y],sep="")]]!=3, paste("Error: Data color error for Track",trackindx[y],". The type of data color should be 'Random' or 'Custom for data with multi-column' based on the uploaded data without column as 'color' or 'stack'.",sep=""))
 				)
               }
             }
+			}
           })
           outputOptions(output, "errorinfo4", suspendWhenHidden = FALSE)	
-          output$errorinfo5 <- renderPrint({			  
-            if(input[[paste("uploadtrack",trackindx[i],sep="")]]==2 && input[[paste("highlightTrack",trackindx[i],sep="")]]==1){		
+          output$errorinfo5 <- renderPrint({
+		    for(e in 1:length(data.T)){		  
+            if(input[[paste("uploadtrack",trackindx[e],sep="")]]==2 && input[[paste("highlightTrack",trackindx[e],sep="")]]==1){		
               validate(
-                need(nchar(hltdata.List[[i]])>0, paste("Warning: Highlight regions are empty for Track",trackindx[i],". Please input applicable genomic regions.",sep=""))
+                need(nchar(hltdata.List[[e]])>0, paste("Warning: Highlight regions are empty for Track",trackindx[e],". Please input applicable genomic regions.",sep=""))
               )
             }
+			}
           })
           outputOptions(output, "errorinfo5", suspendWhenHidden = FALSE) 			  
           if(tktype=="line"){
@@ -852,9 +856,8 @@ plotfig <- function(input, output, trackindx, data.L, data.L1, data.L2, data.C, 
                 })			
               }
               assign("hltTrack",hltTrack.List[[i]])
-              assign("hltdata",hltdata.List[[i]])
-              
-              if(hltTrack==1 && !is.null(nrow(hltregion.List[[i]])) && nrow(hltregion.List[[i]])>0 && (length(columns)==1 | colnames(data.T[[i]])[5]=="color")){               
+              assign("hltdata",hltdata.List[[i]])              
+              if(hltTrack==1 && !is.null(nrow(hltregion.List[[i]])) && nrow(hltregion.List[[i]])>0 && (length(columns)==1 | colnames(data.T[[i]])[5]=="color") && ((!("color" %in% colnames(data.T[[i]])) &&  coltypeTrack!=3) | ("color" %in% colnames(data.T[[i]])))){              
                 assign("hltregion",hltregion.List[[i]])
                 hlttransparency <- transparencyHlt[i]
                 hltregion$color <- adjustcolor(hltregion$color, alpha.f = hlttransparency)
@@ -1217,7 +1220,7 @@ plotfig <- function(input, output, trackindx, data.L, data.L1, data.L2, data.C, 
               }				
               assign("hltTrack",hltTrack.List[[i]])
               assign("hltdata",hltdata.List[[i]])  
-              if(hltTrack==1 && !is.null(nrow(hltregion.List[[i]])) && nrow(hltregion.List[[i]])>0 && (length(columns)==1 | any(c("color","pch","cex") %in% colnames(data.T[[i]])))){
+              if(hltTrack==1 && !is.null(nrow(hltregion.List[[i]])) && nrow(hltregion.List[[i]])>0 && (length(columns)==1 | any(c("color","pch","cex") %in% colnames(data.T[[i]]))) && ((!("color" %in% colnames(data.T[[i]])) &&  coltypeTrack!=3) | ("color" %in% colnames(data.T[[i]])))){
                 assign("hltregion",hltregion.List[[i]])
                 hlttransparency <- transparencyHlt[i]
                 hltregion$color <- adjustcolor(hltregion$color, alpha.f = hlttransparency)
@@ -1403,7 +1406,7 @@ plotfig <- function(input, output, trackindx, data.L, data.L1, data.L2, data.C, 
             }					
             assign("hltTrack",hltTrack.List[[i]])
             assign("hltdata",hltdata.List[[i]])		
-            if(hltTrack==1 && !is.null(nrow(hltregion.List[[i]])) && nrow(hltregion.List[[i]])>0 && tkbardir==1 && length(columns)==1){
+            if(hltTrack==1 && !is.null(nrow(hltregion.List[[i]])) && nrow(hltregion.List[[i]])>0 && tkbardir==1 && length(columns)==1 && ((!("color" %in% colnames(data.T[[i]])) &&  coltypeTrack!=3) | ("color" %in% colnames(data.T[[i]])))){
               assign("hltregion",hltregion.List[[i]])
               hlttransparency <- transparencyHlt[i]
               hltregion$color <- adjustcolor(hltregion$color, alpha.f = hlttransparency)
