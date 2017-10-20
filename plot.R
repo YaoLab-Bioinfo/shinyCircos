@@ -1507,7 +1507,7 @@ plotfig <- function(input, output, trackindx, data.L, data.L1, data.L2, data.C, 
                 }
                 if(input[[paste("rectTrack",trackindx[i],sep="")]]==1){
                   validate(
-                    need(is.numeric(data.T[[i]][,4]), paste("Error: Data uploaded is not appropriate 'Discrete' data. Please select appropriate 'Data type' for Track",trackindx[i],".",sep=""))
+                    need(is.numeric(data.T[[i]][,4]), paste("Error: Data uploaded is not appropriate 'Gradual' data. Please select appropriate 'Data type' for Track",trackindx[i],".",sep=""))
                   )		
                 }				
               }
