@@ -225,7 +225,7 @@ shinyServer(function(input, output, session){
           )			  
         })
         outputOptions(output, "errorinfo1", suspendWhenHidden = FALSE)      
-	  }) 
+      }) 
     }else{NULL}
   })
   observe({
@@ -320,12 +320,12 @@ shinyServer(function(input, output, session){
                 )
                 output$errorinfo2 <- renderPrint({
                   for(f in 1:k){				
-                  if(input[[paste("uploadtrack",trackindx[f],sep="")]]==2 && input[[paste("highlightTrack",trackindx[f],sep="")]]==1 && nchar(input[[paste("hltData",trackindx[f],sep="")]])>0){						
-                    validate(
-                      need(all(data.ht1==FALSE), paste("Error: Data to highlight regions for Track",trackindx[f]," is not in correct format. Each row of the input data should contain four components separated by commas including the chromosome ID, start coordinate, end coordinate and the specified color.",sep=""))		  
-                    )
+                    if(input[[paste("uploadtrack",trackindx[f],sep="")]]==2 && input[[paste("highlightTrack",trackindx[f],sep="")]]==1 && nchar(input[[paste("hltData",trackindx[f],sep="")]])>0){						
+                      validate(
+                        need(all(data.ht1==FALSE), paste("Error: Data to highlight regions for Track",trackindx[f]," is not in correct format. Each row of the input data should contain four components separated by commas including the chromosome ID, start coordinate, end coordinate and the specified color.",sep=""))		  
+                      )
+                    }
                   }
-				  }
                 })
                 outputOptions(output, "errorinfo2", suspendWhenHidden = FALSE)				
                 data <- data.frame(data,stringsAsFactors = F)
@@ -441,13 +441,6 @@ shinyServer(function(input, output, session){
         file.remove("script.R")	  
         writeLines(out,con=file)
       }, contentType = NULL) 	  
-    ## *** Download help manual ***
-    output$shinyCircos_Help_Manual.pdf <- downloadHandler(
-      filename <- function() { paste("shinyCircos_Help_Manual.pdf") },
-      content <- function(file) {
-        file.copy("www/shinyCircos_Help_Manual.pdf", file)
-      },contentType = "application/pdf"
-    )
     ## *** Download sample data in csv format ***
     output$chromosome_general.csv <- downloadfile("example_data/chromosome_general.csv")
     output$chromosome_cytoband.csv <- downloadfile("example_data/chromosome_cytoband.csv")

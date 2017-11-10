@@ -3518,15 +3518,15 @@ For example, 'chr1,1,100000000,red'. Hex color codes as '#FF0000' are also suppo
 				textOutput("errorinfo5"),			
 				textOutput("errorinfo6"),
 				textOutput("errorinfo7"),	
-                textOutput("errorinfo8"),				
+                textOutput("errorinfo8"),
+                textOutput("errorinfo9"),				
 				plotOutput("circosfigure", height='100%', width='100%')
 			),
 			## *** FAQ panel***
 			tabPanel("Gallery",
 			    includeHTML("Gallery.html")
-			),
+			),		
 			tabPanel("Help",
-			    downloadButton("shinyCircos_Help_Manual.pdf", "Download the help manual for the usage of shinyCircos"),
 				includeHTML("README.html")
 			),					
 			id="tabs1"

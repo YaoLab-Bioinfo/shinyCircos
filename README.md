@@ -5,6 +5,10 @@ This is the repository for the Shiny application presented in "shinyCircos: an R
 
 *****
 
+#	<font color="red">Help manual for the usage of shinyCircos [<a target="_blank" href="shinyCircos_Help_Manual.pdf">Download!</a>]</font>
+
+*****
+
 #	Use shinyCircos online
 
 shinyCircos is deployed at https://yimingyu.shinyapps.io/shinycircos/ and http://shinycircos.ncpgr.cn/ for online use.  

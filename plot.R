@@ -657,25 +657,25 @@ plotfig <- function(input, output, trackindx, data.L, data.L1, data.L2, data.C, 
             takindx <- takindx-2
           }	
           output$errorinfo4 <- renderPrint({		  
-		    for(y in 1:length(data.T)){
-            if(input[[paste("uploadtrack",trackindx[y],sep="")]]==2 & input[[paste("coltypeTrack",trackindx[y],sep="")]]==3){								  
-            if(!("color" %in% colnames(data.T[[y]])) & ncol(data.T[[y]])>=4 & colnames(data.T[[y]])[4]!="stack"){	
-				validate(  
-                  need(input[[paste("coltypeTrack",trackindx[y],sep="")]]!=3, paste("Error: Data color error for Track",trackindx[y],". The type of data color should be 'Random' or 'Custom for data with multi-column' based on the uploaded data without column as 'color' or 'stack'.",sep=""))
-				)
+            for(y in 1:length(data.T)){
+              if(input[[paste("uploadtrack",trackindx[y],sep="")]]==2 & input[[paste("coltypeTrack",trackindx[y],sep="")]]==3){								  
+                if(tkbardir==1 & !("color" %in% colnames(data.T[[y]])) & ncol(data.T[[y]])>=4 & colnames(data.T[[y]])[4]!="stack"){	
+                  validate(  
+                    need(input[[paste("coltypeTrack",trackindx[y],sep="")]]!=3, paste("Error: Data color error for Track",trackindx[y],". The type of data color should be 'Random' or 'Custom for data with multi-column' based on the uploaded data without column as 'color' or 'stack'.",sep=""))
+                  )
+                }
               }
             }
-			}
           })
           outputOptions(output, "errorinfo4", suspendWhenHidden = FALSE)	
           output$errorinfo5 <- renderPrint({
-		    for(e in 1:length(data.T)){		  
-            if(input[[paste("uploadtrack",trackindx[e],sep="")]]==2 && input[[paste("highlightTrack",trackindx[e],sep="")]]==1){		
-              validate(
-                need(nchar(hltdata.List[[e]])>0, paste("Warning: Highlight regions are empty for Track",trackindx[e],". Please input applicable genomic regions.",sep=""))
-              )
+            for(e in 1:length(data.T)){		  
+              if(input[[paste("uploadtrack",trackindx[e],sep="")]]==2 && input[[paste("highlightTrack",trackindx[e],sep="")]]==1){		
+                validate(
+                  need(nchar(hltdata.List[[e]])>0, paste("Warning: Highlight regions are empty for Track",trackindx[e],". Please input applicable genomic regions.",sep=""))
+                )
+              }
             }
-			}
           })
           outputOptions(output, "errorinfo5", suspendWhenHidden = FALSE) 			  
           if(tktype=="line"){
@@ -1292,7 +1292,15 @@ plotfig <- function(input, output, trackindx, data.L, data.L1, data.L2, data.C, 
           }else if(tktype=="bar"){
             if(!is.null(data.NN) && ncol(data.NN)==4 && labeltext[i]==1 && poslabels[i]=="outer"){
               circos.genomicLabels(data.NN, labels.column = 4, connection_height = heightlabels[i], track.margin = c(0.01,marginlabels[i]), side = "outside")
-            }		
+            }
+            output$errorinfo9 <- renderPrint({		  
+              if(input[[paste("typeTrack",trackindx[i],sep="")]]=="bar" & input[[paste("uploadtrack",trackindx[i],sep="")]]==2 & input[[paste("directionTrack",trackindx[i],sep="")]]==2){								  
+                validate(  
+                  need(!(ncol(data.T[[i]])==5 & colnames(data.T[[i]])[5]=="color"), paste("Error: Bar direction error for Track",trackindx[i],". The type of bar direction should be 'Unidirectional' based on the uploaded data with a 'color' column.", sep=""))
+                )
+              }
+            })
+            outputOptions(output, "errorinfo9", suspendWhenHidden = FALSE)			
             data.TT[,ncol(data.TT)] <- as.numeric(data.TT[,ncol(data.TT)])
             circos.genomicTrackPlotRegion(data.TT, track.height = tkheight, track.margin = c(lkmargin,tkmargin), bg.col = tkbgcol, bg.border = tkborder, panel.fun = function(region,value,...){
               if(!("color" %in% colnames(data.T[[i]])) && !("cols" %in% colnames(data.TTC))){
@@ -1616,7 +1624,7 @@ plotfig <- function(input, output, trackindx, data.L, data.L1, data.L2, data.C, 
           if(!("color" %in% colnames(data.L))){
             if(input$colorLinks==2 && input$linksTrack){			
               validate(
-                need(!(":" %in% unlist(strsplit(selcolorLinks,""))), "Error: Data color error for links. The type of data color should be 'Random' or 'Specific'.")
+                need(!(":" %in% unlist(strsplit(selcolorLinks,""))), "Error: Data color error for links. The uploaded links data has no group information. The type of data color can be 'Random' assigned by the system. If 'Specific' was chosen, please give a single color as 'red' or 'green'.")
               )
             }
           }
@@ -1639,8 +1647,8 @@ plotfig <- function(input, output, trackindx, data.L, data.L1, data.L2, data.C, 
             rownames(data.LC) <- NULL
             data.L$num <- NULL
             colLinks <- adjustcolor(data.LC$cols, alpha.f = transparencyLinks)
-          }else if(ncol(data.L)==6 && !splitcol){		  
-            colLinks <- adjustcolor(selcolorLinks, alpha.f = transparencyLinks)
+          }else if((ncol(data.L)==6 | ncol(data.L)==7) && !splitcol){		  
+            colLinks <- adjustcolor(selcolorLinks[1], alpha.f = transparencyLinks)
           }
           if(highlightLinks==1 && (!is.null(hltregion1.export) | !is.null(hltregion2.export))){          
             colL <- unique(datL[,4])
@@ -1770,5 +1778,5 @@ plotfig <- function(input, output, trackindx, data.L, data.L1, data.L2, data.C, 
       figurecp <<- recordPlot()
       incProgress(1/1, detail="Finished")
     })
-  }, height=heightSize, width=widthSize)
+  }, height=heightSize, width=widthSize)  
 }
