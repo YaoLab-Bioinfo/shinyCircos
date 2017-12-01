@@ -1,17 +1,17 @@
 shinyCircos
 ========
 
-This is the repository for the Shiny application presented in "shinyCircos: an R/shiny application for creation of Circos plot interactively" (Yu et al. 2017).
+This is the repository for the Shiny application presented in "<a href="https://academic.oup.com/bioinformatics/advance-article-abstract/doi/10.1093/bioinformatics/btx763/4657077" target="_blank">shinyCircos: an R/Shiny application for interactive creation of Circos plot</a>" (Yu et al. ***Bioinformatics***. 2017).
 
 *****
 
-#	<font color="red">Help manual for the usage of shinyCircos [<a target="_blank" href="http://shinycircos.ncpgr.cn/shinyCircos_Help_Manual.pdf">Download!</a>]</font>
+#	<font color="red">Help manual for the usage of shinyCircos [<a target="_blank" href="shinyCircos_Help_Manual.pdf">Download!</a>]</font>
 
 *****
 
 #	Use shinyCircos online
 
-shinyCircos is deployed at https://yimingyu.shinyapps.io/shinycircos/ and http://shinycircos.ncpgr.cn/ for online use.  
+shinyCircos is deployed at <a href="https://yimingyu.shinyapps.io/shinycircos/" target="_blank">https://yimingyu.shinyapps.io/shinycircos/</a> and <a href="http://shinycircos.ncpgr.cn/" target="_blank">http://shinycircos.ncpgr.cn/</a> for online use.  
 shinyCircos is idle until you activate it by accessing the two URLs.  
 So it may take some time when you access this URL for the first time.   
 Once it was activated, shinyCircos could be used smoothly and easily.
@@ -25,8 +25,8 @@ User can choose to run shinyCircos installed locally for a more preferable exper
 **Step 1: Install R and RStudio**
 
 Before running the app you will need to have R and RStudio installed (tested with R 3.3.3 and RStudio 1.0.143).  
-Please check CRAN (https://cran.r-project.org/) for the installation of R.  
-Please check https://www.rstudio.com/ for the installation of RStudio.  
+Please check CRAN (<a href="https://cran.r-project.org/" target="_blank">https://cran.r-project.org/</a>) for the installation of R.  
+Please check <a href="https://www.rstudio.com/" target="_blank">https://www.rstudio.com/</a> for the installation of RStudio.  
 
 **Step 2: Install the R Shiny package and other packages required by shinyCircos**
 
@@ -37,7 +37,7 @@ install.packages("circlize")
 install.packages("RColorBrewer")
 install.packages("data.table")  
 # try http:// if https:// URLs are not supported   
-source("https://bioconductor.org/biocLite.R")  
+source("<a href="https://bioconductor.org/biocLite.R" target="_blank">https://bioconductor.org/biocLite.R</a>")  
 biocLite("GenomicRanges")
 ```
 
@@ -56,7 +56,7 @@ Your web browser will open the app.
 
 **Step 1: Install R**  
 
-Please check CRAN (https://cran.r-project.org/) for the installation of R.
+Please check CRAN (<a href="https://cran.r-project.org/" target="_blank">https://cran.r-project.org/</a>) for the installation of R.
 
 **Step 2: Install the R Shiny package and other packages required by shinyCircos**  
 
@@ -67,20 +67,20 @@ install.packages("circlize")
 install.packages("RColorBrewer")
 install.packages("data.table")  
 ## try http:// if https:// URLs are not supported  
-source("https://bioconductor.org/biocLite.R")  
+source("<a href="https://bioconductor.org/biocLite.R" target="_blank">https://bioconductor.org/biocLite.R</a>")  
 biocLite("GenomicRanges")  
 ```
 
 For more information, please check the following pages:  
-https://cran.r-project.org/web/packages/shiny/index.html  
-https://github.com/rstudio/shiny  
-https://shiny.rstudio.com/  
+<a href="https://cran.r-project.org/web/packages/shiny/index.html" target="_blank">https://cran.r-project.org/web/packages/shiny/index.html</a>  
+<a href="https://github.com/rstudio/shiny" target="_blank">https://github.com/rstudio/shiny</a>  
+<a href="https://shiny.rstudio.com/" target="_blank">https://shiny.rstudio.com/</a>  
 
 **Step 3: Install Shiny-Server**
 
 Please check the following pages for the installation of shiny-server.  
-https://www.rstudio.com/products/shiny/download-server/  
-https://github.com/rstudio/shiny-server/wiki/Building-Shiny-Server-from-Source  
+<a href="https://www.rstudio.com/products/shiny/download-server/" target="_blank">https://www.rstudio.com/products/shiny/download-server/</a>  
+<a href="https://github.com/rstudio/shiny-server/wiki/Building-Shiny-Server-from-Source" target="_blank">https://github.com/rstudio/shiny-server/wiki/Building-Shiny-Server-from-Source</a>  
 
 **Step 4: Upload files of shinyCircos**
 
@@ -118,6 +118,6 @@ $ chown -R shiny /srv/shiny-server/shinyCircos
 $ start shiny-server  
 ```
 
-Now, the shinyCircos app is available at http://IPAddressOfTheServer:3838/shinycircos/.  
+Now, the shinyCircos app is available at <a href="http://IPAddressOfTheServer:3838/shinycircos/" target="_blank">http://IPAddressOfTheServer:3838/shinycircos/</a>.  
 
 

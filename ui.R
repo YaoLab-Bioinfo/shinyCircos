@@ -3357,21 +3357,23 @@ For example, 'chr1,1,100000000,red'. Hex color codes as '#FF0000' are also suppo
 			## *** Welcome panel ***
 			tabPanel("About",
 				HTML('<p <ul><li style="list-style-type: none; background-image: url(bullet.jpg); padding-left: 18px; background-size:9px 9px; background-repeat: no-repeat; background-position: 0px 50%"><font size="4">Software references</font></li></ul></p>'),
-				HTML('<p>1. R Development Core Team. <i><a href="http://www.r-project.org/">R</a>:  A Language and Environment for Statistical Computing.</i> R Foundation for Statistical Computing, Vienna (2016) <br>
-				2. RStudio and Inc. <i><a href="http://www.rstudio.com/shiny/">shiny</a>: Web Application Framework for R.</i> R package version 1.0.0 (2016) <br>
-				3. Gu, Z. <i><a href="http://cran.r-project.org/web/packages/circlize/index.html">circlize</a>: Circular Visualization.</i> R package version 0.4.1 (2017) <br>
-				4. Neuwirth, E. <i><a href="http://cran.r-project.org/web/packages/RColorBrewer/index.html">RColorBrewer</a>: ColorBrewer palettes.</i> R package version 1.1-2 (2014) <br>
-				5. Lawrence, M. <i><a href="http://bioconductor.org/packages/GenomicRanges/">GenomicRanges</a>: Representation and manipulation of genomic intervals and variables defined along a genome.</i> R package version 1.24.3 (2016) <br>
-				6. Dowle, M. <i><a href="http://cran.r-project.org/web/packages/data.table/index.html">data.table</a>: Extension of Data.frame.</i> R package version 1.9.6 (2015) <br>				
-				7. R Core Team and contributors worldwide. <i><a href="http://stat.ethz.ch/R-manual/R-devel/library/grDevices/html/00Index.html">grDevices</a>: Graphics devices and support for base and grid graphics.</i> R package version 3.3.3 (2016) <br></p>'),
+				HTML('<p>1. R Development Core Team. <i><a href="http://www.r-project.org/" target="_blank">R</a>:  A Language and Environment for Statistical Computing.</i> R Foundation for Statistical Computing, Vienna (2016) <br>
+				2. RStudio and Inc. <i><a href="http://www.rstudio.com/shiny/" target="_blank">shiny</a>: Web Application Framework for R.</i> R package version 1.0.0 (2016) <br>
+				3. Gu, Z. <i><a href="http://cran.r-project.org/web/packages/circlize/index.html" target="_blank">circlize</a>: Circular Visualization.</i> R package version 0.4.1 (2017) <br>
+				4. Neuwirth, E. <i><a href="http://cran.r-project.org/web/packages/RColorBrewer/index.html" target="_blank">RColorBrewer</a>: ColorBrewer palettes.</i> R package version 1.1-2 (2014) <br>
+				5. Lawrence, M. <i><a href="http://bioconductor.org/packages/GenomicRanges/" target="_blank">GenomicRanges</a>: Representation and manipulation of genomic intervals and variables defined along a genome.</i> R package version 1.24.3 (2016) <br>
+				6. Dowle, M. <i><a href="http://cran.r-project.org/web/packages/data.table/index.html" target="_blank">data.table</a>: Extension of Data.frame.</i> R package version 1.9.6 (2015) <br>				
+				7. R Core Team and contributors worldwide. <i><a href="http://stat.ethz.ch/R-manual/R-devel/library/grDevices/html/00Index.html" target="_blank">grDevices</a>: Graphics devices and support for base and grid graphics.</i> R package version 3.3.3 (2016) <br></p>'),
 				HTML('<p <ul><li style="list-style-type: none; background-image: url(bullet.jpg); padding-left: 18px; background-size:9px 9px; background-repeat: no-repeat; background-position: 0px 50%"><font size="4">Further references</font></li></ul></p>'),
-				h6("This application was created by ", a("Wen Yao", href="https://www.researchgate.net/profile/Wen_Yao"), " and ", a("Yiming Yu", href="https://www.researchgate.net/profile/Yiming_Yu4"), 
-				" . Please send bugs and feature requests to Wen Yao (ywhzau at gmail.com) or Yiming Yu (yimingyyu at gmail.com). This application uses the ", 
-				a("shiny package from RStudio", href="http://www.rstudio.com/shiny/"), "."),
-				
+				h6("This application was created by ", a("Wen Yao", href="https://www.researchgate.net/profile/Wen_Yao", target="_blank"), " and ", a("Yiming Yu", href="https://www.researchgate.net/profile/Yiming_Yu6", target="_blank"), 
+				". Please send bugs and feature requests to Wen Yao (ywhzau at gmail.com) or Yiming Yu (yimingyyu at gmail.com). This application uses the ", 
+				a("shiny package from RStudio", href="http://www.rstudio.com/shiny/", target="_blank"), "."),
+				HTML('<p <ul><li style="list-style-type: none; background-image: url(bullet.jpg); padding-left: 18px; background-size:9px 9px; background-repeat: no-repeat; background-position: 0px 50%"><font size="4">Please cite</font></li></ul></p>'),
+				h6("Yiming Yu, Yidan Ouyang, and Wen Yao. shinyCircos: an R/Shiny application for interactive creation of Circos plot. ", 
+				em(strong("Bioinformatics."))," 2017 Nov. 24. ", a("doi:10.1093/bioinformatics/btx763", href="https://academic.oup.com/bioinformatics/advance-article-abstract/doi/10.1093/bioinformatics/btx763/4657077", target="_blank")),
 				HTML('<p <ul><li style="list-style-type: none; background-image: url(bullet.jpg); padding-left: 18px; background-size:9px 9px; background-repeat: no-repeat; background-position: 0px 50%";><font size="5" color="red">!!Note!!</font></li></ul></p>'),
 				h5("Users are encouraged to install and use shinyCircos on local personal computers. 
-				Please check the help menu of the shinyCircos application or  ", a("https://github.com/venyao/shinyCircos", href="https://github.com/venyao/shinyCircos"), " for the installation of shinyCircos on local computers.")
+				Please check the help menu of the shinyCircos application or  ", a("https://github.com/venyao/shinyCircos", href="https://github.com/venyao/shinyCircos", target="_blank"), " for the installation of shinyCircos on local computers.")
 			),
 			## *** Data upload panel ***
 			tabPanel("Data upload",
