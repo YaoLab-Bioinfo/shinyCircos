@@ -37,7 +37,7 @@ install.packages("circlize")
 install.packages("RColorBrewer")
 install.packages("data.table")  
 # try http:// if https:// URLs are not supported   
-source("<a href="https://bioconductor.org/biocLite.R" target="_blank">https://bioconductor.org/biocLite.R</a>")  
+source("https://bioconductor.org/biocLite.R")  
 biocLite("GenomicRanges")
 ```
 
@@ -67,7 +67,7 @@ install.packages("circlize")
 install.packages("RColorBrewer")
 install.packages("data.table")  
 ## try http:// if https:// URLs are not supported  
-source("<a href="https://bioconductor.org/biocLite.R" target="_blank">https://bioconductor.org/biocLite.R</a>")  
+source("https://bioconductor.org/biocLite.R")  
 biocLite("GenomicRanges")  
 ```
 
