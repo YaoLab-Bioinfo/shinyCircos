@@ -3324,8 +3324,8 @@ For example, 'chr1,1,100000000,red'. Hex color codes as '#FF0000' are also suppo
 			),
 			checkboxInput("adfontSize", HTML("<font color='red'>Adjust font size</font>"), FALSE),
 			conditionalPanel(condition="input.adfontSize",
-			radioButtons("fontsize", NULL, c("Small" = "1", "Medium" = "1.1","Large"="1.2","Custom"="custom")),
-			conditionalPanel(condition="input.fontsize=='custom'",
+			radioButtons("fontSize", NULL, c("Small" = "1", "Medium" = "1.1","Large"="1.2","Custom"="custom")),
+			conditionalPanel(condition="input.fontSize=='custom'",
 			numericInput("cexlabel", NULL, value=1, min=0.1, max=3, step=0.1)
 			)
 			),			

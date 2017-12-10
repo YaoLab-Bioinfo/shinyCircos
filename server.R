@@ -111,12 +111,10 @@ shinyServer(function(input, output, session){
           })
           output[[paste("trackdat",trackindx[v],sep="")]] <- reactive({
             return(ncol(data.T[[v]])==4 | (ncol(data.T[[v]])>=5 && ("color" %in% colnames(data.T[[v]]))) | (ncol(data.T[[v]])>=5 && ("pch" %in% colnames(data.T[[v]]))) | (ncol(data.T[[v]])>=5 && ("cex" %in% colnames(data.T[[v]]))))
-          })
-          
+          })          
           output[[paste("stackmd",trackindx[v],sep="")]] <- reactive({
             return(ncol(data.T[[v]])==4 && colnames(data.T[[v]])[4]=="stack")
-          })
-          
+          })          
           output[[paste("labeldat",trackindx[v],sep="")]] <- reactive({
             return(!is.null(data.N[[v]]))
           }) 
@@ -141,7 +139,10 @@ shinyServer(function(input, output, session){
           )
           validate(
             need(all(is.numeric(data.C[,2]),is.numeric(data.C[,3])), "Error: Data formatting error! The second and third column of chromosome data should be numeric vectors.") 
-          )			  
+          )	
+          validate(
+            need(sum(is.na(data.C[,2:3]))==0, "Error: Data formatting error! The chromosome data contains missing value.") 
+          )		  
           if(input$datatypeChr!="general"){	 		  
             validate(
               need(ncol(data.C)==5, "Error: The chromosome data type should be 'General' based on the uploaded data.")
@@ -153,49 +154,81 @@ shinyServer(function(input, output, session){
             )
             validate(
               need(all(is.numeric(data.CN[,2]),is.numeric(data.CN[,3])),"Error: The second and third column of label data for the chromosome track should be numeric vectors.")
-            )		  		  
+            )
+            validate(
+              need(sum(is.na(data.CN[,2:3]))==0, "Error: Data formatting error! The label data for the chromosome track contains missing value.") 
+            )				
           }	  
           if(!is.null(data.T)){   
             for(i in 1:length(data.T)){
               dt.TT <- data.T[[i]]		
               tptrack <- input[[paste("typeTrack",trackindx[i],sep="")]]
               validate(
-                need(ncol(dt.TT)>=4, paste("Error: Data formatting error for Track",trackindx[i],"."," Please upload applicable data.",sep=""))
+                need(ncol(dt.TT)>=4, paste("Error: Data formatting error for Track",trackindx[i],"!"," Please upload applicable data.",sep=""))
               )			
               validate(
-                need(all(is.numeric(dt.TT[,2]),is.numeric(dt.TT[,3])), paste("Error: Data formatting error for Track",trackindx[i],"."," The second and third column should be numeric vectors.",sep=""))
+                need(all(is.numeric(dt.TT[,2]),is.numeric(dt.TT[,3])), paste("Error: Data formatting error for Track",trackindx[i],"!"," The second and third column should be numeric vectors.",sep=""))
               )				
               if(tptrack=="point"){
                 validate(
-                  need(is.numeric(dt.TT[,4]) | colnames(dt.TT)[4]=="stack", paste("Error: Data formatting error for Track",trackindx[i],"."," The fourth column should be a numeric vector or a character vector named as 'stack'.",sep=""))
+                  need(is.numeric(dt.TT[,4]) | colnames(dt.TT)[4]=="stack", paste("Error: Data formatting error for Track",trackindx[i],"!"," The fourth column should be a numeric vector or a character vector named as 'stack'.",sep=""))
+                )
+                dt.TTT <- dt.TT[,-1][,which(colnames(dt.TT[,-1])!="color")]
+                dt.TTT <- dt.TTT[,which(colnames(dt.TTT)!="stack")]		  
+                validate(
+                  need(sum(is.na(dt.TTT))==0, paste("Error: Data formatting error for Track",trackindx[i],"!"," The track data contains missing value.",sep=""))
                 )					
               }else if(tptrack=="line"){
                 validate(
-                  need(is.numeric(dt.TT[,4]) | colnames(dt.TT)[4]=="stack", paste("Error: Data formatting error for Track",trackindx[i],"."," The fourth column should be a numeric vector or a character vector named as 'stack'.",sep="")),
-                  need(!all(("pch" %in% colnames(dt.TT)) | ("cex" %in% colnames(dt.TT))), paste("Error: Data formatting error for Track",trackindx[i],"."," It should not contain columns named as 'pch' or 'cex'.",sep=""))			   
-                )						
+                  need(is.numeric(dt.TT[,4]) | colnames(dt.TT)[4]=="stack", paste("Error: Data formatting error for Track",trackindx[i],"!"," The fourth column should be a numeric vector or a character vector named as 'stack'.",sep="")),
+                  need(!all(("pch" %in% colnames(dt.TT)) | ("cex" %in% colnames(dt.TT))), paste("Error: Data formatting error for Track",trackindx[i],"!"," It should not contain columns named as 'pch' or 'cex'.",sep=""))			   
+                )
+                dt.TTT <- dt.TT[,-1][,which(colnames(dt.TT[,-1])!="color")]
+                validate(
+                  need(sum(is.na(dt.TTT))==0, paste("Error: Data formatting error for Track",trackindx[i],"!"," The track data contains missing value.",sep=""))
+                )									
               }else if(tptrack=="bar"){
                 validate(
                   need(ncol(dt.TT)<=5, paste("Warning: Please upload data with four or five columns, the fifth column of which should be named as 'color'. Otherwise, only the first four or five columns of the data would be used to create barplot for Track",trackindx[i],".",sep="")),
-                  need(!all(("pch" %in% colnames(dt.TT)) | ("cex" %in% colnames(dt.TT))), paste("Error: Data formatting error for Track",trackindx[i],"."," It should not contain columns named as 'pch' or 'cex'.",sep=""))			   			   
+                  need(!all(("pch" %in% colnames(dt.TT)) | ("cex" %in% colnames(dt.TT))), paste("Error: Data formatting error for Track",trackindx[i],"!"," It should not contain columns named as 'pch' or 'cex'.",sep=""))			   			   
                 )
+                dt.TTT <- dt.TT[,-1][,which(colnames(dt.TT[,-1])!="color")]
+                validate(
+                  need(sum(is.na(dt.TTT))==0, paste("Error: Data formatting error for Track",trackindx[i],"!"," The track data contains missing value.",sep=""))
+                )				
               }else if(tptrack=="rect"){
                 validate(
                   need(ncol(dt.TT)<=5, paste("Warning: Please upload data with four columns. Otherwise, only the first four columns of the data would be used to create the rect plot for Track",trackindx[i],".",sep="")),
                   need(ncol(dt.TT)==4, paste("Error: Please upload data with four columns for Track",trackindx[i],"."," The 4th column should be a numeric vactor or a character vactor.",sep="")),
-                  need(!all(("pch" %in% colnames(dt.TT)) | ("cex" %in% colnames(dt.TT))), paste("Error: Data formatting error for Track",trackindx[i],"."," It should not contain columns named as 'pch' or 'cex'.",sep=""))			   
-                )		
+                  need(!all(("pch" %in% colnames(dt.TT)) | ("cex" %in% colnames(dt.TT))), paste("Error: Data formatting error for Track",trackindx[i],"!"," It should not contain columns named as 'pch' or 'cex'.",sep=""))			   
+                )
+                if(!is.numeric(dt.TT[,4])){
+                  dt.TTT <- dt.TT[,2:3]
+                }else{
+                  dt.TTT <- dt.TT[,-1]
+                }
+                validate(
+                  need(sum(is.na(dt.TTT))==0, paste("Error: Data formatting error for Track",trackindx[i],"!"," The track data contains missing value.",sep=""))
+                )				
               }else if(tptrack=="heatmap"){
                 colums <- lapply(dt.TT[,-(1:3)],function(x){is.numeric(x)})
                 validate(
-                  need(all(unlist(colums)), paste("Error: Data formatting error for Track",trackindx[i],"."," Apart from the first column, other columns of the data to create heatmap should be numeric vectors.",sep="")),
-                  need(!all(("pch" %in% colnames(dt.TT)) | ("cex" %in% colnames(dt.TT))), paste("Error: Data formatting error for Track",trackindx[i],"."," It should not contain columns named as 'pch' or 'cex'.",sep=""))			   
-                )		
+                  need(all(unlist(colums)), paste("Error: Data formatting error for Track",trackindx[i],"!"," Apart from the first column, other columns of the data to create heatmap should be numeric vectors.",sep="")),
+                  need(!all(("pch" %in% colnames(dt.TT)) | ("cex" %in% colnames(dt.TT))), paste("Error: Data formatting error for Track",trackindx[i],"!"," It should not contain columns named as 'pch' or 'cex'.",sep=""))			   
+                )
+                dt.TTT <- dt.TT[,-1]
+                validate(
+                  need(sum(is.na(dt.TTT))==0, paste("Error: Data formatting error for Track",trackindx[i],"!"," The track data contains missing value.",sep=""))
+                )				
               }else if(tptrack=="ideogram"){
                 validate(
-                  need(ncol(dt.TT)==5, paste("Error: Data formatting error for Track",trackindx[i],"."," Data to create ideogram should contain five columns. Please upload applicable data for Track",trackindx[i],"."," See example data 'chromosome_ideogram.csv' for more details.",sep="")),
-                  need(!all(("pch" %in% colnames(dt.TT)) | ("cex" %in% colnames(dt.TT))), paste("Error: Data formatting error for Track",trackindx[i],"."," It should not contain columns named as 'pch' or 'cex'.",sep=""))			   
-                )		
+                  need(ncol(dt.TT)==5, paste("Error: Data formatting error for Track",trackindx[i],"!"," Data to create ideogram should contain five columns. Please upload applicable data for Track",trackindx[i],"."," See example data 'chromosome_ideogram.csv' for more details.",sep="")),
+                  need(!all(("pch" %in% colnames(dt.TT)) | ("cex" %in% colnames(dt.TT))), paste("Error: Data formatting error for Track",trackindx[i],"!"," It should not contain columns named as 'pch' or 'cex'.",sep=""))			   
+                )
+                dt.TTT <- dt.TT[,2:3]
+                validate(
+                  need(sum(is.na(dt.TTT))==0, paste("Error: Data formatting error for Track",trackindx[i],"!"," The track data contains missing value.",sep=""))
+                )				
               }						
             }
           }
@@ -207,18 +240,25 @@ shinyServer(function(input, output, session){
                   need(ncol(dt.NN)==4, paste("Error: Label data for Track",trackindx[k]," should contain four columns.",sep=""))			
                 )
                 validate(			
-                  need(all(is.numeric(dt.NN[,2]),is.numeric(dt.NN[,3])), paste("Error: Label data formatting error for Track",trackindx[k],"."," The second and third column should be numeric vectors.",sep=""))
+                  need(all(is.numeric(dt.NN[,2]),is.numeric(dt.NN[,3])), paste("Error: Label data formatting error for Track",trackindx[k],"!"," The second and third column should be numeric vectors.",sep=""))
                 )
+                validate(
+                  need(sum(is.na(dt.NN[,2:3]))==0, paste("Error: Data formatting error for Track",trackindx[k],"!"," The label data for the chromosome track contains missing value.",sep=""))
+                )					
               }
             }
           }			
           if(linksTrack.export && !is.null(linksFile.export)){
             validate(
-              need(ncol(data.L)==6 | (ncol(data.L)==7 && colnames(data.L)[7]=="color"), "Error: Data formatting error. Data to create links between different genomic regions should be composed of 6 or 7 columns, the 7th column of which should be named as 'color'. Please upload applicable data.")
+              need(ncol(data.L)==6 | (ncol(data.L)==7 && colnames(data.L)[7]=="color"), "Error: Data formatting error! Data to create links between different genomic regions should be composed of 6 or 7 columns, the 7th column of which should be named as 'color'. Please upload applicable data.")
             )
             validate(
-              need(all(is.numeric(data.L[,2]),is.numeric(data.L[,3]),is.numeric(data.L[,5]),is.numeric(data.L[,6])), "Error: Data formatting error. The second, third, fifth and sixth columns of the data to create links between different genomic regions should be numeric vectors. Please upload applicable data.")			
+              need(all(is.numeric(data.L[,2]),is.numeric(data.L[,3]),is.numeric(data.L[,5]),is.numeric(data.L[,6])), "Error: Data formatting error! The second, third, fifth and sixth columns of the data to create links between different genomic regions should be numeric vectors. Please upload applicable data.")			
             )
+            data.LL <- data.L[,c(2:3,5:6)]
+            validate(
+              need(sum(is.na(data.LL))==0, "Error: Data formatting error! The track data contains missing value.")
+            )			
           }
           validate(
             need(is.null(data.C), "Please go to the 'Circos visualization' menu to generate the Circos plot!")
@@ -394,7 +434,7 @@ shinyServer(function(input, output, session){
           cexlabel <<- input$cexlabel
           unitChr <<- input$unitChr
           labelChr <<- input$labelChr
-          fontsize <<- input$fontsize
+          fontSize <<- input$fontSize
           trackChr <<- input$trackChr
           datatypeChr <<- input$datatypeChr
           if(input$linksTrack)  {
@@ -410,7 +450,7 @@ shinyServer(function(input, output, session){
           gap.width <<- gsub("\\s","",strsplit(input$gapChr,",")[[1]])	
           plotfig(input = input, output = output, trackindx = trackindx, data.L = data.L, data.L1 = data.L1, data.L2 = data.L2, data.C = data.C, barBoundary = barBoundary, coldir1Track = coldir1Track, 
                   coldir2Track = coldir2Track, data.T = data.T, data.N = data.N, data.CN = data.CN, hltTrack.List = hltTrack.List, hltdata.List = hltdata.List, heightSize = heightSize, widthSize = widthSize, addlegend = addlegend, poslegend = poslegend, colorChr = colorChr,
-                  gap.width = gap.width, legendtext = legendtext, labeltext = labeltext, poslabels = poslabels, heightlabels = heightlabels, marginlabels = marginlabels, fillareaTrack = fillareaTrack, cexlabel = cexlabel, unitChr = unitChr, labelChr = labelChr, fontsize = fontsize, colorTrack = colorTrack, borderareaTrack = borderareaTrack, selreaTrack = selreaTrack, transparencyHlt = transparencyHlt,
+                  gap.width = gap.width, legendtext = legendtext, labeltext = labeltext, poslabels = poslabels, heightlabels = heightlabels, marginlabels = marginlabels, fillareaTrack = fillareaTrack, cexlabel = cexlabel, unitChr = unitChr, labelChr = labelChr, fontSize = fontSize, colorTrack = colorTrack, borderareaTrack = borderareaTrack, selreaTrack = selreaTrack, transparencyHlt = transparencyHlt,
                   trackChr = trackChr, datatypeChr = datatypeChr, labeltextchr = labeltextchr, heightlabelschr = heightlabelschr, marginlabelschr = marginlabelschr, poslabelschr = poslabelschr, transparencyhltLinks = transparencyhltLinks, transparencyTrack = transparencyTrack, transparencyLinks = transparencyLinks,
                   colorLinks = colorLinks, linksTrack = linksTrack, typeTrack = typeTrack, coltypeTk = coltypeTk, colorcusTrack = colorcusTrack, marginLinks = marginLinks, selcolorLinks = selcolorLinks, colrectTrack = colrectTrack, rectTrack = rectTrack, rectcolTrack = rectcolTrack, rectcoldisTrack = rectcoldisTrack, rectcoldiscusTrack = rectcoldiscusTrack, 
                   borderTrack = borderTrack, gridsborderTrack = gridsborderTrack, colgridsborderTrack = colgridsborderTrack, directionTrack = directionTrack, colorlineTrack = colorlineTrack, symbolTrack = symbolTrack, pointsizeTrack = pointsizeTrack, baselineTrack = baselineTrack, colhmapTrack = colhmapTrack, lineshmapTrack = lineshmapTrack, heightlinesTrack = heightlinesTrack, marginlinesTrack = marginlinesTrack, heightTrack = heightTrack, marginTrack = marginTrack , bgcolTrack = bgcolTrack)

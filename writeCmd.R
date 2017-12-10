@@ -451,7 +451,7 @@ repnumgap <- round(length(unique(data.C[,1]))/length(gap.width))+1
 gap.width <- rep(gap.width, repnumgap)[1:length(unique(data.C[,1]))]			
 gap.width <- as.numeric(gap.width)
 rotation <- gap.width[length(gap.width)]/2	
-if(fontsize=="custom"){
+if(fontSize=="custom"){
   cat(paste("cexlabel <- ",cexlabel,sep=""),file="code.R",append=TRUE,sep="\n")
   if(length(legendtext)!=0 && addlegend==1 && poslegend==1){
     cat("par(oma=c(0,0,0,0), mar=c(9,0.5,1,9.5), xpd=TRUE, cex=cexlabel-0.1)",file="code.R",append=TRUE,sep="\n")
@@ -459,40 +459,40 @@ if(fontsize=="custom"){
     cat("par(mar=c(0.6,0.6,0.6,0.6), cex=cexlabel-0.1)",file="code.R",append=TRUE,sep="\n")
   }
 }else{
-  cat(paste("fontsize <- ",fontsize,sep=""),file="code.R",append=TRUE,sep="\n")			
+  cat(paste("fontSize <- ",fontSize,sep=""),file="code.R",append=TRUE,sep="\n")			
   if(length(legendtext)!=0 && addlegend==1 && poslegend==1){
-    cat("par(oma=c(0,0,0,0), mar=c(9,0.5,1,9.5), xpd=TRUE, cex=fontsize-0.05)",file="code.R",append=TRUE,sep="\n")
+    cat("par(oma=c(0,0,0,0), mar=c(9,0.5,1,9.5), xpd=TRUE, cex=fontSize-0.05)",file="code.R",append=TRUE,sep="\n")
   }else{
-    cat("par(mar=c(0.6,0.6,0.6,0.6), cex=fontsize-0.05)",file="code.R",append=TRUE,sep="\n")
+    cat("par(mar=c(0.6,0.6,0.6,0.6), cex=fontSize-0.05)",file="code.R",append=TRUE,sep="\n")
   }			
 }
 cat(paste('trackChr <- "',trackChr,'"',sep=""),file="code.R",append=TRUE,sep="\n")																																																		
 cat(paste("labelChr <- ",'"',labelChr,'"',sep=""),paste("unitChr <- ",'"',unitChr,'"',sep=""),paste("rotation <- ",rotation,sep=""),paste("gap.width <- c(",paste(gap.width,collapse = ","),")",sep=""),paste("labeltextchr <- ",labeltextchr,sep=""),
     paste("poslabelschr <- ",'"',poslabelschr,'"',sep=""),paste("heightlabelschr <- ",heightlabelschr,sep=""),paste("marginlabelschr <- ",marginlabelschr,sep=""),file="code.R",append=TRUE,sep="\n")			
 if(datatypeChr=="general"){
-  if(trackChr=="track" && fontsize!="custom"){
+  if(trackChr=="track" && fontSize!="custom"){
     colorChr <- gsub("0x","#", colorChr)        			
     repnumcol <- round(length(unique(data.C[,1]))/length(colorChr))+1
     colorChr <- rep(colorChr, repnumcol)[1:length(unique(data.C[,1]))]
     cat(paste('colorChr <- c("',paste(colorChr,collapse = '","'),'")',sep=""),file="code.R",append=TRUE,sep="\n")
     cat('plotcircos(data.C, color=colorChr, plotTypes=unique(c(labelChr,"axis")), units=unitChr, rotation=rotation, gap.width=gap.width, labeltextchr=labeltextchr, poslabelschr=poslabelschr, heightlabelschr=heightlabelschr, marginlabelschr=marginlabelschr, data.CN=data.CN)',file="code.R",append=TRUE,sep="\n")
-  }else if(trackChr=="track" && fontsize=="custom"){
+  }else if(trackChr=="track" && fontSize=="custom"){
     repnumcol <- round(length(unique(data.C[,1]))/length(colorChr))+1
     colorChr <- rep(colorChr, repnumcol)[1:length(unique(data.C[,1]))]			
     cat(paste('colorChr <- c("',paste(colorChr,collapse = '","'),'")',sep=""),paste("cexlabel <- ",paste(cexlabel,collapse = ","),sep=""),file="code.R",append=TRUE,sep="\n")
     cat('plotcircos.font(data.C, color=colorChr, plotTypes=unique(c(labelChr,"axis")), units=unitChr, rotation=rotation, gap.width=gap.width, cexLabel=cexlabel-0.1, labeltextchr=labeltextchr, poslabelschr=poslabelschr, heightlabelschr=heightlabelschr, marginlabelschr=marginlabelschr, data.CN=data.CN)',file="code.R",append=TRUE,sep="\n")				
-  }else if(trackChr!="track" && fontsize!="custom"){
+  }else if(trackChr!="track" && fontSize!="custom"){
     cat(paste("cexlabel <- ",paste(cexlabel,collapse = ","),sep=""),file="code.R",append=TRUE,sep="\n")
     cat('plotcircos.notrack(data.C, plotTypes=unique(c(labelChr,"axis")), units=unitChr, rotation=rotation, gap.width=gap.width, data.CN=data.CN, labeltextchr=labeltextchr, poslabelschr=poslabelschr, heightlabelschr=heightlabelschr, marginlabelschr=marginlabelschr)',file="code.R",append=TRUE,sep="\n")								
-  }else if(trackChr!="track" && fontsize=="custom"){
+  }else if(trackChr!="track" && fontSize=="custom"){
     cat(paste("cexlabel <- ",paste(cexlabel,collapse = ","),sep=""),file="code.R",append=TRUE,sep="\n")
     cat('plotcircos.notrack.font(data.C, plotTypes=unique(c(labelChr,"axis")), units=unitChr, rotation=rotation, gap.width=gap.width, cexLabel=cexlabel-0.1, data.CN=data.CN, labeltextchr=labeltextchr, poslabelschr=poslabelschr, heightlabelschr=heightlabelschr, marginlabelschr=marginlabelschr)',file="code.R",append=TRUE,sep="\n")														
   }
 }else{
-  if(fontsize!="custom"){			    
+  if(fontSize!="custom"){			    
     cat(paste("cexlabel <- ",paste(cexlabel,collapse = ","),sep=""),file="code.R",append=TRUE,sep="\n")
     cat('plotcircos.cyto(data.C, plotTypes=unique(c(labelChr,"axis")), units=unitChr, rotation=rotation, gap.width=gap.width, labeltextchr=labeltextchr, poslabelschr=poslabelschr, heightlabelschr=heightlabelschr, marginlabelschr=marginlabelschr, data.CN=data.CN)',file="code.R",append=TRUE,sep="\n")
-  }else if(fontsize=="custom"){			
+  }else if(fontSize=="custom"){			
     cat(paste("cexlabel <- ",paste(cexlabel,collapse = ","),sep=""),file="code.R",append=TRUE,sep="\n")
     cat('plotcircos.cyto.font(data.C, plotTypes=unique(c(labelChr,"axis")), units=unitChr, rotation=rotation, gap.width=gap.width, cexLabel=cexlabel-0.1, labeltextchr=labeltextchr, poslabelschr=poslabelschr, heightlabelschr=heightlabelschr, marginlabelschr=marginlabelschr, data.CN=data.CN)',file="code.R",append=TRUE,sep="\n")																
   }
@@ -1794,9 +1794,9 @@ if(!is.null(data.L) && linksTrack.export){
 }
 n <- length(legendtext)
 if(n!=0 && addlegend==1){
-  if(poslegend==1 && fontsize!="custom"){
-    xleft <- 1.2+(as.numeric(fontsize)-1)*0.25
-  }else if(poslegend==1 && fontsize=="custom"){
+  if(poslegend==1 && fontSize!="custom"){
+    xleft <- 1.2+(as.numeric(fontSize)-1)*0.25
+  }else if(poslegend==1 && fontSize=="custom"){
     xleft <- 1.2+(as.numeric(cexlabel)-1)*0.25
   }else{
     xleft <- -0.01

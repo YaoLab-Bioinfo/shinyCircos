@@ -314,7 +314,7 @@ get_most_inside_radius = function() {
   }
 }
 
-plotfig <- function(input, output, trackindx, data.L, data.L1, data.L2, data.C, data.T, data.N, data.CN, hltTrack.List, hltdata.List, heightSize, widthSize, colorChr, gap.width, cexlabel, unitChr, labelChr, fontsize, trackChr, datatypeChr, transparencyHlt, legendtext, labeltext, poslabels, heightlabels, marginlabels, fillareaTrack, borderareaTrack, selreaTrack, addlegend, poslegend, transparencyhltLinks, labeltextchr, poslabelschr, heightlabelschr, marginlabelschr, transparencyTrack, transparencyLinks, marginLinks, selcolorLinks, barBoundary, coldir1Track, coldir2Track, colrectTrack, colorTrack, colorLinks, linksTrack, typeTrack, coltypeTk, colorcusTrack, rectTrack, rectcolTrack, rectcoldisTrack, rectcoldiscusTrack, borderTrack, gridsborderTrack, colgridsborderTrack, directionTrack, colorlineTrack, symbolTrack, pointsizeTrack, baselineTrack, heightTrack, colhmapTrack, lineshmapTrack, heightlinesTrack, marginlinesTrack, marginTrack , bgcolTrack){       
+plotfig <- function(input, output, trackindx, data.L, data.L1, data.L2, data.C, data.T, data.N, data.CN, hltTrack.List, hltdata.List, heightSize, widthSize, colorChr, gap.width, cexlabel, unitChr, labelChr, fontSize, trackChr, datatypeChr, transparencyHlt, legendtext, labeltext, poslabels, heightlabels, marginlabels, fillareaTrack, borderareaTrack, selreaTrack, addlegend, poslegend, transparencyhltLinks, labeltextchr, poslabelschr, heightlabelschr, marginlabelschr, transparencyTrack, transparencyLinks, marginLinks, selcolorLinks, barBoundary, coldir1Track, coldir2Track, colrectTrack, colorTrack, colorLinks, linksTrack, typeTrack, coltypeTk, colorcusTrack, rectTrack, rectcolTrack, rectcoldisTrack, rectcoldiscusTrack, borderTrack, gridsborderTrack, colgridsborderTrack, directionTrack, colorlineTrack, symbolTrack, pointsizeTrack, baselineTrack, heightTrack, colhmapTrack, lineshmapTrack, heightlinesTrack, marginlinesTrack, marginTrack , bgcolTrack){       
   ## *** The highlight regions ***
   if(!is.null(data.L)){
     highlightLinks <<- input$highlightLinks
@@ -384,7 +384,7 @@ plotfig <- function(input, output, trackindx, data.L, data.L1, data.L2, data.C, 
       gap.width <- rep(gap.width, repnumgap)[1:length(unique(data.C[,1]))]
       gap.width <- as.numeric(gap.width)
       rotation <- gap.width[length(gap.width)]/2	
-      if(fontsize=="custom"){
+      if(fontSize=="custom"){
         if(length(legendtext)!=0 && addlegend==1 && poslegend==1){
           par(oma=c(0,0,0,0),mar = c(9,0.5,1,9.5),xpd=TRUE,cex=cexlabel-0.1)
         }else{
@@ -392,25 +392,25 @@ plotfig <- function(input, output, trackindx, data.L, data.L1, data.L2, data.C, 
         }
       }else{
         if(length(legendtext)!=0 && addlegend==1 && poslegend==1){
-          par(oma=c(0,0,0,0),mar = c(9,0.5,1,9.5),xpd=TRUE,cex=as.numeric(fontsize)-0.05)
+          par(oma=c(0,0,0,0),mar = c(9,0.5,1,9.5),xpd=TRUE,cex=as.numeric(fontSize)-0.05)
         }else{
-          par(mar = c(0.6,0.6,0.6,0.6),cex=as.numeric(fontsize)-0.05) 
+          par(mar = c(0.6,0.6,0.6,0.6),cex=as.numeric(fontSize)-0.05) 
         }			
       }			
       if(datatypeChr=="general"){
-        if(trackChr=="track" && fontsize!="custom"){
+        if(trackChr=="track" && fontSize!="custom"){
           plotcircos(data.C, color=colorChr, plotTypes=unique(c(labelChr,"axis")), units=unitChr, rotation=rotation, gap.width=gap.width, labeltextchr=labeltextchr, poslabelschr=poslabelschr, heightlabelschr=heightlabelschr, marginlabelschr=marginlabelschr, data.CN=data.CN)
-        }else if(trackChr=="track" && fontsize=="custom"){
+        }else if(trackChr=="track" && fontSize=="custom"){
           plotcircos.font(data.C, color=colorChr, plotTypes=unique(c(labelChr,"axis")), units=unitChr, rotation=rotation, gap.width=gap.width, cexLabel=cexlabel-0.1, labeltextchr=labeltextchr, poslabelschr=poslabelschr, heightlabelschr=heightlabelschr, marginlabelschr=marginlabelschr, data.CN=data.CN)
-        }else if(trackChr!="track" && fontsize!="custom"){
+        }else if(trackChr!="track" && fontSize!="custom"){
           plotcircos.notrack(data.C, plotTypes=unique(c(labelChr,"axis")), units=unitChr, rotation=rotation, gap.width=gap.width, data.CN=data.CN, labeltextchr=labeltextchr, poslabelschr=poslabelschr, heightlabelschr=heightlabelschr, marginlabelschr=marginlabelschr)
-        }else if(trackChr!="track" && fontsize=="custom"){
+        }else if(trackChr!="track" && fontSize=="custom"){
           plotcircos.notrack.font(data.C, plotTypes=unique(c(labelChr,"axis")), units=unitChr, rotation=rotation, gap.width=gap.width, cexLabel=cexlabel-0.1, data.CN=data.CN, labeltextchr=labeltextchr, poslabelschr=poslabelschr, heightlabelschr=heightlabelschr, marginlabelschr=marginlabelschr)
         }
       }else{
-        if(fontsize!="custom"){			    
+        if(fontSize!="custom"){			    
           plotcircos.cyto(data.C, plotTypes=unique(c(labelChr,"axis")), units=unitChr, rotation=rotation, gap.width=gap.width, labeltextchr=labeltextchr, poslabelschr=poslabelschr, heightlabelschr=heightlabelschr, marginlabelschr=marginlabelschr, data.CN=data.CN)
-        }else if(fontsize=="custom"){			
+        }else if(fontSize=="custom"){			
           plotcircos.cyto.font(data.C, plotTypes=unique(c(labelChr,"axis")), units=unitChr, rotation=rotation, gap.width=gap.width, cexLabel=cexlabel-0.1, labeltextchr=labeltextchr, poslabelschr=poslabelschr, heightlabelschr=heightlabelschr, marginlabelschr=marginlabelschr, data.CN=data.CN)
         }
       }
@@ -489,11 +489,11 @@ plotfig <- function(input, output, trackindx, data.L, data.L1, data.L2, data.C, 
               data.TTC$num <- NULL
             }
             data.TT$num <- NULL
-            if(ncol(data.TT)==5 && ("color" %in% colnames(data.TT))){
+            if(c(ncol(data.TT)==5 | ncol(data.TT)==6 | ncol(data.TT)==7) && ("color" %in% colnames(data.TT))){
               data.TT <- data.TT[,1:4]
             }else if(c(ncol(data.TT)==5 | ncol(data.TT)==6 | ncol(data.TT)==7) && ("pch" %in% colnames(data.TT)) && !("color" %in% colnames(data.TT))){
               data.TT <- data.TT[,1:4]
-              tkcolor	<- tkcolor[1]
+              tkcolor <- tkcolor[1]
             }
             if(is.null(data.TTC)){
               data.TTC.export[[i]] <<- ""
@@ -1066,8 +1066,12 @@ plotfig <- function(input, output, trackindx, data.L, data.L1, data.L2, data.C, 
                       }
                     } 				
                     dat <- data.T[[i]][data.T[[i]][,1] %in% x,]
-                    tkcols <- data.TTC$cols[data.TTC[,1] %in% x]
-                    circos.points((dat[,2]+dat[,3])/2,dat[,4], col=adjustcolor(tkcols,alpha.f = tktransparency), cex=0.6, pch=dat$pch)
+                    if(coltypeTrack==1){
+                      tkcols <- data.TTC$cols[data.TTC[,1] %in% x]
+                      circos.points((dat[,2]+dat[,3])/2,dat[,4], col=adjustcolor(tkcols,alpha.f = tktransparency), cex=0.6, pch=dat$pch)
+                    }else{
+                      circos.points((dat[,2]+dat[,3])/2,dat[,4], col=tkcolor[1], cex=0.6, pch=dat$pch)					
+                    }
                   })				
                 }else if(("pch" %in% colnames(data.T[[i]])) && !("color" %in% colnames(data.T[[i]]))){
                   lapply(unique(data.T[[i]][,1]),function(x){
@@ -1159,8 +1163,12 @@ plotfig <- function(input, output, trackindx, data.L, data.L1, data.L2, data.C, 
                       }
                     } 				
                     dat <- data.T[[i]][data.T[[i]][,1] %in% x,]
-                    tkcols <- data.TTC$cols[data.TTC[,1] %in% x]
-                    circos.points((dat[,2]+dat[,3])/2,dat[,4], col=adjustcolor(tkcols,alpha.f = tktransparency), cex=dat$cex, pch=dat$pch)
+                    if(coltypeTrack==1){
+                      tkcols <- data.TTC$cols[data.TTC[,1] %in% x]
+                      circos.points((dat[,2]+dat[,3])/2,dat[,4], col=adjustcolor(tkcols,alpha.f = tktransparency), cex=dat$cex, pch=dat$pch)
+                    }else{
+                      circos.points((dat[,2]+dat[,3])/2,dat[,4], col=tkcolor[1], cex=dat$cex, pch=dat$pch)
+                    }
                   })				
                 }else if(("pch" %in% colnames(data.T[[i]])) && !("color" %in% colnames(data.T[[i]]))){
                   lapply(unique(data.T[[i]][,1]),function(x){
@@ -1216,6 +1224,24 @@ plotfig <- function(input, output, trackindx, data.L, data.L1, data.L2, data.C, 
                     dat <- data.T[[i]][data.T[[i]][,1] %in% x,]
                     circos.points((dat[,2]+dat[,3])/2,dat[,4], col=tkcolor[1], cex=dat$cex, pch=16)
                   })
+                }else if(coltypeTrack==2 && ("color" %in% colnames(data.T[[i]])) && !("pch" %in% colnames(data.T[[i]]))){
+                  lapply(data.T[[i]],function(x){
+                    if(trackChr=="track"){
+                      circos.updatePlotRegion(sector.index = x, track.index=takindx+2, bg.col = tkbgcol[which(unique(data.C[,1])==x)], bg.border = tkborder)
+                    }else{
+                      circos.updatePlotRegion(sector.index = x, track.index=takindx+1, bg.col = tkbgcol[which(unique(data.C[,1])==x)], bg.border = tkborder)
+                    }
+                    if(nchar(tklinecolor[1])!=0){               
+                      xlim <- get.cell.meta.data("xlim")
+                      ylim <- get.cell.meta.data("ylim")
+                      for(k in 1:length(tklinecoord)){
+                        y1 <- as.numeric(quantile(ylim,probs=tklinecoord[k]))
+                        circos.lines(x=xlim,y=c(y1,y1), col=tklinecolor[k], lwd=0.1)
+                      }
+                    } 				
+                    dat <- data.T[[i]][data.T[[i]][,1] %in% x,]
+                    circos.points((dat[,2]+dat[,3])/2,dat[,4], col=tkcolor[1], cex=dat$cex, pch=16)
+                  })			
                 }
               }				
               assign("hltTrack",hltTrack.List[[i]])
@@ -1744,9 +1770,9 @@ plotfig <- function(input, output, trackindx, data.L, data.L1, data.L2, data.C, 
       }							
       n <- length(legendtext)
       if(n!=0 && addlegend==1){
-        if(poslegend==1 && fontsize!="custom"){
-          xleft <- 1.2+(as.numeric(fontsize)-1)*0.25
-        }else if(poslegend==1 && fontsize=="custom"){
+        if(poslegend==1 && fontSize!="custom"){
+          xleft <- 1.2+(as.numeric(fontSize)-1)*0.25
+        }else if(poslegend==1 && fontSize=="custom"){
           xleft <- 1.2+(as.numeric(cexlabel)-1)*0.25
         }else{
           xleft <- -0.01
