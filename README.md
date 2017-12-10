@@ -5,7 +5,7 @@ This is the repository for the Shiny application presented in "<a href="https://
 
 *****
 
-#	<font color="red">Help manual for the usage of shinyCircos [<a target="_blank" href="shinyCircos_Help_Manual.pdf">Download!</a>]</font>
+#	<font color="red">Help manual for the usage of shinyCircos [<a target="_blank" href="http://shinycircos.ncpgr.cn/shinyCircos_Help_Manual.pdf">Download!</a>]</font>
 
 *****
 
