@@ -1,10 +1,11 @@
 cat('## setwd("absolute path of a directory containing the input data files")',file="code.R",append=TRUE,sep="\n")
-cat("library(circlize)
+cat("options(warn=-1)
+library(circlize)
 library(RColorBrewer)
 library(GenomicRanges)
 library(data.table)
-library(grDevices)
-options(warn=-1)",file="code.R",append=TRUE,sep="\n")  
+library(RLumShiny)
+library(grDevices)",file="code.R",append=TRUE,sep="\n")  
 cat("",file="code.R",append=TRUE,sep="\n")
 cat('plotcircos <- function(x, color, plotTypes, units, rotation, gap.width, labeltextchr, poslabelschr, heightlabelschr, marginlabelschr, data.CN){
 	circos.par("start.degree"=90-rotation, "gap.degree"=gap.width, cell.padding=c(0,0,0,0), track.margin=c(0,0))
@@ -651,7 +652,11 @@ if(!is.null(data.T)){
       cat(paste('tklinecol <- c("',paste(tklinecol,collapse ='","'),'")',sep=""),file="code.R",append=TRUE,sep="\n")														
     }
     ## *** The fill color for track ***
-    hmapcols <- gsub('\\"',"",colhmapTrack[i])    
+	if(heatmapcol[i]==1){
+      hmapcols <- gsub('\\"',"",colhmapTrack[i])    
+	}else{
+	  hmapcols <- heatmapcols[i]                                         
+	}	   
     hmapcols <- unlist(strsplit(hmapcols,"\\."))  
     cat(paste('hmapcols <- c("',paste(hmapcols,collapse ='","'),'")',sep=""),file="code.R",append=TRUE,sep="\n")														 			
     ## *** Add connection ***

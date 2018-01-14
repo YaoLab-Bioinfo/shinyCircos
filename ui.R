@@ -1,3 +1,6 @@
+options(warn=-1)
+library(RLumShiny)
+
 shinyUI(fluidPage(theme="newstyle.css",
                   tags$head(tags$script(HTML('Shiny.addCustomMessageHandler("jsCode",function(message) {eval(message.value);});'))),
 	titlePanel(HTML('<p><font size="6">shinyCircos: an R/Shiny application for interactive creation of Circos plot</font></p>'),
@@ -484,23 +487,33 @@ Hex color codes as '#FF0000' are also supported.</p>
 	                                      </table>
 	                                      "), value="grey95")
 			),			
-			conditionalPanel(condition="input.typeTrack1=='heatmap'",
-			selectInput("colhmapTrack1", HTML("<table><tr><td><strong>Colors:</strong></td>
+			conditionalPanel(condition="input.typeTrack1=='heatmap'",			
+			radioButtons("heatmapcol1", HTML("<table><tr><td><strong>Colors</strong></td>
 <td>
 <div class='help-tip'>
-	<p>Colors to be used for the heatmap.</p>
+	<p>Colors to be used for the heatmap, which can be assigned by the application or specified by the users.</p>
 	                                      </div></td></tr>
 	                                      </table>
-	                                      "), choices = c("blue.white.red", "green.black.red", "green.yellow.red", 
+	                                      "), c("Typical" = "1", "Custom" = "2"), selected="1"),			
+			conditionalPanel(condition="input.heatmapcol1=='1'",			
+			selectInput("colhmapTrack1", NULL, choices = c("blue.white.red", "green.black.red", "green.yellow.red", 
 	                                                      "purple.yellow.red", "blue.green.red", "blue.yellow.green", 
-	                                                      "cyan.white.deeppink1"), selected="blue.white.red"),
+	                                                      "cyan.white.deeppink1"), selected="blue.white.red")
+			),
+			conditionalPanel(condition="input.heatmapcol1=='2'",
+			 fluidRow(
+			   column(4,jscolorInput("lowColor1", label = HTML('<p><font size="1.8"><strong>Low Color</strong></font></p>'), value = "#0016DB")), 
+			   column(4, jscolorInput("midColor1", label = HTML('<p><font size="1.8"><strong>Middle Color</strong></font></p>'), value = "#FFFFFF")),
+			   column(4, jscolorInput("highColor1", label = HTML('<p><font size="1.8"><strong>High Color</strong></font></p>'), value = "#FFFF00"))),					
+			   HTML('<br>')
+			),
 			radioButtons("lineshmapTrack1", HTML("<table><tr><td><strong>Add position lines</strong></td>
 <td>
 <div class='help-tip'>
 	<p>Add genomic position lines between tracks, which can be used to identify the correspondance between heatmaps and regions.</p>
 	                                      </div></td></tr>
 	                                      </table>
-	                                      "), c("Yes" = "1", "No" = "2"),selected="2"),
+	                                      "), c("Yes" = "1", "No" = "2"), selected="2"),
 			conditionalPanel(condition="input.lineshmapTrack1=='1'",
 			numericInput("heightlinesTrack1", HTML("<table><tr><td><strong>Position lines height:</strong></td>
 <td>
@@ -778,16 +791,26 @@ Hex color codes as '#FF0000' are also supported.</p>
 	                                      </table>
 	                                      "), value="grey95")
 			),
-			conditionalPanel(condition="input.typeTrack2=='heatmap'",
-			selectInput("colhmapTrack2", HTML("<table><tr><td><strong>Colors:</strong></td>
+			conditionalPanel(condition="input.typeTrack2=='heatmap'",			
+			radioButtons("heatmapcol2", HTML("<table><tr><td><strong>Colors</strong></td>
 <td>
 <div class='help-tip'>
-	<p>Colors to be used for the heatmap.</p>
+	<p>Colors to be used for the heatmap, which can be assigned by the application or specified by the users.</p>
 	                                      </div></td></tr>
 	                                      </table>
-	                                      "), choices = c("blue.white.red", "green.black.red", "green.yellow.red", 
+	                                      "), c("Typical" = "1", "Custom" = "2"), selected="1"),			
+			conditionalPanel(condition="input.heatmapcol2=='1'",			
+			selectInput("colhmapTrack2", NULL, choices = c("blue.white.red", "green.black.red", "green.yellow.red", 
 	                                                      "purple.yellow.red", "blue.green.red", "blue.yellow.green", 
-	                                                      "cyan.white.deeppink1"), selected="blue.white.red"),
+	                                                      "cyan.white.deeppink1"), selected="blue.white.red")
+			),
+			conditionalPanel(condition="input.heatmapcol2=='2'",
+			 fluidRow(
+			   column(4,jscolorInput("lowColor2", label = HTML('<p><font size="1.8"><strong>Low Color</strong></font></p>'), value = "#0016DB")), 
+			   column(4, jscolorInput("midColor2", label = HTML('<p><font size="1.8"><strong>Middle Color</strong></font></p>'), value = "#FFFFFF")),
+			   column(4, jscolorInput("highColor2", label = HTML('<p><font size="1.8"><strong>High Color</strong></font></p>'), value = "#FFFF00"))),					
+			   HTML('<br>')
+			),			
 			radioButtons("lineshmapTrack2", HTML("<table><tr><td><strong>Add position lines</strong></td>
 <td>
 <div class='help-tip'>
@@ -1070,16 +1093,26 @@ Hex color codes as '#FF0000' are also supported.</p>
 	                                      </table>
 	                                      "), value="grey95")
 			),
-			conditionalPanel(condition="input.typeTrack3=='heatmap'",
-			selectInput("colhmapTrack3", HTML("<table><tr><td><strong>Colors:</strong></td>
+			conditionalPanel(condition="input.typeTrack3=='heatmap'",			
+			radioButtons("heatmapcol3", HTML("<table><tr><td><strong>Colors</strong></td>
 <td>
 <div class='help-tip'>
-	<p>Colors to be used for the heatmap.</p>
+	<p>Colors to be used for the heatmap, which can be assigned by the application or specified by the users.</p>
 	                                      </div></td></tr>
 	                                      </table>
-	                                      "), choices = c("blue.white.red", "green.black.red", "green.yellow.red", 
+	                                      "), c("Typical" = "1", "Custom" = "2"), selected="1"),			
+			conditionalPanel(condition="input.heatmapcol3=='1'",			
+			selectInput("colhmapTrack3", NULL, choices = c("blue.white.red", "green.black.red", "green.yellow.red", 
 	                                                      "purple.yellow.red", "blue.green.red", "blue.yellow.green", 
-	                                                      "cyan.white.deeppink1"), selected="blue.white.red"),
+	                                                      "cyan.white.deeppink1"), selected="blue.white.red")
+			),
+			conditionalPanel(condition="input.heatmapcol3=='2'",
+			 fluidRow(
+			   column(4,jscolorInput("lowColor3", label = HTML('<p><font size="1.8"><strong>Low Color</strong></font></p>'), value = "#0016DB")), 
+			   column(4, jscolorInput("midColor3", label = HTML('<p><font size="1.8"><strong>Middle Color</strong></font></p>'), value = "#FFFFFF")),
+			   column(4, jscolorInput("highColor3", label = HTML('<p><font size="1.8"><strong>High Color</strong></font></p>'), value = "#FFFF00"))),					
+			   HTML('<br>')
+			),			
 			radioButtons("lineshmapTrack3", HTML("<table><tr><td><strong>Add position lines</strong></td>
 <td>
 <div class='help-tip'>
@@ -1362,16 +1395,26 @@ Hex color codes as '#FF0000' are also supported.</p>
 	                                      </table>
 	                                      "), value="grey95")
 			),
-			conditionalPanel(condition="input.typeTrack4=='heatmap'",
-			selectInput("colhmapTrack4", HTML("<table><tr><td><strong>Colors:</strong></td>
+			conditionalPanel(condition="input.typeTrack4=='heatmap'",			
+			radioButtons("heatmapcol4", HTML("<table><tr><td><strong>Colors</strong></td>
 <td>
 <div class='help-tip'>
-	<p>Colors to be used for the heatmap.</p>
+	<p>Colors to be used for the heatmap, which can be assigned by the application or specified by the users.</p>
 	                                      </div></td></tr>
 	                                      </table>
-	                                      "), choices = c("blue.white.red", "green.black.red", "green.yellow.red", 
+	                                      "), c("Typical" = "1", "Custom" = "2"), selected="1"),			
+			conditionalPanel(condition="input.heatmapcol4=='1'",			
+			selectInput("colhmapTrack4", NULL, choices = c("blue.white.red", "green.black.red", "green.yellow.red", 
 	                                                      "purple.yellow.red", "blue.green.red", "blue.yellow.green", 
-	                                                      "cyan.white.deeppink1"), selected="blue.white.red"),
+	                                                      "cyan.white.deeppink1"), selected="blue.white.red")
+			),
+			conditionalPanel(condition="input.heatmapcol4=='2'",
+			 fluidRow(
+			   column(4,jscolorInput("lowColor4", label = HTML('<p><font size="1.8"><strong>Low Color</strong></font></p>'), value = "#0016DB")), 
+			   column(4, jscolorInput("midColor4", label = HTML('<p><font size="1.8"><strong>Middle Color</strong></font></p>'), value = "#FFFFFF")),
+			   column(4, jscolorInput("highColor4", label = HTML('<p><font size="1.8"><strong>High Color</strong></font></p>'), value = "#FFFF00"))),					
+			   HTML('<br>')
+			),			
 			radioButtons("lineshmapTrack4", HTML("<table><tr><td><strong>Add position lines</strong></td>
 <td>
 <div class='help-tip'>
@@ -1652,16 +1695,26 @@ automatically to the number of sectors. For example, 'grey95' or 'grey95,grey,pi
 	                                      </table>
 	                                      "), value="grey95")
 			),
-			conditionalPanel(condition="input.typeTrack5=='heatmap'",
-			selectInput("colhmapTrack5", HTML("<table><tr><td><strong>Colors:</strong></td>
+			conditionalPanel(condition="input.typeTrack5=='heatmap'",			
+			radioButtons("heatmapcol5", HTML("<table><tr><td><strong>Colors</strong></td>
 <td>
 <div class='help-tip'>
-	<p>Colors to be used for the heatmap.</p>
+	<p>Colors to be used for the heatmap, which can be assigned by the application or specified by the users.</p>
 	                                      </div></td></tr>
 	                                      </table>
-	                                      "), choices = c("blue.white.red", "green.black.red", "green.yellow.red", 
+	                                      "), c("Typical" = "1", "Custom" = "2"), selected="1"),			
+			conditionalPanel(condition="input.heatmapcol5=='1'",			
+			selectInput("colhmapTrack5", NULL, choices = c("blue.white.red", "green.black.red", "green.yellow.red", 
 	                                                      "purple.yellow.red", "blue.green.red", "blue.yellow.green", 
-	                                                      "cyan.white.deeppink1"), selected="blue.white.red"),
+	                                                      "cyan.white.deeppink1"), selected="blue.white.red")
+			),
+			conditionalPanel(condition="input.heatmapcol5=='2'",
+			 fluidRow(
+			   column(4,jscolorInput("lowColor5", label = HTML('<p><font size="1.8"><strong>Low Color</strong></font></p>'), value = "#0016DB")), 
+			   column(4, jscolorInput("midColor5", label = HTML('<p><font size="1.8"><strong>Middle Color</strong></font></p>'), value = "#FFFFFF")),
+			   column(4, jscolorInput("highColor5", label = HTML('<p><font size="1.8"><strong>High Color</strong></font></p>'), value = "#FFFF00"))),					
+			   HTML('<br>')
+			),			
 			radioButtons("lineshmapTrack5", HTML("<table><tr><td><strong>Add position lines</strong></td>
 <td>
 <div class='help-tip'>
@@ -1942,16 +1995,26 @@ adjusted automatically to the number of sectors. For example, 'grey95' or 'grey9
 	                                      </table>
 	                                      "), value="grey95")
 			),
-			conditionalPanel(condition="input.typeTrack6=='heatmap'",
-			selectInput("colhmapTrack6", HTML("<table><tr><td><strong>Colors:</strong></td>
+			conditionalPanel(condition="input.typeTrack6=='heatmap'",			
+			radioButtons("heatmapcol6", HTML("<table><tr><td><strong>Colors</strong></td>
 <td>
 <div class='help-tip'>
-	<p>Colors to be used for the heatmap.</p>
+	<p>Colors to be used for the heatmap, which can be assigned by the application or specified by the users.</p>
 	                                      </div></td></tr>
 	                                      </table>
-	                                      "), choices = c("blue.white.red", "green.black.red", "green.yellow.red", 
+	                                      "), c("Typical" = "1", "Custom" = "2"), selected="1"),			
+			conditionalPanel(condition="input.heatmapcol6=='1'",			
+			selectInput("colhmapTrack6", NULL, choices = c("blue.white.red", "green.black.red", "green.yellow.red", 
 	                                                      "purple.yellow.red", "blue.green.red", "blue.yellow.green", 
-	                                                      "cyan.white.deeppink1"), selected="blue.white.red"),
+	                                                      "cyan.white.deeppink1"), selected="blue.white.red")
+			),
+			conditionalPanel(condition="input.heatmapcol6=='2'",
+			 fluidRow(
+			   column(4,jscolorInput("lowColor6", label = HTML('<p><font size="1.8"><strong>Low Color</strong></font></p>'), value = "#0016DB")), 
+			   column(4, jscolorInput("midColor6", label = HTML('<p><font size="1.8"><strong>Middle Color</strong></font></p>'), value = "#FFFFFF")),
+			   column(4, jscolorInput("highColor6", label = HTML('<p><font size="1.8"><strong>High Color</strong></font></p>'), value = "#FFFF00"))),					
+			   HTML('<br>')
+			),			
 			radioButtons("lineshmapTrack6", HTML("<table><tr><td><strong>Add position lines</strong></td>
 <td>
 <div class='help-tip'>
@@ -2233,16 +2296,26 @@ automatically to the number of sectors. For example, 'grey95' or 'grey95,grey,pi
 	                                      </table>
 	                                      "), value="grey95")
 			),
-			conditionalPanel(condition="input.typeTrack7=='heatmap'",
-			selectInput("colhmapTrack7", HTML("<table><tr><td><strong>Colors:</strong></td>
+			conditionalPanel(condition="input.typeTrack7=='heatmap'",			
+			radioButtons("heatmapcol7", HTML("<table><tr><td><strong>Colors</strong></td>
 <td>
 <div class='help-tip'>
-	<p>Colors to be used for the heatmap.</p>
+	<p>Colors to be used for the heatmap, which can be assigned by the application or specified by the users.</p>
 	                                      </div></td></tr>
 	                                      </table>
-	                                      "), choices = c("blue.white.red", "green.black.red", "green.yellow.red", 
+	                                      "), c("Typical" = "1", "Custom" = "2"), selected="1"),			
+			conditionalPanel(condition="input.heatmapcol7=='1'",			
+			selectInput("colhmapTrack7", NULL, choices = c("blue.white.red", "green.black.red", "green.yellow.red", 
 	                                                      "purple.yellow.red", "blue.green.red", "blue.yellow.green", 
-	                                                      "cyan.white.deeppink1"), selected="blue.white.red"),
+	                                                      "cyan.white.deeppink1"), selected="blue.white.red")
+			),
+			conditionalPanel(condition="input.heatmapcol7=='2'",
+			 fluidRow(
+			   column(4,jscolorInput("lowColor7", label = HTML('<p><font size="1.8"><strong>Low Color</strong></font></p>'), value = "#0016DB")), 
+			   column(4, jscolorInput("midColor7", label = HTML('<p><font size="1.8"><strong>Middle Color</strong></font></p>'), value = "#FFFFFF")),
+			   column(4, jscolorInput("highColor7", label = HTML('<p><font size="1.8"><strong>High Color</strong></font></p>'), value = "#FFFF00"))),					
+			   HTML('<br>')
+			),			
 			radioButtons("lineshmapTrack7", HTML("<table><tr><td><strong>Add position lines</strong></td>
 <td>
 <div class='help-tip'>
@@ -2525,16 +2598,26 @@ Hex color codes as '#FF0000' are also supported.</p>
 	                                      </table>
 	                                      "), value="grey95")
 			),
-			conditionalPanel(condition="input.typeTrack8=='heatmap'",
-			selectInput("colhmapTrack8", HTML("<table><tr><td><strong>Colors:</strong></td>
+			conditionalPanel(condition="input.typeTrack8=='heatmap'",			
+			radioButtons("heatmapcol8", HTML("<table><tr><td><strong>Colors</strong></td>
 <td>
 <div class='help-tip'>
-	<p>Colors to be used for the heatmap.</p>
+	<p>Colors to be used for the heatmap, which can be assigned by the application or specified by the users.</p>
 	                                      </div></td></tr>
 	                                      </table>
-	                                      "), choices = c("blue.white.red", "green.black.red", "green.yellow.red", 
+	                                      "), c("Typical" = "1", "Custom" = "2"), selected="1"),			
+			conditionalPanel(condition="input.heatmapcol8=='1'",			
+			selectInput("colhmapTrack8", NULL, choices = c("blue.white.red", "green.black.red", "green.yellow.red", 
 	                                                      "purple.yellow.red", "blue.green.red", "blue.yellow.green", 
-	                                                      "cyan.white.deeppink1"), selected="blue.white.red"),
+	                                                      "cyan.white.deeppink1"), selected="blue.white.red")
+			),
+			conditionalPanel(condition="input.heatmapcol8=='2'",
+			 fluidRow(
+			   column(4,jscolorInput("lowColor8", label = HTML('<p><font size="1.8"><strong>Low Color</strong></font></p>'), value = "#0016DB")), 
+			   column(4, jscolorInput("midColor8", label = HTML('<p><font size="1.8"><strong>Middle Color</strong></font></p>'), value = "#FFFFFF")),
+			   column(4, jscolorInput("highColor8", label = HTML('<p><font size="1.8"><strong>High Color</strong></font></p>'), value = "#FFFF00"))),					
+			   HTML('<br>')
+			),			
 			radioButtons("lineshmapTrack8", HTML("<table><tr><td><strong>Add position lines</strong></td>
 <td>
 <div class='help-tip'>
@@ -2816,16 +2899,26 @@ Hex color codes as '#FF0000' are also supported.</p>
 	                                      </table>
 	                                      "), value="grey95")
 			),
-			conditionalPanel(condition="input.typeTrack9=='heatmap'",
-			selectInput("colhmapTrack9", HTML("<table><tr><td><strong>Colors:</strong></td>
+			conditionalPanel(condition="input.typeTrack9=='heatmap'",			
+			radioButtons("heatmapcol9", HTML("<table><tr><td><strong>Colors</strong></td>
 <td>
 <div class='help-tip'>
-	<p>Colors to be used for the heatmap.</p>
+	<p>Colors to be used for the heatmap, which can be assigned by the application or specified by the users.</p>
 	                                      </div></td></tr>
 	                                      </table>
-	                                      "), choices = c("blue.white.red", "green.black.red", "green.yellow.red", 
+	                                      "), c("Typical" = "1", "Custom" = "2"), selected="1"),			
+			conditionalPanel(condition="input.heatmapcol9=='1'",			
+			selectInput("colhmapTrack9", NULL, choices = c("blue.white.red", "green.black.red", "green.yellow.red", 
 	                                                      "purple.yellow.red", "blue.green.red", "blue.yellow.green", 
-	                                                      "cyan.white.deeppink1"), selected="blue.white.red"),
+	                                                      "cyan.white.deeppink1"), selected="blue.white.red")
+			),
+			conditionalPanel(condition="input.heatmapcol9=='2'",
+			 fluidRow(
+			   column(4,jscolorInput("lowColor9", label = HTML('<p><font size="1.8"><strong>Low Color</strong></font></p>'), value = "#0016DB")), 
+			   column(4, jscolorInput("midColor9", label = HTML('<p><font size="1.8"><strong>Middle Color</strong></font></p>'), value = "#FFFFFF")),
+			   column(4, jscolorInput("highColor9", label = HTML('<p><font size="1.8"><strong>High Color</strong></font></p>'), value = "#FFFF00"))),					
+			   HTML('<br>')
+			),			
 			radioButtons("lineshmapTrack9", HTML("<table><tr><td><strong>Add position lines</strong></td>
 <td>
 <div class='help-tip'>
@@ -3108,16 +3201,26 @@ Hex color codes as '#FF0000' are also supported.</p>
 	                                      </table>
 	                                      "), value="grey95")
 			),
-			conditionalPanel(condition="input.typeTrack10=='heatmap'",
-			selectInput("colhmapTrack10", HTML("<table><tr><td><strong>Colors:</strong></td>
+			conditionalPanel(condition="input.typeTrack10=='heatmap'",			
+			radioButtons("heatmapcol10", HTML("<table><tr><td><strong>Colors</strong></td>
 <td>
 <div class='help-tip'>
-	<p>Colors to be used for the heatmap.</p>
+	<p>Colors to be used for the heatmap, which can be assigned by the application or specified by the users.</p>
 	                                      </div></td></tr>
 	                                      </table>
-	                                      "), choices = c("blue.white.red", "green.black.red", "green.yellow.red", 
+	                                      "), c("Typical" = "1", "Custom" = "2"), selected="1"),			
+			conditionalPanel(condition="input.heatmapcol10=='1'",			
+			selectInput("colhmapTrack10", NULL, choices = c("blue.white.red", "green.black.red", "green.yellow.red", 
 	                                                      "purple.yellow.red", "blue.green.red", "blue.yellow.green", 
-	                                                      "cyan.white.deeppink1"), selected="blue.white.red"),
+	                                                      "cyan.white.deeppink1"), selected="blue.white.red")
+			),
+			conditionalPanel(condition="input.heatmapcol10=='2'",
+			 fluidRow(
+			   column(4,jscolorInput("lowColor10", label = HTML('<p><font size="1.8"><strong>Low Color</strong></font></p>'), value = "#0016DB")), 
+			   column(4, jscolorInput("midColor10", label = HTML('<p><font size="1.8"><strong>Middle Color</strong></font></p>'), value = "#FFFFFF")),
+			   column(4, jscolorInput("highColor10", label = HTML('<p><font size="1.8"><strong>High Color</strong></font></p>'), value = "#FFFF00"))),					
+			   HTML('<br>')
+			),			
 			radioButtons("lineshmapTrack10", HTML("<table><tr><td><strong>Add position lines</strong></td>
 <td>
 <div class='help-tip'>
@@ -3363,7 +3466,8 @@ For example, 'chr1,1,100000000,red'. Hex color codes as '#FF0000' are also suppo
 				4. Neuwirth, E. <i><a href="http://cran.r-project.org/web/packages/RColorBrewer/index.html" target="_blank">RColorBrewer</a>: ColorBrewer palettes.</i> R package version 1.1-2 (2014) <br>
 				5. Lawrence, M. <i><a href="http://bioconductor.org/packages/GenomicRanges/" target="_blank">GenomicRanges</a>: Representation and manipulation of genomic intervals and variables defined along a genome.</i> R package version 1.24.3 (2016) <br>
 				6. Dowle, M. <i><a href="http://cran.r-project.org/web/packages/data.table/index.html" target="_blank">data.table</a>: Extension of Data.frame.</i> R package version 1.9.6 (2015) <br>				
-				7. R Core Team and contributors worldwide. <i><a href="http://stat.ethz.ch/R-manual/R-devel/library/grDevices/html/00Index.html" target="_blank">grDevices</a>: Graphics devices and support for base and grid graphics.</i> R package version 3.3.3 (2016) <br></p>'),
+				7. Burow, C. <i><a href="https://cran.r-project.org/web/packages/RLumShiny/index.html" target="_blank">RLumShiny</a>: "Shiny" Applications for the R Package "Luminescence".</i> R package version 0.1.1 (2016) <br>								
+				8. R Core Team and contributors worldwide. <i><a href="http://stat.ethz.ch/R-manual/R-devel/library/grDevices/html/00Index.html" target="_blank">grDevices</a>: Graphics devices and support for base and grid graphics.</i> R package version 3.3.3 (2016) <br></p>'),
 				HTML('<p <ul><li style="list-style-type: none; background-image: url(bullet.jpg); padding-left: 18px; background-size:9px 9px; background-repeat: no-repeat; background-position: 0px 50%"><font size="4">Further references</font></li></ul></p>'),
 				h6("This application was created by ", a("Wen Yao", href="https://www.researchgate.net/profile/Wen_Yao", target="_blank"), " and ", a("Yiming Yu", href="https://www.researchgate.net/profile/Yiming_Yu6", target="_blank"), 
 				". Please send bugs and feature requests to Wen Yao (ywhzau at gmail.com) or Yiming Yu (yimingyyu at gmail.com). This application uses the ", 
@@ -3510,7 +3614,13 @@ For example, 'chr1,1,100000000,red'. Hex color codes as '#FF0000' are also suppo
 				)
 			),
 			## *** Circos visualization panel ***
-			tabPanel("Circos visualization", 
+			tabPanel("Circos visualization", tags$head(
+			tags$style("
+				#lowColor1, #highColor1, #midColor1, #lowColor2, #highColor2, #midColor2, #lowColor3, #highColor3, #midColor3,
+				#lowColor4, #highColor4, #midColor4, #lowColor5, #highColor5, #midColor5, #lowColor6, #highColor6, #midColor6,
+				#lowColor7, #highColor7, #midColor7, #lowColor8, #highColor8, #midColor8, #lowColor9, #highColor9, #midColor9,
+				#lowColor10, #highColor10, #midColor10{width:100%}")
+		    ),
 				downloadButton("shinyCircos.pdf", "Download pdf-file"),
 				downloadButton("shinyCircos.svg", "Download svg-file"),
 				downloadButton("script.R", "Download the R scripts to reproduce the Circos plot"),

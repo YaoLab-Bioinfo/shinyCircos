@@ -314,7 +314,7 @@ get_most_inside_radius = function() {
   }
 }
 
-plotfig <- function(input, output, trackindx, data.L, data.L1, data.L2, data.C, data.T, data.N, data.CN, hltTrack.List, hltdata.List, heightSize, widthSize, colorChr, gap.width, cexlabel, unitChr, labelChr, fontSize, trackChr, datatypeChr, transparencyHlt, legendtext, labeltext, poslabels, heightlabels, marginlabels, fillareaTrack, borderareaTrack, selreaTrack, addlegend, poslegend, transparencyhltLinks, labeltextchr, poslabelschr, heightlabelschr, marginlabelschr, transparencyTrack, transparencyLinks, marginLinks, selcolorLinks, barBoundary, coldir1Track, coldir2Track, colrectTrack, colorTrack, colorLinks, linksTrack, typeTrack, coltypeTk, colorcusTrack, rectTrack, rectcolTrack, rectcoldisTrack, rectcoldiscusTrack, borderTrack, gridsborderTrack, colgridsborderTrack, directionTrack, colorlineTrack, symbolTrack, pointsizeTrack, baselineTrack, heightTrack, colhmapTrack, lineshmapTrack, heightlinesTrack, marginlinesTrack, marginTrack , bgcolTrack){       
+plotfig <- function(input, output, trackindx, data.L, data.L1, data.L2, data.C, data.T, data.N, data.CN, hltTrack.List, hltdata.List, heightSize, widthSize, colorChr, gap.width, cexlabel, unitChr, labelChr, fontSize, trackChr, datatypeChr, transparencyHlt, legendtext, labeltext, poslabels, heightlabels, marginlabels, fillareaTrack, borderareaTrack, selreaTrack, addlegend, poslegend, transparencyhltLinks, labeltextchr, poslabelschr, heightlabelschr, marginlabelschr, transparencyTrack, transparencyLinks, marginLinks, selcolorLinks, barBoundary, coldir1Track, coldir2Track, colrectTrack, colorTrack, colorLinks, linksTrack, typeTrack, coltypeTk, colorcusTrack, rectTrack, rectcolTrack, rectcoldisTrack, rectcoldiscusTrack, borderTrack, gridsborderTrack, colgridsborderTrack, directionTrack, colorlineTrack, symbolTrack, pointsizeTrack, baselineTrack, heightTrack, colhmapTrack, heatmapcols, heatmapcol, lineshmapTrack, heightlinesTrack, marginlinesTrack, marginTrack , bgcolTrack){       
   ## *** The highlight regions ***
   if(!is.null(data.L)){
     highlightLinks <<- input$highlightLinks
@@ -539,7 +539,11 @@ plotfig <- function(input, output, trackindx, data.L, data.L1, data.L2, data.C, 
             tklinecol <- rep(tklinecol, length(unique(data.T[[i]][,4])))[1:length(unique(data.T[[i]][,4]))]   
           }
           ## *** The fill color for track ***
-          hmapcols <- gsub('\\"',"",colhmapTrack[i])    
+		  if(heatmapcol[i]==1){
+            hmapcols <- gsub('\\"',"",colhmapTrack[i])    
+		  }else{
+		    hmapcols <- heatmapcols[i]                                         
+		  }		  		  
           hmapcols <- unlist(strsplit(hmapcols,"\\."))   			
           ## *** Add connection ***
           lineshmap <- lineshmapTrack[i]

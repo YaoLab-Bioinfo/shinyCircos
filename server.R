@@ -318,6 +318,8 @@ shinyServer(function(input, output, session){
             pointsizeTrack <<- c()
             baselineTrack <<- c()
             colhmapTrack <<- c()
+			heatmapcols <<- c()
+			heatmapcol <<- c()			
             lineshmapTrack <<- c()
             heightlinesTrack <<- c()
             marginlinesTrack <<- c()
@@ -401,8 +403,10 @@ shinyServer(function(input, output, session){
               symbolTrack <<- c(symbolTrack,input[[paste("symbolTrack",trackindx[k],sep="")]])
               pointsizeTrack <<- c(pointsizeTrack,input[[paste("pointsizeTrack",trackindx[k],sep="")]])
               baselineTrack <<- c(baselineTrack,input[[paste("baselineTrack",trackindx[k],sep="")]])
-              colhmapTrack <<- c(colhmapTrack,input[[paste("colhmapTrack",trackindx[k],sep="")]])
-              lineshmapTrack <<- c(lineshmapTrack,input[[paste("lineshmapTrack",trackindx[k],sep="")]])
+              colhmapTrack <<- c(colhmapTrack,input[[paste("colhmapTrack",trackindx[k],sep="")]])              			  
+              heatmapcols <<- c(heatmapcols,paste(input[[paste("lowColor",trackindx[k],sep="")]],input[[paste("midColor",trackindx[k],sep="")]],input[[paste("highColor",trackindx[k],sep="")]],sep="."))
+			  heatmapcol <<- c(heatmapcol,input[[paste("heatmapcol",trackindx[k],sep="")]])
+			  lineshmapTrack <<- c(lineshmapTrack,input[[paste("lineshmapTrack",trackindx[k],sep="")]])
               heightlinesTrack <<- c(heightlinesTrack,input[[paste("heightlinesTrack",trackindx[k],sep="")]])
               marginlinesTrack <<- c(marginlinesTrack,input[[paste("marginlinesTrack",trackindx[k],sep="")]])
               heightTrack <<- c(heightTrack,input[[paste("heightTrack",trackindx[k],sep="")]])
@@ -453,7 +457,7 @@ shinyServer(function(input, output, session){
                   gap.width = gap.width, legendtext = legendtext, labeltext = labeltext, poslabels = poslabels, heightlabels = heightlabels, marginlabels = marginlabels, fillareaTrack = fillareaTrack, cexlabel = cexlabel, unitChr = unitChr, labelChr = labelChr, fontSize = fontSize, colorTrack = colorTrack, borderareaTrack = borderareaTrack, selreaTrack = selreaTrack, transparencyHlt = transparencyHlt,
                   trackChr = trackChr, datatypeChr = datatypeChr, labeltextchr = labeltextchr, heightlabelschr = heightlabelschr, marginlabelschr = marginlabelschr, poslabelschr = poslabelschr, transparencyhltLinks = transparencyhltLinks, transparencyTrack = transparencyTrack, transparencyLinks = transparencyLinks,
                   colorLinks = colorLinks, linksTrack = linksTrack, typeTrack = typeTrack, coltypeTk = coltypeTk, colorcusTrack = colorcusTrack, marginLinks = marginLinks, selcolorLinks = selcolorLinks, colrectTrack = colrectTrack, rectTrack = rectTrack, rectcolTrack = rectcolTrack, rectcoldisTrack = rectcoldisTrack, rectcoldiscusTrack = rectcoldiscusTrack, 
-                  borderTrack = borderTrack, gridsborderTrack = gridsborderTrack, colgridsborderTrack = colgridsborderTrack, directionTrack = directionTrack, colorlineTrack = colorlineTrack, symbolTrack = symbolTrack, pointsizeTrack = pointsizeTrack, baselineTrack = baselineTrack, colhmapTrack = colhmapTrack, lineshmapTrack = lineshmapTrack, heightlinesTrack = heightlinesTrack, marginlinesTrack = marginlinesTrack, heightTrack = heightTrack, marginTrack = marginTrack , bgcolTrack = bgcolTrack)
+                  borderTrack = borderTrack, gridsborderTrack = gridsborderTrack, colgridsborderTrack = colgridsborderTrack, directionTrack = directionTrack, colorlineTrack = colorlineTrack, symbolTrack = symbolTrack, pointsizeTrack = pointsizeTrack, baselineTrack = baselineTrack, colhmapTrack = colhmapTrack, heatmapcols = heatmapcols, heatmapcol = heatmapcol, lineshmapTrack = lineshmapTrack, heightlinesTrack = heightlinesTrack, marginlinesTrack = marginlinesTrack, heightTrack = heightTrack, marginTrack = marginTrack , bgcolTrack = bgcolTrack)
         })
       }else{NULL}
     })
