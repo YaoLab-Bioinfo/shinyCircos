@@ -248,7 +248,7 @@ start coordinate, end coordinate and label text. Label text can be numbers or ch
 The first three columns of each row represent the coordinate of a genomic region 
 	while the 4th to 6th columns of each row represent the coordinate of another genomic region. 
 For data with 7 columns, the 7th column should be categorical
-	characters indicating varying colors used for different links. The name of the 7th column should be 'color'. 
+	characters indicating varying colors or numbers indicating gradual colors used for different links. The name of the 7th column should be 'color'. 
 A link will be created between the two genomic regions in each row. See example data for more details.</p>
 	                                      </div></td></tr>
 	                                      </table>
@@ -3355,6 +3355,16 @@ Hex color codes as '#FF0000' are also supported.</p>
 			conditionalPanel(condition="input.linksTrack",
 			checkboxInput("optionsLinks", HTML("<font color='red'>Links</font>"), FALSE),
 			conditionalPanel(condition="input.optionsLinks",
+			radioButtons("colformatLinks", HTML("<table><tr><td>Data format</td>
+<td>
+<div class='help-tip'>
+	<p>The format of links data specified by the user. For data with 6 columns, user should select 'Data without color column'. 
+	For data with 7 columns, user should select 'Data with multi-group' if the 'color' column represents different categories indicated by a character string as 'a, b, c'. 
+	For data with 7 columns, user should select 'Data with gradual values' if the 'color' column represents gradual values indicated by numbers as '1, 2, 3'.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), c("Data without 'color' column" = "1","Data with multi-group" = "2", "Data with gradual values" = "3"), selected="1"),							  
+			conditionalPanel(condition="input.colformatLinks==1 | input.colformatLinks==2",	
 			radioButtons("colorLinks", HTML("<table><tr><td>Data color</td>
 <td>
 <div class='help-tip'>
@@ -3374,7 +3384,22 @@ For data with 7 columns, format of specified color as 'a:red;b:green;c:blue' is 
 	<p>A decimal number in [0, 1] to adjust the color transparency. The higher the value, the deeper the color.</p>
 	                                      </div></td></tr>
 	                                      </table>
-	                                      "), value=0.5, min=0, max=1, step=0.1),
+	                                      "), value=0.5, min=0, max=1, step=0.1)
+			),
+			conditionalPanel(condition="input.colformatLinks==3",
+		    HTML("<table><tr><td><strong>Data color</strong></td>
+<td>
+<div class='help-tip'>
+	<p>For data with 'color' column indicated by numbers, links are filled with colors specified by the user.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "),										  
+			fluidRow(
+			   column(4,jscolorInput("lowColinks", label = HTML('<p><font size="1.8"><strong>Low Color</strong></font></p>'), value = "#0016DB")), 
+			   column(4, jscolorInput("midColinks", label = HTML('<p><font size="1.8"><strong>Middle Color</strong></font></p>'), value = "#FFFFFF")),
+			   column(4, jscolorInput("highColinks", label = HTML('<p><font size="1.8"><strong>High Color</strong></font></p>'), value = "#FFFF00"))),					
+			   HTML('<br>')          
+			),			
 			numericInput("marginLinks", HTML("<table><tr><td><strong>Track margin:</strong></td>
 <td>
 <div class='help-tip'>
@@ -3510,7 +3535,8 @@ For example, 'chr1,1,100000000,red'. Hex color codes as '#FF0000' are also suppo
 				downloadButton("stack_line.csv", "line (stack) data"),
 				HTML('<p <ul><li style="list-style-type: none; background-image: url(bullet.jpg); padding-left: 18px; background-size:6px 6px; background-repeat: no-repeat; background-position: 6px 50%"><font size="2">Example links data</font></li></ul></p>'),				
 				downloadButton("links.csv", "links data"),
-				downloadButton("links_color.csv", "links (color) data"),
+				downloadButton("links_discrete_color.csv", "links (discrete color) data"),
+				downloadButton("links_gradual_color.csv", "links (gradual color) data"),				
 				HTML('<br>'),
 				HTML('<br>'),
 				HTML('<p <ul><li style="list-style-type: none; background-image: url(bullet.jpg); padding-left: 18px; background-size:9px 9px; background-repeat: no-repeat; background-position: 0px 50%"><font size="4">Glimpse of data uploaded</font></li></ul></p>'),
@@ -3619,7 +3645,8 @@ For example, 'chr1,1,100000000,red'. Hex color codes as '#FF0000' are also suppo
 				#lowColor1, #highColor1, #midColor1, #lowColor2, #highColor2, #midColor2, #lowColor3, #highColor3, #midColor3,
 				#lowColor4, #highColor4, #midColor4, #lowColor5, #highColor5, #midColor5, #lowColor6, #highColor6, #midColor6,
 				#lowColor7, #highColor7, #midColor7, #lowColor8, #highColor8, #midColor8, #lowColor9, #highColor9, #midColor9,
-				#lowColor10, #highColor10, #midColor10{width:100%}")
+				#lowColor10, #highColor10, #midColor10, #lowColinks, #midColinks, #highColinks {width:100%}
+				")
 		    ),
 				downloadButton("shinyCircos.pdf", "Download pdf-file"),
 				downloadButton("shinyCircos.svg", "Download svg-file"),
@@ -3631,7 +3658,9 @@ For example, 'chr1,1,100000000,red'. Hex color codes as '#FF0000' are also suppo
 				textOutput("errorinfo6"),
 				textOutput("errorinfo7"),	
                 textOutput("errorinfo8"),
-                textOutput("errorinfo9"),				
+                textOutput("errorinfo9"),
+                textOutput("errorinfo10"),
+                textOutput("errorinfo11"),					
 				plotOutput("circosfigure", height='100%', width='100%')
 			),
 			## *** FAQ panel***

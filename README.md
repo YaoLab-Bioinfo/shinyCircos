@@ -5,7 +5,7 @@ This is the repository for the Shiny application presented in "<a href="https://
 
 *****
 
-#	<font color="red">Help manual for the usage of shinyCircos [<a target="_blank" href="http://shinycircos.ncpgr.cn/shinyCircos_Help_Manual.pdf">Download!</a>]</font>
+#	<font color="red">Help manual for the usage of shinyCircos [<a target="_blank" href="shinyCircos_Help_Manual.pdf">Download!</a>]</font>
 
 *****
 
@@ -35,7 +35,7 @@ Start an R session using RStudio and run these lines:
 install.packages("shiny")  
 install.packages("circlize")  
 install.packages("RColorBrewer")
-install.packages("data.table")  
+install.packages("data.table")
 install.packages("RLumShiny")  
 # try http:// if https:// URLs are not supported   
 source("https://bioconductor.org/biocLite.R")  
@@ -66,7 +66,7 @@ Start an R session and run these lines in R:
 install.packages("shiny")  
 install.packages("circlize")  
 install.packages("RColorBrewer")
-install.packages("data.table")  
+install.packages("data.table")
 install.packages("RLumShiny")  
 ## try http:// if https:// URLs are not supported  
 source("https://bioconductor.org/biocLite.R")  

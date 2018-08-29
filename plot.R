@@ -314,7 +314,7 @@ get_most_inside_radius = function() {
   }
 }
 
-plotfig <- function(input, output, trackindx, data.L, data.L1, data.L2, data.C, data.T, data.N, data.CN, hltTrack.List, hltdata.List, heightSize, widthSize, colorChr, gap.width, cexlabel, unitChr, labelChr, fontSize, trackChr, datatypeChr, transparencyHlt, legendtext, labeltext, poslabels, heightlabels, marginlabels, fillareaTrack, borderareaTrack, selreaTrack, addlegend, poslegend, transparencyhltLinks, labeltextchr, poslabelschr, heightlabelschr, marginlabelschr, transparencyTrack, transparencyLinks, marginLinks, selcolorLinks, barBoundary, coldir1Track, coldir2Track, colrectTrack, colorTrack, colorLinks, linksTrack, typeTrack, coltypeTk, colorcusTrack, rectTrack, rectcolTrack, rectcoldisTrack, rectcoldiscusTrack, borderTrack, gridsborderTrack, colgridsborderTrack, directionTrack, colorlineTrack, symbolTrack, pointsizeTrack, baselineTrack, heightTrack, colhmapTrack, heatmapcols, heatmapcol, lineshmapTrack, heightlinesTrack, marginlinesTrack, marginTrack , bgcolTrack){       
+plotfig <- function(input, output, trackindx, data.L, data.L1, data.L2, data.C, data.T, data.N, data.CN, hltTrack.List, hltdata.List, heightSize, widthSize, colorChr, gap.width, cexlabel, unitChr, labelChr, fontSize, trackChr, datatypeChr, transparencyHlt, legendtext, labeltext, poslabels, heightlabels, marginlabels, fillareaTrack, borderareaTrack, selreaTrack, addlegend, poslegend, transparencyhltLinks, labeltextchr, poslabelschr, heightlabelschr, marginlabelschr, transparencyTrack, transparencyLinks, marginLinks, selcolorLinks, barBoundary, coldir1Track, coldir2Track, colrectTrack, colorTrack, colformatLinks, colorLinks, gracolinks, linksTrack, typeTrack, coltypeTk, colorcusTrack, rectTrack, rectcolTrack, rectcoldisTrack, rectcoldiscusTrack, borderTrack, gridsborderTrack, colgridsborderTrack, directionTrack, colorlineTrack, symbolTrack, pointsizeTrack, baselineTrack, heightTrack, colhmapTrack, heatmapcols, heatmapcol, lineshmapTrack, heightlinesTrack, marginlinesTrack, marginTrack , bgcolTrack){       
   ## *** The highlight regions ***
   if(!is.null(data.L)){
     highlightLinks <<- input$highlightLinks
@@ -660,7 +660,7 @@ plotfig <- function(input, output, trackindx, data.L, data.L1, data.L2, data.C, 
           if(poslabels[i]=="inner"){
             takindx <- takindx-2
           }	
-          output$errorinfo4 <- renderPrint({		  
+          output$errorinfo4 <- renderPrint({
             for(y in 1:length(data.T)){
               if(input[[paste("uploadtrack",trackindx[y],sep="")]]==2 & input[[paste("coltypeTrack",trackindx[y],sep="")]]==3){								  
                 if(tkbardir==1 & !("color" %in% colnames(data.T[[y]])) & ncol(data.T[[y]])>=4 & colnames(data.T[[y]])[4]!="stack"){	
@@ -1659,8 +1659,29 @@ plotfig <- function(input, output, trackindx, data.L, data.L1, data.L2, data.C, 
             }
           }
         })
-        outputOptions(output, "errorinfo8", suspendWhenHidden = FALSE)       		
-        if(colorLinks==2){
+        outputOptions(output, "errorinfo8", suspendWhenHidden = FALSE)
+        output$errorinfo10 <- renderPrint({
+          if("color" %in% colnames(data.L)){
+            if(input$colformatLinks==3){			
+              validate(
+                need(is.numeric(data.L$color), "Error: Data to plot links is not in correct format. The 'color' column should be a numeric vector.")
+              )
+            }
+          }
+        })
+        outputOptions(output, "errorinfo10", suspendWhenHidden = FALSE)
+        output$errorinfo11 <- renderPrint({
+          if("color" %in% colnames(data.L)){
+            if(input$colformatLinks==2 && input$colorLinks==1){			 
+              validate(
+                need(length(unique(data.L$color))<=50, "Error: The 'color' column of the links data should be a discrete character vector with no more than 50 groups for 'Discrete' type. Please choose 'Data with gradual values' type or upload applicable data.")
+              )
+			}
+          }		
+        })
+        outputOptions(output, "errorinfo11", suspendWhenHidden = FALSE)				
+        if(colformatLinks!=3){
+		if(colorLinks==2){
           splitcol <- ":" %in% unlist(strsplit(selcolorLinks,""))		  
           if(ncol(data.L)==7 && colnames(data.L)[7]=="color" && splitcol){
             data.L$num <- 1:nrow(data.L)				
@@ -1771,6 +1792,58 @@ plotfig <- function(input, output, trackindx, data.L, data.L1, data.L2, data.C, 
             }
           }
         }
+		}else{
+          if(ncol(data.L)==7 && colnames(data.L)[7]=="color"){
+            break1 <- min(as.numeric(as.matrix(data.L[,-c(1:6)])))
+            break2 <- max(as.numeric(as.matrix(data.L[,-c(1:6)])))
+            midpoint <- (break1+break2)/2
+            f <- colorRamp2(breaks = c(break1, midpoint, break2), colors = gracolinks)		  
+			colLinks <- f(data.L$color)
+          }else if((ncol(data.L)==6 | ncol(data.L)==7)){		  
+            linkscolor.export <<- rand_color(1)				   
+			colLinks <- linkscolor.export
+          }
+          if(highlightLinks==1 && (!is.null(hltregion1.export) | !is.null(hltregion2.export))){          
+            colL <- unique(datL[,4])
+            colL <- adjustcolor(colL, alpha.f = transparencyhltLinks)
+            colL <- gsub("0x","#", colL)
+            hltregion1$color <- adjustcolor(hltregion1$color, alpha.f = transparencyhltLinks)
+            hltregion1$color <- gsub("0x","#", hltregion1$color)
+            hltregion2$color <- adjustcolor(hltregion2$color, alpha.f = transparencyhltLinks)
+            hltregion2$color <- gsub("0x","#", hltregion2$color)			
+            linkk1 <- data.LL1[!data.LL1$num %in% c(hltregion1$num,hltregion2$num),][,c(1:3)]
+            linkk2 <- data.LL2[!data.LL2$num %in% c(hltregion1$num,hltregion2$num),][,c(1:3)]
+            colindx <- (!data.LL1$num %in% c(hltregion1$num,hltregion2$num)) & (!data.LL2$num %in% c(hltregion1$num,hltregion2$num))
+            if(ncol(data.L)==7 && colnames(data.L)[7]=="color"){
+              circos.genomicLink(linkk1, linkk2, rou = rou, col = colLinks[colindx], border = NA)
+            }else{
+              circos.genomicLink(linkk1, linkk2, rou = rou, col = colLinks, border = NA)
+            }
+            lapply(colL, function(x){
+              hltregion11 <- hltregion1[hltregion1$color %in% x,]
+              hltregion12 <- data.LL2[data.L2$num %in% hltregion11$num,]
+              hltregion12 <- hltregion12[,c(1:3)]
+              hltregion11 <- hltregion11[,c(1:3)]
+              hltregion22 <- hltregion2[hltregion2$color %in% x,]
+              hltregion21 <- data.LL1[data.L1$num %in% hltregion22$num,]
+              hltregion21 <- hltregion21[,c(1:3)]
+              hltregion22 <- hltregion22[,c(1:3)]
+              if(nrow(hltregion11)!=0){
+                circos.genomicLink(hltregion11, hltregion12, rou = rou, col = x, border = NA)
+              }
+              if(nrow(hltregion22)!=0){
+                circos.genomicLink(hltregion21, hltregion22, rou = rou, col = x, border = NA)
+              }
+            })
+          }else{
+            if(!(ncol(data.L)==6)){		  
+              data.L1 <- data.L[,c(1:3)]
+              data.L2 <- data.L[,c(4:6)]
+              circos.genomicLink(data.L1, data.L2, rou = rou, col = colLinks, border = NA)
+            }
+          }		
+		
+		}
       }							
       n <- length(legendtext)
       if(n!=0 && addlegend==1){

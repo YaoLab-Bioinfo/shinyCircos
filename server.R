@@ -2,7 +2,7 @@
 options(shiny.maxRequestSize = 200*1024^2)
 options(warn=-1)
 library(circlize)
-library(RColorBrewer)
+#library(RColorBrewer)
 library(GenomicRanges)
 library(data.table)
 library(grDevices)
@@ -423,7 +423,7 @@ shinyServer(function(input, output, session){
               borderareaTrack <<- c(borderareaTrack,input[[paste("borderareaTrack",trackindx[k],sep="")]])
               selreaTrack <<- c(selreaTrack,input[[paste("selreaTrack",trackindx[k],sep="")]])
               legendtext <<- c(legendtext,input[[paste("text",trackindx[k],sep="")]])
-            }
+			}
           }
           labeltextchr <<- input$labels0
           poslabelschr <<- input$poslabels0
@@ -432,7 +432,9 @@ shinyServer(function(input, output, session){
           transparencyhltLinks <<- input$transparencyhltLinks
           transparencyLinks <<- input$transparencyLinks
           selcolorLinks <<- input$selcolorLinks
+		  colformatLinks <<- input$colformatLinks
           colorLinks <<- input$colorLinks
+		  gracolinks <<- c(input$lowColinks,input$midColinks,input$highColinks)
           linksTrack <<- input$linksTrack
           marginLinks <<- input$marginLinks
           cexlabel <<- input$cexlabel
@@ -456,7 +458,7 @@ shinyServer(function(input, output, session){
                   coldir2Track = coldir2Track, data.T = data.T, data.N = data.N, data.CN = data.CN, hltTrack.List = hltTrack.List, hltdata.List = hltdata.List, heightSize = heightSize, widthSize = widthSize, addlegend = addlegend, poslegend = poslegend, colorChr = colorChr,
                   gap.width = gap.width, legendtext = legendtext, labeltext = labeltext, poslabels = poslabels, heightlabels = heightlabels, marginlabels = marginlabels, fillareaTrack = fillareaTrack, cexlabel = cexlabel, unitChr = unitChr, labelChr = labelChr, fontSize = fontSize, colorTrack = colorTrack, borderareaTrack = borderareaTrack, selreaTrack = selreaTrack, transparencyHlt = transparencyHlt,
                   trackChr = trackChr, datatypeChr = datatypeChr, labeltextchr = labeltextchr, heightlabelschr = heightlabelschr, marginlabelschr = marginlabelschr, poslabelschr = poslabelschr, transparencyhltLinks = transparencyhltLinks, transparencyTrack = transparencyTrack, transparencyLinks = transparencyLinks,
-                  colorLinks = colorLinks, linksTrack = linksTrack, typeTrack = typeTrack, coltypeTk = coltypeTk, colorcusTrack = colorcusTrack, marginLinks = marginLinks, selcolorLinks = selcolorLinks, colrectTrack = colrectTrack, rectTrack = rectTrack, rectcolTrack = rectcolTrack, rectcoldisTrack = rectcoldisTrack, rectcoldiscusTrack = rectcoldiscusTrack, 
+                  colformatLinks = colformatLinks, colorLinks = colorLinks, gracolinks=gracolinks, linksTrack = linksTrack, typeTrack = typeTrack, coltypeTk = coltypeTk, colorcusTrack = colorcusTrack, marginLinks = marginLinks, selcolorLinks = selcolorLinks, colrectTrack = colrectTrack, rectTrack = rectTrack, rectcolTrack = rectcolTrack, rectcoldisTrack = rectcoldisTrack, rectcoldiscusTrack = rectcoldiscusTrack, 
                   borderTrack = borderTrack, gridsborderTrack = gridsborderTrack, colgridsborderTrack = colgridsborderTrack, directionTrack = directionTrack, colorlineTrack = colorlineTrack, symbolTrack = symbolTrack, pointsizeTrack = pointsizeTrack, baselineTrack = baselineTrack, colhmapTrack = colhmapTrack, heatmapcols = heatmapcols, heatmapcol = heatmapcol, lineshmapTrack = lineshmapTrack, heightlinesTrack = heightlinesTrack, marginlinesTrack = marginlinesTrack, heightTrack = heightTrack, marginTrack = marginTrack , bgcolTrack = bgcolTrack)
         })
       }else{NULL}
@@ -511,7 +513,8 @@ shinyServer(function(input, output, session){
     output$stack_point.csv <- downloadfile("example_data/stack_point.csv")
     output$stack_line.csv <- downloadfile("example_data/stack_line.csv")
     output$links.csv <- downloadfile("example_data/links.csv")
-    output$links_color.csv <- downloadfile("example_data/links_color.csv")
+    output$links_discrete_color.csv <- downloadfile("example_data/links_discrete_color.csv")
+    output$links_gradual_color.csv <- downloadfile("example_data/links_gradual_color.csv")	
   })
 })
 
