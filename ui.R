@@ -2,6 +2,8 @@ options(warn=-1)
 library(RLumShiny)
 
 shinyUI(fluidPage(theme="newstyle.css",
+		title = "shinyCircos", 
+		windowTitle = "interactive creation of Circos plots",
                   tags$head(tags$script(HTML('Shiny.addCustomMessageHandler("jsCode",function(message) {eval(message.value);});'))),
 	titlePanel(HTML('<p><font size="6">shinyCircos: an R/Shiny application for interactive creation of Circos plot</font></p>'),
 	## *** Add some custom CSS; customize the look of the header ***
