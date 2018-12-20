@@ -2,7 +2,7 @@
 options(shiny.maxRequestSize = 200*1024^2)
 options(warn=-1)
 library(circlize)
-#library(RColorBrewer)
+library(RColorBrewer)
 library(GenomicRanges)
 library(data.table)
 library(grDevices)
