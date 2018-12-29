@@ -50,7 +50,7 @@ shiny::runGitHub("shinyCircos", "venyao")
 ```
 This command will download the code of shinyCircos from GitHub to a temporary directory of your computer and then launch the shinyCircos app in the web browser. Once the web browser was closed, the downloaded code of shinyCircos would be deleted from your computer. Next time when you run this command in RStudio, it will download the source code of shinyCircos from GitHub to a temporary directory again. This process is frustrating since it takes some time to download the code of shinyCircos from GitHub.  
 
-Users are suggested to download the source code of shinyCircos from GitHub to a fixed directory of your computer, such as 'E:\apps' on Windows. Following the procedure illustrated in the following figure, a zip file named 'shinyCircos-master.zip' would be downloaded to the disk of your computer. Move this file to 'E:\apps' and unzip this file. Then a directory named 'shinyCircos-master' would be generated in 'E:\apps'. The scripts 'server.R' and 'ui.R' could be found in 'E:\apps\shinyCircos-master'.  
+Users are suggested to download the source code of shinyCircos from GitHub to a fixed directory of your computer, such as 'E:\\apps' on Windows. Following the procedure illustrated in the following figure, a zip file named 'shinyCircos-master.zip' would be downloaded to the disk of your computer. Move this file to 'E:\\apps' and unzip this file. Then a directory named 'shinyCircos-master' would be generated in 'E:\\apps'. The scripts 'server.R' and 'ui.R' could be found in 'E:\\apps\\shinyCircos-master'.  
 <br>
 <img src="shinyCircos.png" width="890"/>  
 <br>
