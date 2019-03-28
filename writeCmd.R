@@ -669,7 +669,9 @@ if(!is.null(data.T)){
     ## *** Add border ***
     tkborder <- borderTrack[i]
     cat(paste('tkborder <- "',tkborder,'"',sep=""),file="code.R",append=TRUE,sep="\n")																								
-    gridsborder <- gridsborderTrack[i]
+    innergap <- 0.5 - innergapTrack[i]
+    cat(paste("innergap <- ",innergap,sep=""),file="code.R",append=TRUE,sep="\n")
+	gridsborder <- gridsborderTrack[i]
     if(gridsborder=="add"){
       tkbordercol <- colgridsborderTrack[i]
       cat(paste('tkbordercol <- c("',tkbordercol,'")',sep=""),file="code.R",append=TRUE,sep="\n")																												
@@ -1620,7 +1622,8 @@ if(!is.null(data.T)){
         if(lineshmap==2){
           cat('circos.genomicTrackPlotRegion(data.TT, track.height = tkheight, track.margin = c(lkmargin,tkmargin), stack = TRUE,
                               panel.fun = function(region, value, ...){
-                                circos.genomicRect(region, value, col = f(value[[1]]),
+							    i = getI(...)
+                                circos.genomicRect(region, value, col = f(value[[1]]), ybottom = i - innergap, ytop = i + innergap,
                                                    border = f(value[[1]]), posTransform = posTransform.default, ...)
                               }, bg.border = NA)',file="code.R",append=TRUE,sep="\n")
         }else{
@@ -1628,7 +1631,8 @@ if(!is.null(data.T)){
                                 horizontalLine = "top", track.height = heightlines, track.margin = c(0,marginlines))
             circos.genomicTrackPlotRegion(data.TT, track.height = tkheight, track.margin = c(lkmargin,tkmargin), stack = TRUE,
                               panel.fun = function(region, value, ...){
-                                circos.genomicRect(region, value, col = f(value[[1]]),
+                                i = getI(...)
+								circos.genomicRect(region, value, col = f(value[[1]]), ybottom = i - innergap, ytop = i + innergap,
                                                    border = f(value[[1]]), posTransform = posTransform.default, ...)
                               }, bg.border = NA)',file="code.R",append=TRUE,sep="\n")			
         }			
@@ -1636,7 +1640,8 @@ if(!is.null(data.T)){
         if(lineshmap==2){
           cat('circos.genomicTrackPlotRegion(data.TT, track.height = tkheight, track.margin = c(lkmargin,tkmargin), stack = TRUE,
                               panel.fun = function(region, value, ...){
-                                circos.genomicRect(region, value, col = f(value[[1]]), lwd = 0.1,
+                                i = getI(...)
+								circos.genomicRect(region, value, col = f(value[[1]]), lwd = 0.1, ybottom = i - innergap, ytop = i + innergap,
                                                    border = tkbordercol, posTransform = posTransform.default, ...)
                               }, bg.border = NA)',file="code.R",append=TRUE,sep="\n")
         }else{
@@ -1644,7 +1649,8 @@ if(!is.null(data.T)){
                                 horizontalLine = "top", track.height = heightlines, track.margin = c(0,marginlines))
             circos.genomicTrackPlotRegion(data.TT, track.height = tkheight, track.margin = c(lkmargin,tkmargin), stack = TRUE,
                               panel.fun = function(region, value, ...){
-                                circos.genomicRect(region, value, col = f(value[[1]]), lwd = 0.1,
+                                i = getI(...)
+								circos.genomicRect(region, value, col = f(value[[1]]), lwd = 0.1, ybottom = i - innergap, ytop = i + innergap,
                                                    border = tkbordercol, posTransform = posTransform.default, ...)
                               }, bg.border = NA)',file="code.R",append=TRUE,sep="\n")			
         }

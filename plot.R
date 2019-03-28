@@ -314,7 +314,7 @@ get_most_inside_radius = function() {
   }
 }
 
-plotfig <- function(input, output, trackindx, data.L, data.L1, data.L2, data.C, data.T, data.N, data.CN, hltTrack.List, hltdata.List, heightSize, widthSize, colorChr, gap.width, cexlabel, unitChr, labelChr, fontSize, trackChr, datatypeChr, transparencyHlt, legendtext, labeltext, poslabels, heightlabels, marginlabels, fillareaTrack, borderareaTrack, selreaTrack, addlegend, poslegend, transparencyhltLinks, labeltextchr, poslabelschr, heightlabelschr, marginlabelschr, transparencyTrack, transparencyLinks, marginLinks, selcolorLinks, barBoundary, coldir1Track, coldir2Track, colrectTrack, colorTrack, colformatLinks, colorLinks, gracolinks, linksTrack, typeTrack, coltypeTk, colorcusTrack, rectTrack, rectcolTrack, rectcoldisTrack, rectcoldiscusTrack, borderTrack, gridsborderTrack, colgridsborderTrack, directionTrack, colorlineTrack, symbolTrack, pointsizeTrack, baselineTrack, heightTrack, colhmapTrack, heatmapcols, heatmapcol, lineshmapTrack, heightlinesTrack, marginlinesTrack, marginTrack , bgcolTrack){       
+plotfig <- function(input, output, trackindx, data.L, data.L1, data.L2, data.C, data.T, data.N, data.CN, hltTrack.List, hltdata.List, heightSize, widthSize, colorChr, gap.width, cexlabel, unitChr, labelChr, fontSize, trackChr, datatypeChr, transparencyHlt, legendtext, labeltext, poslabels, heightlabels, marginlabels, fillareaTrack, borderareaTrack, selreaTrack, addlegend, poslegend, transparencyhltLinks, labeltextchr, poslabelschr, heightlabelschr, marginlabelschr, transparencyTrack, transparencyLinks, marginLinks, selcolorLinks, barBoundary, coldir1Track, coldir2Track, colrectTrack, colorTrack, colformatLinks, colorLinks, gracolinks, linksTrack, typeTrack, coltypeTk, colorcusTrack, rectTrack, rectcolTrack, rectcoldisTrack, rectcoldiscusTrack, borderTrack, innergapTrack, gridsborderTrack, colgridsborderTrack, directionTrack, colorlineTrack, symbolTrack, pointsizeTrack, baselineTrack, heightTrack, colhmapTrack, heatmapcols, heatmapcol, lineshmapTrack, heightlinesTrack, marginlinesTrack, marginTrack , bgcolTrack){       
   ## *** The highlight regions ***
   if(!is.null(data.L)){
     highlightLinks <<- input$highlightLinks
@@ -553,6 +553,7 @@ plotfig <- function(input, output, trackindx, data.L, data.L1, data.L2, data.C, 
           }			
           ## *** Add border ***
           tkborder <- borderTrack[i]
+		  innergap <- 0.5 - innergapTrack[i]
           gridsborder <- gridsborderTrack[i]
           if(gridsborder=="add"){
             tkbordercol <<- colgridsborderTrack[i]
@@ -1589,7 +1590,8 @@ plotfig <- function(input, output, trackindx, data.L, data.L1, data.L2, data.C, 
               if(lineshmap==2){
                 circos.genomicTrackPlotRegion(data.TT, track.height = tkheight, track.margin = c(lkmargin,tkmargin), stack = TRUE,
                                               panel.fun = function(region, value, ...){
-                                                circos.genomicRect(region, value, col = f(value[[1]]),
+											    i = getI(...)
+                                                circos.genomicRect(region, value, col = f(value[[1]]), ybottom = i - innergap, ytop = i + innergap,
                                                                    border = f(value[[1]]), posTransform = posTransform.default, ...)
                                               }, bg.border = NA)
               }else{
@@ -1597,7 +1599,8 @@ plotfig <- function(input, output, trackindx, data.L, data.L1, data.L2, data.C, 
                                                 horizontalLine = "top", track.height = heightlines, track.margin = c(0,marginlines))
                 circos.genomicTrackPlotRegion(data.TT, track.height = tkheight, track.margin = c(lkmargin,tkmargin), stack = TRUE,
                                               panel.fun = function(region, value, ...){
-                                                circos.genomicRect(region, value, col = f(value[[1]]),
+											    i = getI(...)
+                                                circos.genomicRect(region, value, col = f(value[[1]]), ybottom = i - innergap, ytop = i + innergap,
                                                                    border = f(value[[1]]), posTransform = posTransform.default, ...)
                                               }, bg.border = NA)			
               }			
@@ -1605,7 +1608,8 @@ plotfig <- function(input, output, trackindx, data.L, data.L1, data.L2, data.C, 
               if(lineshmap==2){
                 circos.genomicTrackPlotRegion(data.TT, track.height = tkheight, track.margin = c(lkmargin,tkmargin), stack = TRUE,
                                               panel.fun = function(region, value, ...){
-                                                circos.genomicRect(region, value, col = f(value[[1]]), lwd = 0.1,
+											    i = getI(...)
+                                                circos.genomicRect(region, value, col = f(value[[1]]), lwd = 0.1, ybottom = i - innergap, ytop = i + innergap,
                                                                    border = tkbordercol, posTransform = posTransform.default, ...)
                                               }, bg.border = NA)
               }else{
@@ -1613,7 +1617,8 @@ plotfig <- function(input, output, trackindx, data.L, data.L1, data.L2, data.C, 
                                                 horizontalLine = "top", track.height = heightlines, track.margin = c(0,marginlines))
                 circos.genomicTrackPlotRegion(data.TT, track.height = tkheight, track.margin = c(lkmargin,tkmargin), stack = TRUE,
                                               panel.fun = function(region, value, ...){
-                                                circos.genomicRect(region, value, col = f(value[[1]]), lwd = 0.1,
+											    i = getI(...)
+                                                circos.genomicRect(region, value, col = f(value[[1]]), lwd = 0.1, ybottom = i - innergap, ytop = i + innergap,
                                                                    border = tkbordercol, posTransform = posTransform.default, ...)
                                               }, bg.border = NA)			
               }

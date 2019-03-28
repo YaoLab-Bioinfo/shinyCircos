@@ -310,6 +310,7 @@ shinyServer(function(input, output, session){
             rectcoldisTrack <<- c()
             rectcoldiscusTrack <<- c()
             borderTrack <<- c()
+			innergapTrack <<- c()
             gridsborderTrack <<- c()
             colgridsborderTrack <<- c()
             directionTrack <<- c()
@@ -396,6 +397,7 @@ shinyServer(function(input, output, session){
               rectcoldisTrack <<- c(rectcoldisTrack,input[[paste("rectcoldisTrack",trackindx[k],sep="")]])
               rectcoldiscusTrack <<- c(rectcoldiscusTrack,input[[paste("rectcoldiscusTrack",trackindx[k],sep="")]])
               borderTrack <<- c(borderTrack,input[[paste("borderTrack",trackindx[k],sep="")]])
+			  innergapTrack <<- c(innergapTrack,input[[paste("innergapTrack",trackindx[k],sep="")]])
               gridsborderTrack <<- c(gridsborderTrack,input[[paste("gridsborderTrack",trackindx[k],sep="")]])
               colgridsborderTrack <<- c(colgridsborderTrack,input[[paste("colgridsborderTrack",trackindx[k],sep="")]])
               directionTrack <<- c(directionTrack,input[[paste("directionTrack",trackindx[k],sep="")]])
@@ -459,7 +461,7 @@ shinyServer(function(input, output, session){
                   gap.width = gap.width, legendtext = legendtext, labeltext = labeltext, poslabels = poslabels, heightlabels = heightlabels, marginlabels = marginlabels, fillareaTrack = fillareaTrack, cexlabel = cexlabel, unitChr = unitChr, labelChr = labelChr, fontSize = fontSize, colorTrack = colorTrack, borderareaTrack = borderareaTrack, selreaTrack = selreaTrack, transparencyHlt = transparencyHlt,
                   trackChr = trackChr, datatypeChr = datatypeChr, labeltextchr = labeltextchr, heightlabelschr = heightlabelschr, marginlabelschr = marginlabelschr, poslabelschr = poslabelschr, transparencyhltLinks = transparencyhltLinks, transparencyTrack = transparencyTrack, transparencyLinks = transparencyLinks,
                   colformatLinks = colformatLinks, colorLinks = colorLinks, gracolinks=gracolinks, linksTrack = linksTrack, typeTrack = typeTrack, coltypeTk = coltypeTk, colorcusTrack = colorcusTrack, marginLinks = marginLinks, selcolorLinks = selcolorLinks, colrectTrack = colrectTrack, rectTrack = rectTrack, rectcolTrack = rectcolTrack, rectcoldisTrack = rectcoldisTrack, rectcoldiscusTrack = rectcoldiscusTrack, 
-                  borderTrack = borderTrack, gridsborderTrack = gridsborderTrack, colgridsborderTrack = colgridsborderTrack, directionTrack = directionTrack, colorlineTrack = colorlineTrack, symbolTrack = symbolTrack, pointsizeTrack = pointsizeTrack, baselineTrack = baselineTrack, colhmapTrack = colhmapTrack, heatmapcols = heatmapcols, heatmapcol = heatmapcol, lineshmapTrack = lineshmapTrack, heightlinesTrack = heightlinesTrack, marginlinesTrack = marginlinesTrack, heightTrack = heightTrack, marginTrack = marginTrack , bgcolTrack = bgcolTrack)
+                  borderTrack = borderTrack, innergapTrack = innergapTrack, gridsborderTrack = gridsborderTrack, colgridsborderTrack = colgridsborderTrack, directionTrack = directionTrack, colorlineTrack = colorlineTrack, symbolTrack = symbolTrack, pointsizeTrack = pointsizeTrack, baselineTrack = baselineTrack, colhmapTrack = colhmapTrack, heatmapcols = heatmapcols, heatmapcol = heatmapcol, lineshmapTrack = lineshmapTrack, heightlinesTrack = heightlinesTrack, marginlinesTrack = marginlinesTrack, heightTrack = heightTrack, marginTrack = marginTrack , bgcolTrack = bgcolTrack)
         })
       }else{NULL}
     })

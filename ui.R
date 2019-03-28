@@ -548,6 +548,13 @@ Hex color codes as '#FF0000' are also supported.</p>
 	                                      </table>
 	                                      "), value=0.01, min=0, max=0.8, step=0.005),
 			conditionalPanel(condition="input.typeTrack1=='heatmap'",
+			numericInput("innergapTrack1", HTML("<table><tr><td><strong>Inner gap:</strong></td>
+<td>
+<div class='help-tip'>
+	<p>Inner gap of the track.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), value=0, min=0, max=0.5, step=0.05),
 			radioButtons("gridsborderTrack1", HTML("<table><tr><td><strong>Add cell borders</strong></td>
 <td>
 <div class='help-tip'>
@@ -852,6 +859,13 @@ Hex color codes as '#FF0000' are also supported.</p>
 	                                      </table>
 	                                      "), value=0.01, min=0, max=0.8, step=0.005),
 			conditionalPanel(condition="input.typeTrack2=='heatmap'",
+			numericInput("innergapTrack2", HTML("<table><tr><td><strong>Inner gap:</strong></td>
+<td>
+<div class='help-tip'>
+	<p>Inner gap of the track.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), value=0, min=0, max=0.5, step=0.05),			
 			radioButtons("gridsborderTrack2", HTML("<table><tr><td><strong>Add cell borders</strong></td>
 <td>
 <div class='help-tip'>
@@ -1154,6 +1168,13 @@ Hex color codes as '#FF0000' are also supported.</p>
 	                                      </table>
 	                                      "), value=0.01, min=0, max=0.8, step=0.005),
 			conditionalPanel(condition="input.typeTrack3=='heatmap'",
+			numericInput("innergapTrack3", HTML("<table><tr><td><strong>Inner gap:</strong></td>
+<td>
+<div class='help-tip'>
+	<p>Inner gap of the track.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), value=0, min=0, max=0.5, step=0.05),			
 			radioButtons("gridsborderTrack3", HTML("<table><tr><td><strong>Add cell borders</strong></td>
 <td>
 <div class='help-tip'>
@@ -1456,6 +1477,13 @@ Hex color codes as '#FF0000' are also supported.</p>
 	                                      </table>
 	                                      "), value=0.01, min=0, max=0.8, step=0.005),
 			conditionalPanel(condition="input.typeTrack4=='heatmap'",
+			numericInput("innergapTrack4", HTML("<table><tr><td><strong>Inner gap:</strong></td>
+<td>
+<div class='help-tip'>
+	<p>Inner gap of the track.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), value=0, min=0, max=0.5, step=0.05),			
 			radioButtons("gridsborderTrack4", HTML("<table><tr><td><strong>Add cell borders</strong></td>
 <td>
 <div class='help-tip'>
@@ -1756,6 +1784,13 @@ automatically to the number of sectors. For example, 'grey95' or 'grey95,grey,pi
 	                                      </table>
 	                                      "), value=0.01, min=0, max=0.8, step=0.005),
 			conditionalPanel(condition="input.typeTrack5=='heatmap'",
+			numericInput("innergapTrack5", HTML("<table><tr><td><strong>Inner gap:</strong></td>
+<td>
+<div class='help-tip'>
+	<p>Inner gap of the track.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), value=0, min=0, max=0.5, step=0.05),			
 			radioButtons("gridsborderTrack5", HTML("<table><tr><td><strong>Add cell borders</strong></td>
 <td>
 <div class='help-tip'>
@@ -2056,6 +2091,13 @@ adjusted automatically to the number of sectors. For example, 'grey95' or 'grey9
 	                                      </table>
 	                                      "), value=0.01, min=0, max=0.8, step=0.005),
 			conditionalPanel(condition="input.typeTrack6=='heatmap'",
+			numericInput("innergapTrack6", HTML("<table><tr><td><strong>Inner gap:</strong></td>
+<td>
+<div class='help-tip'>
+	<p>Inner gap of the track.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), value=0, min=0, max=0.5, step=0.05),			
 			radioButtons("gridsborderTrack6", HTML("<table><tr><td><strong>Add cell borders</strong></td>
 <td>
 <div class='help-tip'>
@@ -2357,6 +2399,13 @@ automatically to the number of sectors. For example, 'grey95' or 'grey95,grey,pi
 	                                      </table>
 	                                      "), value=0.01, min=0, max=0.8, step=0.005),
 			conditionalPanel(condition="input.typeTrack7=='heatmap'",
+			numericInput("innergapTrack7", HTML("<table><tr><td><strong>Inner gap:</strong></td>
+<td>
+<div class='help-tip'>
+	<p>Inner gap of the track.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), value=0, min=0, max=0.5, step=0.05),			
 			radioButtons("gridsborderTrack7", HTML("<table><tr><td><strong>Add cell borders</strong></td>
 <td>
 <div class='help-tip'>
@@ -2659,6 +2708,13 @@ Hex color codes as '#FF0000' are also supported.</p>
 	                                      </table>
 	                                      "), value=0.01, min=0, max=0.8, step=0.005),
 			conditionalPanel(condition="input.typeTrack8=='heatmap'",
+			numericInput("innergapTrack8", HTML("<table><tr><td><strong>Inner gap:</strong></td>
+<td>
+<div class='help-tip'>
+	<p>Inner gap of the track.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), value=0, min=0, max=0.5, step=0.05),			
 			radioButtons("gridsborderTrack8", HTML("<table><tr><td><strong>Add cell borders</strong></td>
 <td>
 <div class='help-tip'>
@@ -2960,6 +3016,13 @@ Hex color codes as '#FF0000' are also supported.</p>
 	                                      </table>
 	                                      "), value=0.01, min=0, max=0.8, step=0.005),
 			conditionalPanel(condition="input.typeTrack9=='heatmap'",
+			numericInput("innergapTrack9", HTML("<table><tr><td><strong>Inner gap:</strong></td>
+<td>
+<div class='help-tip'>
+	<p>Inner gap of the track.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), value=0, min=0, max=0.5, step=0.05),			
 			radioButtons("gridsborderTrack9", HTML("<table><tr><td><strong>Add cell borders</strong></td>
 <td>
 <div class='help-tip'>
@@ -3262,6 +3325,13 @@ Hex color codes as '#FF0000' are also supported.</p>
 	                                      </table>
 	                                      "), value=0.01, min=0, max=0.8, step=0.005),
 			conditionalPanel(condition="input.typeTrack10=='heatmap'",
+			numericInput("innergapTrack10", HTML("<table><tr><td><strong>Inner gap:</strong></td>
+<td>
+<div class='help-tip'>
+	<p>Inner gap of the track.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), value=0, min=0, max=0.5, step=0.05),			
 			radioButtons("gridsborderTrack10", HTML("<table><tr><td><strong>Add cell borders</strong></td>
 <td>
 <div class='help-tip'>
