@@ -7,81 +7,81 @@ library(data.table)
 library(RLumShiny)
 library(grDevices)",file="code.R",append=TRUE,sep="\n")  
 cat("",file="code.R",append=TRUE,sep="\n")
-cat('plotcircos <- function(x, color, plotTypes, units, rotation, gap.width, labeltextchr, poslabelschr, heightlabelschr, marginlabelschr, data.CN){
-	circos.par("start.degree"=90-rotation, "gap.degree"=gap.width, cell.padding=c(0,0,0,0), track.margin=c(0,0))
-	circos.genomicInitialize.new(x, plotType=plotTypes, unit=units)
-	if(!is.null(data.CN) && ncol(data.CN)==4 && labeltextchr==1 && poslabelschr=="outer"){
-	circos.genomicLabels(data.CN, labels.column = 4, connection_height = heightlabelschr, track.margin = c(0.01,marginlabelschr), side = "outside")
-	}		
-	circos.genomicTrackPlotRegion(ylim = c(0, 1),bg.col = color, bg.border = NA, track.height = 0.05)	
-	if(!is.null(data.CN) && ncol(data.CN)==4 && labeltextchr==1 && poslabelschr=="inner"){
-	circos.genomicLabels(data.CN, labels.column = 4, connection_height = heightlabelschr, track.margin = c(0.01,marginlabelschr), side = "inside")
-	}		
+cat('plotcircos <- function(x, color, height, plotTypes, units, rotation, gap.width, labeltextchr, poslabelschr, heightlabelschr, marginlabelschr, data.CN){
+  circos.par("start.degree"=90-rotation, "gap.degree"=gap.width, cell.padding=c(0,0,0,0), track.margin=c(0,0))
+  circos.genomicInitialize.new(x,plotType=plotTypes,unit=units)
+  if(!is.null(data.CN) && ncol(data.CN)==4 && labeltextchr==1 && poslabelschr=="outer"){
+    circos.genomicLabels(data.CN, labels.column=4, connection_height=heightlabelschr, track.margin=c(0.01,marginlabelschr), side="outside")
+  }		
+  circos.genomicTrackPlotRegion(ylim = c(0, 1),bg.col = color, bg.border = NA, track.height = height)	
+  if(!is.null(data.CN) && ncol(data.CN)==4 && labeltextchr==1 && poslabelschr=="inner"){
+    circos.genomicLabels(data.CN, labels.column=4, connection_height=heightlabelschr, track.margin=c(0.01,marginlabelschr), side="inside")
+  }		
 }
 
 plotcircos.notrack <- function(x, plotTypes, units, rotation, gap.width, data.CN, labeltextchr, poslabelschr, heightlabelschr, marginlabelschr){
-	circos.par("start.degree"=90-rotation, "gap.degree"=gap.width, cell.padding=c(0,0,0,0), track.margin=c(0,0))
-	circos.genomicInitialize.new(x, plotType=plotTypes, unit=units)
-	if(!is.null(data.CN) && ncol(data.CN)==4 && labeltextchr==1 && poslabelschr=="inner"){
+  circos.par("start.degree"=90-rotation, "gap.degree"=gap.width, cell.padding=c(0,0,0,0), track.margin=c(0,0))
+  circos.genomicInitialize.new(x,plotType=plotTypes,unit=units)
+  if(!is.null(data.CN) && ncol(data.CN)==4 && labeltextchr==1 && poslabelschr=="inner"){
     circos.genomicLabels(data.CN, labels.column = 4, connection_height = heightlabelschr, track.margin = c(0.01,marginlabelschr), side = "inside")
   }
 }
 
-plotcircos.font <- function(x, color, plotTypes, units, rotation, gap.width, cexLabel, labeltextchr, poslabelschr, heightlabelschr, marginlabelschr, data.CN){
-	circos.par("start.degree"=90-rotation, "gap.degree"=gap.width, cell.padding=c(0,0,0,0), track.margin=c(0,0))
-	circos.genomicInitialize.new.font(x, plotType=plotTypes, unit=units, cexlabel=cexLabel)
-	if(!is.null(data.CN) && ncol(data.CN)==4 && labeltextchr==1 && poslabelschr=="outer"){
-	circos.genomicLabels(data.CN, labels.column = 4, connection_height = heightlabelschr, track.margin = c(0.01,marginlabelschr), side = "outside")
-	}	
-	circos.genomicTrackPlotRegion(ylim = c(0, 1),bg.col = color, bg.border = NA, track.height = 0.05)
-	if(!is.null(data.CN) && ncol(data.CN)==4 && labeltextchr==1 && poslabelschr=="inner"){
-	circos.genomicLabels(data.CN, labels.column = 4, connection_height = heightlabelschr, track.margin = c(0.01,marginlabelschr), side = "inside")
-	}	
-}
-
-plotcircos.notrack.font <- function(x, plotTypes, units, rotation, gap.width, cexLabel, data.CN, labeltextchr, poslabelschr, heightlabelschr, marginlabelschr){  
-	circos.par("start.degree"=90-rotation, "gap.degree"=gap.width, cell.padding=c(0,0,0,0), track.margin=c(0,0))
-	circos.genomicInitialize.new.font(x, plotType=plotTypes, unit=units, cexlabel=cexLabel)
-	if(!is.null(data.CN) && ncol(data.CN)==4 && labeltextchr==1 && poslabelschr=="inner"){
+plotcircos.font <- function(x, color, height, plotTypes, units, rotation, gap.width, cexLabel, labeltextchr, poslabelschr, heightlabelschr, marginlabelschr, data.CN){
+  circos.par("start.degree"=90-rotation, "gap.degree"=gap.width, cell.padding=c(0,0,0,0), track.margin=c(0,0))
+  circos.genomicInitialize.new.font(x, plotType=plotTypes, unit=units, cexlabel=cexLabel)
+  if(!is.null(data.CN) && ncol(data.CN)==4 && labeltextchr==1 && poslabelschr=="outer"){
+    circos.genomicLabels(data.CN, labels.column = 4, connection_height = heightlabelschr, track.margin = c(0.01,marginlabelschr), side = "outside")
+  }	
+  circos.genomicTrackPlotRegion(ylim = c(0, 1),bg.col = color, bg.border = NA, track.height = height)
+  if(!is.null(data.CN) && ncol(data.CN)==4 && labeltextchr==1 && poslabelschr=="inner"){
     circos.genomicLabels(data.CN, labels.column = 4, connection_height = heightlabelschr, track.margin = c(0.01,marginlabelschr), side = "inside")
   }	
 }
 
-plotcircos.cyto <- function(x, plotTypes, units, rotation, gap.width, labeltextchr, poslabelschr, heightlabelschr, marginlabelschr, data.CN){ 
+plotcircos.notrack.font <- function(x, plotTypes, units, rotation, gap.width, cexLabel, data.CN, labeltextchr, poslabelschr, heightlabelschr, marginlabelschr){  
   circos.par("start.degree"=90-rotation, "gap.degree"=gap.width, cell.padding=c(0,0,0,0), track.margin=c(0,0))
-  circos.genomicInitialize.new(x, plotType = plotTypes, unit=units)
-  if(!is.null(data.CN) && ncol(data.CN)==4 && labeltextchr==1 && poslabelschr=="outer"){
-  circos.genomicLabels(data.CN, labels.column = 4, connection_height = heightlabelschr, track.margin = c(0.01,marginlabelschr), side = "outside")
-  }	
-  circos.genomicTrackPlotRegion(x, ylim = c(0, 1), bg.border = NA, 
-     track.height = 0.05, panel.fun = function(region, value, ...){
-     col = cytoband.col(value[[2]])
-     circos.genomicRect(region, value, ybottom = 0, 
-     ytop = 1, col = col, border = NA, ...)
-     xlim = get.cell.meta.data("xlim")
-     circos.rect(xlim[1], 0, xlim[2], 1, border = "black")
-     }, cell.padding = c(0, 0, 0, 0))  
+  circos.genomicInitialize.new.font(x, plotType=plotTypes, unit=units, cexlabel=cexLabel)
   if(!is.null(data.CN) && ncol(data.CN)==4 && labeltextchr==1 && poslabelschr=="inner"){
-  circos.genomicLabels(data.CN, labels.column = 4, connection_height = heightlabelschr, track.margin = c(0.01,marginlabelschr), side = "inside")
+    circos.genomicLabels(data.CN, labels.column = 4, connection_height = heightlabelschr, track.margin = c(0.01,marginlabelschr), side = "inside")
   }	
 }
 
-plotcircos.cyto.font <- function(x, plotTypes, units, rotation, gap.width, cexLabel, labeltextchr, poslabelschr, heightlabelschr, marginlabelschr, data.CN){
+plotcircos.cyto <- function(x, height, plotTypes, units, rotation, gap.width, labeltextchr, poslabelschr, heightlabelschr, marginlabelschr, data.CN){ 
+  circos.par("start.degree"=90-rotation, "gap.degree"=gap.width, cell.padding=c(0,0,0,0), track.margin=c(0,0))
+  circos.genomicInitialize.new(x, plotType = plotTypes, unit=units)
+  if(!is.null(data.CN) && ncol(data.CN)==4 && labeltextchr==1 && poslabelschr=="outer"){
+    circos.genomicLabels(data.CN, labels.column = 4, connection_height = heightlabelschr, track.margin = c(0.01,marginlabelschr), side = "outside")
+  }	
+  circos.genomicTrackPlotRegion(x, ylim = c(0, 1), bg.border = NA, 
+                                track.height = height, panel.fun = function(region, value, ...){
+                                  col = cytoband.col(value[[2]])
+                                  circos.genomicRect(region, value, ybottom = 0, 
+                                                     ytop = 1, col = col, border = NA, ...)
+                                  xlim = get.cell.meta.data("xlim")
+                                  circos.rect(xlim[1], 0, xlim[2], 1, border = "black")
+                                }, cell.padding = c(0, 0, 0, 0))  
+  if(!is.null(data.CN) && ncol(data.CN)==4 && labeltextchr==1 && poslabelschr=="inner"){
+    circos.genomicLabels(data.CN, labels.column = 4, connection_height = heightlabelschr, track.margin = c(0.01,marginlabelschr), side = "inside")
+  }	
+}
+
+plotcircos.cyto.font <- function(x, height, plotTypes, units, rotation, gap.width, cexLabel, labeltextchr, poslabelschr, heightlabelschr, marginlabelschr, data.CN){
   circos.par("start.degree"=90-rotation, "gap.degree"=gap.width, cell.padding=c(0,0,0,0), track.margin=c(0,0))
   circos.genomicInitialize.new.font(x, plotType=plotTypes, unit=units, cexlabel=cexLabel)  
   if(!is.null(data.CN) && ncol(data.CN)==4 && labeltextchr==1 && poslabelschr=="outer"){
-  circos.genomicLabels(data.CN, labels.column = 4, connection_height = heightlabelschr, track.margin = c(0.01,marginlabelschr), side = "outside")
+    circos.genomicLabels(data.CN, labels.column = 4, connection_height = heightlabelschr, track.margin = c(0.01,marginlabelschr), side = "outside")
   }	
   circos.genomicTrackPlotRegion(x, ylim = c(0, 1), bg.border = NA, 
-     track.height = 0.05, panel.fun = function(region, value, ...){
-     col = cytoband.col(value[[2]])
-     circos.genomicRect(region, value, ybottom = 0, 
-     ytop = 1, col = col, border = NA, ...)
-     xlim = get.cell.meta.data("xlim")
-     circos.rect(xlim[1], 0, xlim[2], 1, border = "black")
-     }, cell.padding = c(0, 0, 0, 0))
+                                track.height = height, panel.fun = function(region, value, ...){
+                                  col = cytoband.col(value[[2]])
+                                  circos.genomicRect(region, value, ybottom = 0, 
+                                                     ytop = 1, col = col, border = NA, ...)
+                                  xlim = get.cell.meta.data("xlim")
+                                  circos.rect(xlim[1], 0, xlim[2], 1, border = "black")
+                                }, cell.padding = c(0, 0, 0, 0))
   if(!is.null(data.CN) && ncol(data.CN)==4 && labeltextchr==1 && poslabelschr=="inner"){
-  circos.genomicLabels(data.CN, labels.column = 4, connection_height = heightlabelschr, track.margin = c(0.01,marginlabelschr), side = "inside")
+    circos.genomicLabels(data.CN, labels.column = 4, connection_height = heightlabelschr, track.margin = c(0.01,marginlabelschr), side = "inside")
   }	
 }
 
@@ -475,13 +475,13 @@ if(datatypeChr=="general"){
     colorChr <- gsub("0x","#", colorChr)        			
     repnumcol <- round(length(unique(data.C[,1]))/length(colorChr))+1
     colorChr <- rep(colorChr, repnumcol)[1:length(unique(data.C[,1]))]
-    cat(paste('colorChr <- c("',paste(colorChr,collapse = '","'),'")',sep=""),file="code.R",append=TRUE,sep="\n")
-    cat('plotcircos(data.C, color=colorChr, plotTypes=unique(c(labelChr,"axis")), units=unitChr, rotation=rotation, gap.width=gap.width, labeltextchr=labeltextchr, poslabelschr=poslabelschr, heightlabelschr=heightlabelschr, marginlabelschr=marginlabelschr, data.CN=data.CN)',file="code.R",append=TRUE,sep="\n")
+    cat(paste('colorChr <- c("',paste(colorChr,collapse = '","'),'")',sep=""),paste("heightChr <- ",heightChr,sep=""),file="code.R",append=TRUE,sep="\n")
+    cat('plotcircos(data.C, height=heightChr, color=colorChr, plotTypes=unique(c(labelChr,"axis")), units=unitChr, rotation=rotation, gap.width=gap.width, labeltextchr=labeltextchr, poslabelschr=poslabelschr, heightlabelschr=heightlabelschr, marginlabelschr=marginlabelschr, data.CN=data.CN)',file="code.R",append=TRUE,sep="\n")
   }else if(trackChr=="track" && fontSize=="custom"){
     repnumcol <- round(length(unique(data.C[,1]))/length(colorChr))+1
     colorChr <- rep(colorChr, repnumcol)[1:length(unique(data.C[,1]))]			
     cat(paste('colorChr <- c("',paste(colorChr,collapse = '","'),'")',sep=""),paste("cexlabel <- ",paste(cexlabel,collapse = ","),sep=""),file="code.R",append=TRUE,sep="\n")
-    cat('plotcircos.font(data.C, color=colorChr, plotTypes=unique(c(labelChr,"axis")), units=unitChr, rotation=rotation, gap.width=gap.width, cexLabel=cexlabel-0.1, labeltextchr=labeltextchr, poslabelschr=poslabelschr, heightlabelschr=heightlabelschr, marginlabelschr=marginlabelschr, data.CN=data.CN)',file="code.R",append=TRUE,sep="\n")				
+    cat('plotcircos.font(data.C, height=heightChr, color=colorChr, plotTypes=unique(c(labelChr,"axis")), units=unitChr, rotation=rotation, gap.width=gap.width, cexLabel=cexlabel-0.1, labeltextchr=labeltextchr, poslabelschr=poslabelschr, heightlabelschr=heightlabelschr, marginlabelschr=marginlabelschr, data.CN=data.CN)',file="code.R",append=TRUE,sep="\n")				
   }else if(trackChr!="track" && fontSize!="custom"){
     cat(paste("cexlabel <- ",paste(cexlabel,collapse = ","),sep=""),file="code.R",append=TRUE,sep="\n")
     cat('plotcircos.notrack(data.C, plotTypes=unique(c(labelChr,"axis")), units=unitChr, rotation=rotation, gap.width=gap.width, data.CN=data.CN, labeltextchr=labeltextchr, poslabelschr=poslabelschr, heightlabelschr=heightlabelschr, marginlabelschr=marginlabelschr)',file="code.R",append=TRUE,sep="\n")								
@@ -492,10 +492,10 @@ if(datatypeChr=="general"){
 }else{
   if(fontSize!="custom"){			    
     cat(paste("cexlabel <- ",paste(cexlabel,collapse = ","),sep=""),file="code.R",append=TRUE,sep="\n")
-    cat('plotcircos.cyto(data.C, plotTypes=unique(c(labelChr,"axis")), units=unitChr, rotation=rotation, gap.width=gap.width, labeltextchr=labeltextchr, poslabelschr=poslabelschr, heightlabelschr=heightlabelschr, marginlabelschr=marginlabelschr, data.CN=data.CN)',file="code.R",append=TRUE,sep="\n")
+    cat('plotcircos.cyto(data.C, height=heightChr, plotTypes=unique(c(labelChr,"axis")), units=unitChr, rotation=rotation, gap.width=gap.width, labeltextchr=labeltextchr, poslabelschr=poslabelschr, heightlabelschr=heightlabelschr, marginlabelschr=marginlabelschr, data.CN=data.CN)',file="code.R",append=TRUE,sep="\n")
   }else if(fontSize=="custom"){			
     cat(paste("cexlabel <- ",paste(cexlabel,collapse = ","),sep=""),file="code.R",append=TRUE,sep="\n")
-    cat('plotcircos.cyto.font(data.C, plotTypes=unique(c(labelChr,"axis")), units=unitChr, rotation=rotation, gap.width=gap.width, cexLabel=cexlabel-0.1, labeltextchr=labeltextchr, poslabelschr=poslabelschr, heightlabelschr=heightlabelschr, marginlabelschr=marginlabelschr, data.CN=data.CN)',file="code.R",append=TRUE,sep="\n")																
+    cat('plotcircos.cyto.font(data.C, height=heightChr, plotTypes=unique(c(labelChr,"axis")), units=unitChr, rotation=rotation, gap.width=gap.width, cexLabel=cexlabel-0.1, labeltextchr=labeltextchr, poslabelschr=poslabelschr, heightlabelschr=heightlabelschr, marginlabelschr=marginlabelschr, data.CN=data.CN)',file="code.R",append=TRUE,sep="\n")																
   }
 }
 if(!is.null(data.T)){

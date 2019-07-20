@@ -445,6 +445,7 @@ shinyServer(function(input, output, session){
           fontSize <<- input$fontSize
           trackChr <<- input$trackChr
           datatypeChr <<- input$datatypeChr
+		  heightChr <<- input$heightChr
           if(input$linksTrack)  {
             legendtext <<- c(legendtext,input$text11)
           }
@@ -457,7 +458,7 @@ shinyServer(function(input, output, session){
           colorChr <<- gsub("\\s","",strsplit(input$colorChr,",")[[1]])
           gap.width <<- gsub("\\s","",strsplit(input$gapChr,",")[[1]])	
           plotfig(input = input, output = output, trackindx = trackindx, data.L = data.L, data.L1 = data.L1, data.L2 = data.L2, data.C = data.C, barBoundary = barBoundary, coldir1Track = coldir1Track, 
-                  coldir2Track = coldir2Track, data.T = data.T, data.N = data.N, data.CN = data.CN, hltTrack.List = hltTrack.List, hltdata.List = hltdata.List, heightSize = heightSize, widthSize = widthSize, addlegend = addlegend, poslegend = poslegend, colorChr = colorChr,
+                  coldir2Track = coldir2Track, data.T = data.T, data.N = data.N, data.CN = data.CN, hltTrack.List = hltTrack.List, hltdata.List = hltdata.List, heightSize = heightSize, widthSize = widthSize, addlegend = addlegend, poslegend = poslegend, colorChr = colorChr, heightChr = heightChr,
                   gap.width = gap.width, legendtext = legendtext, labeltext = labeltext, poslabels = poslabels, heightlabels = heightlabels, marginlabels = marginlabels, fillareaTrack = fillareaTrack, cexlabel = cexlabel, unitChr = unitChr, labelChr = labelChr, fontSize = fontSize, colorTrack = colorTrack, borderareaTrack = borderareaTrack, selreaTrack = selreaTrack, transparencyHlt = transparencyHlt,
                   trackChr = trackChr, datatypeChr = datatypeChr, labeltextchr = labeltextchr, heightlabelschr = heightlabelschr, marginlabelschr = marginlabelschr, poslabelschr = poslabelschr, transparencyhltLinks = transparencyhltLinks, transparencyTrack = transparencyTrack, transparencyLinks = transparencyLinks,
                   colformatLinks = colformatLinks, colorLinks = colorLinks, gracolinks=gracolinks, linksTrack = linksTrack, typeTrack = typeTrack, coltypeTk = coltypeTk, colorcusTrack = colorcusTrack, marginLinks = marginLinks, selcolorLinks = selcolorLinks, colrectTrack = colrectTrack, rectTrack = rectTrack, rectcolTrack = rectcolTrack, rectcoldisTrack = rectcoldisTrack, rectcoldiscusTrack = rectcoldiscusTrack, 

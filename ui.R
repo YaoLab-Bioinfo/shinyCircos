@@ -287,7 +287,14 @@ colors is accepted and adjusted automatically to the number of sectors.
 For example, 'grey' or 'grey,red,green,blue'. Hex color codes as '#FF0000' are also supported.</p>
 	                                      </div></td></tr>
 	                                      </table>
-	                                      "), value="grey")    
+	                                      "), value="grey"),
+			numericInput("heightChr", HTML("<table><tr><td>Band height:</td>
+<td>
+<div class='help-tip'>
+	<p>Height of the chromosome band, which should be greater than 0.01 and smaller than 0.9.</p>
+	                                      </div></td></tr>
+	                                      </table>
+	                                      "), value=0.05, min=0.01, max=0.9, step=0.01)										  
 			)
 			),
 			radioButtons("labelChr", "Chromosome IDs", c("Show" = "labels", "Hide" = "axis")),
