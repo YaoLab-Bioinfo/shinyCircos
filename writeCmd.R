@@ -703,7 +703,8 @@ if(!is.null(data.T)){
     if(tkrectcol==1){
       cat(paste('rectcols <- c("',paste(rectcols,collapse ='","'),'")',sep=""),file="code.R",append=TRUE,sep="\n")																
     }else if(tkrectcol==2 && selrectcol==2){
-      cat(paste('rectcols <- c("',rectcols,'")',sep=""),"data.TT[,4] <- rectcols",file="code.R",append=TRUE,sep="\n")																								
+      rectcols <- rectcoldisTrack[i]      
+	  cat(paste('rectcols <- c("',rectcols,'")',sep=""),"data.TT[,4] <- rectcols",file="code.R",append=TRUE,sep="\n")																								
     }else if(tkrectcol==2 && selrectcol==3){
       rectcols <- rectcoldiscusTrack[i]
       rectcols <- unlist(strsplit(rectcols,";"))
