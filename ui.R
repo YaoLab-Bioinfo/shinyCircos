@@ -299,8 +299,11 @@ For example, 'grey' or 'grey,red,green,blue'. Hex color codes as '#FF0000' are a
 	                                      </table>
 	                                      "), value=0.05, min=0.01, max=0.9, step=0.01)
             ),
-			radioButtons("labelChr", "Chromosome IDs", c("Show" = "labels", "Hide" = "axis")),
-			radioButtons("unitChr", "Size units of genomic regions", c("Show" = "unit", "Hide" = "")),
+			radioButtons("outAxis", "Genomic position axis", c("Show" = "1", "Hide" = "2"), "1"),
+			conditionalPanel(condition="input.outAxis=='1'",
+				radioButtons("labelChr", "Chromosome IDs", c("Show" = "labels", "Hide" = "axis")),
+				radioButtons("unitChr", "Size units of genomic regions", c("Show" = "unit", "Hide" = ""))
+			),
 			textInput("gapChr", HTML("<table><tr><td><strong>Gap width(s):</strong></td>
 <td>
 <div class='help-tip'>

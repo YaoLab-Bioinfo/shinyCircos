@@ -467,8 +467,13 @@ if(fontSize=="custom"){
     cat("par(mar=c(0.6,0.6,0.6,0.6), cex=fontSize-0.05)",file="code.R",append=TRUE,sep="\n")
   }			
 }
-cat(paste('trackChr <- "',trackChr,'"',sep=""),file="code.R",append=TRUE,sep="\n")																																																		
-cat(paste("labelChr <- ",'"',labelChr,'"',sep=""),paste("unitChr <- ",'"',unitChr,'"',sep=""),paste("rotation <- ",rotation,sep=""),paste("gap.width <- c(",paste(gap.width,collapse = ","),")",sep=""),paste("labeltextchr <- ",labeltextchr,sep=""),
+cat(paste('trackChr <- "',trackChr,'"',sep=""),file="code.R",append=TRUE,sep="\n")
+if(outAxis == 1){
+	plotTypes <- unique(c(labelChr,"axis"))
+}else{
+	plotTypes <- NULL
+}																																									
+cat(paste("plotTypes <- ",'"',plotTypes,'"',sep=""),paste("unitChr <- ",'"',unitChr,'"',sep=""),paste("rotation <- ",rotation,sep=""),paste("gap.width <- c(",paste(gap.width,collapse = ","),")",sep=""),paste("labeltextchr <- ",labeltextchr,sep=""),
     paste("poslabelschr <- ",'"',poslabelschr,'"',sep=""),paste("heightlabelschr <- ",heightlabelschr,sep=""),paste("marginlabelschr <- ",marginlabelschr,sep=""),file="code.R",append=TRUE,sep="\n")			
 if(datatypeChr=="general"){
   if(trackChr=="track" && fontSize!="custom"){
@@ -476,26 +481,26 @@ if(datatypeChr=="general"){
     repnumcol <- round(length(unique(data.C[,1]))/length(colorChr))+1
     colorChr <- rep(colorChr, repnumcol)[1:length(unique(data.C[,1]))]
     cat(paste('colorChr <- c("',paste(colorChr,collapse = '","'),'")',sep=""),paste("heightChr <- ",heightChr,sep=""),file="code.R",append=TRUE,sep="\n")
-    cat('plotcircos(data.C, height=heightChr, color=colorChr, plotTypes=unique(c(labelChr,"axis")), units=unitChr, rotation=rotation, gap.width=gap.width, labeltextchr=labeltextchr, poslabelschr=poslabelschr, heightlabelschr=heightlabelschr, marginlabelschr=marginlabelschr, data.CN=data.CN)',file="code.R",append=TRUE,sep="\n")
+    cat('plotcircos(data.C, height=heightChr, color=colorChr, plotTypes=plotTypes, units=unitChr, rotation=rotation, gap.width=gap.width, labeltextchr=labeltextchr, poslabelschr=poslabelschr, heightlabelschr=heightlabelschr, marginlabelschr=marginlabelschr, data.CN=data.CN)',file="code.R",append=TRUE,sep="\n")
   }else if(trackChr=="track" && fontSize=="custom"){
     repnumcol <- round(length(unique(data.C[,1]))/length(colorChr))+1
     colorChr <- rep(colorChr, repnumcol)[1:length(unique(data.C[,1]))]			
     cat(paste('colorChr <- c("',paste(colorChr,collapse = '","'),'")',sep=""),paste("cexlabel <- ",paste(cexlabel,collapse = ","),sep=""),file="code.R",append=TRUE,sep="\n")
-    cat('plotcircos.font(data.C, height=heightChr, color=colorChr, plotTypes=unique(c(labelChr,"axis")), units=unitChr, rotation=rotation, gap.width=gap.width, cexLabel=cexlabel-0.1, labeltextchr=labeltextchr, poslabelschr=poslabelschr, heightlabelschr=heightlabelschr, marginlabelschr=marginlabelschr, data.CN=data.CN)',file="code.R",append=TRUE,sep="\n")				
+    cat('plotcircos.font(data.C, height=heightChr, color=colorChr, plotTypes=plotTypes, units=unitChr, rotation=rotation, gap.width=gap.width, cexLabel=cexlabel-0.1, labeltextchr=labeltextchr, poslabelschr=poslabelschr, heightlabelschr=heightlabelschr, marginlabelschr=marginlabelschr, data.CN=data.CN)',file="code.R",append=TRUE,sep="\n")				
   }else if(trackChr!="track" && fontSize!="custom"){
     cat(paste("cexlabel <- ",paste(cexlabel,collapse = ","),sep=""),file="code.R",append=TRUE,sep="\n")
-    cat('plotcircos.notrack(data.C, plotTypes=unique(c(labelChr,"axis")), units=unitChr, rotation=rotation, gap.width=gap.width, data.CN=data.CN, labeltextchr=labeltextchr, poslabelschr=poslabelschr, heightlabelschr=heightlabelschr, marginlabelschr=marginlabelschr)',file="code.R",append=TRUE,sep="\n")								
+    cat('plotcircos.notrack(data.C, plotTypes=plotTypes, units=unitChr, rotation=rotation, gap.width=gap.width, data.CN=data.CN, labeltextchr=labeltextchr, poslabelschr=poslabelschr, heightlabelschr=heightlabelschr, marginlabelschr=marginlabelschr)',file="code.R",append=TRUE,sep="\n")								
   }else if(trackChr!="track" && fontSize=="custom"){
     cat(paste("cexlabel <- ",paste(cexlabel,collapse = ","),sep=""),file="code.R",append=TRUE,sep="\n")
-    cat('plotcircos.notrack.font(data.C, plotTypes=unique(c(labelChr,"axis")), units=unitChr, rotation=rotation, gap.width=gap.width, cexLabel=cexlabel-0.1, data.CN=data.CN, labeltextchr=labeltextchr, poslabelschr=poslabelschr, heightlabelschr=heightlabelschr, marginlabelschr=marginlabelschr)',file="code.R",append=TRUE,sep="\n")														
+    cat('plotcircos.notrack.font(data.C, plotTypes=plotTypes, units=unitChr, rotation=rotation, gap.width=gap.width, cexLabel=cexlabel-0.1, data.CN=data.CN, labeltextchr=labeltextchr, poslabelschr=poslabelschr, heightlabelschr=heightlabelschr, marginlabelschr=marginlabelschr)',file="code.R",append=TRUE,sep="\n")														
   }
 }else{
   if(fontSize!="custom"){			    
     cat(paste("cexlabel <- ",paste(cexlabel,collapse = ","),sep=""),file="code.R",append=TRUE,sep="\n")
-    cat('plotcircos.cyto(data.C, height=heightChr, plotTypes=unique(c(labelChr,"axis")), units=unitChr, rotation=rotation, gap.width=gap.width, labeltextchr=labeltextchr, poslabelschr=poslabelschr, heightlabelschr=heightlabelschr, marginlabelschr=marginlabelschr, data.CN=data.CN)',file="code.R",append=TRUE,sep="\n")
+    cat('plotcircos.cyto(data.C, height=heightChr, plotTypes=plotTypes, units=unitChr, rotation=rotation, gap.width=gap.width, labeltextchr=labeltextchr, poslabelschr=poslabelschr, heightlabelschr=heightlabelschr, marginlabelschr=marginlabelschr, data.CN=data.CN)',file="code.R",append=TRUE,sep="\n")
   }else if(fontSize=="custom"){			
     cat(paste("cexlabel <- ",paste(cexlabel,collapse = ","),sep=""),file="code.R",append=TRUE,sep="\n")
-    cat('plotcircos.cyto.font(data.C, height=heightChr, plotTypes=unique(c(labelChr,"axis")), units=unitChr, rotation=rotation, gap.width=gap.width, cexLabel=cexlabel-0.1, labeltextchr=labeltextchr, poslabelschr=poslabelschr, heightlabelschr=heightlabelschr, marginlabelschr=marginlabelschr, data.CN=data.CN)',file="code.R",append=TRUE,sep="\n")																
+    cat('plotcircos.cyto.font(data.C, height=heightChr, plotTypes=plotTypes, units=unitChr, rotation=rotation, gap.width=gap.width, cexLabel=cexlabel-0.1, labeltextchr=labeltextchr, poslabelschr=poslabelschr, heightlabelschr=heightlabelschr, marginlabelschr=marginlabelschr, data.CN=data.CN)',file="code.R",append=TRUE,sep="\n")																
   }
 }
 if(!is.null(data.T)){
