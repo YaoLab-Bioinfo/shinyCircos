@@ -11,7 +11,7 @@ This is the repository for the Shiny application presented in "<a href="https://
 
 #	Use shinyCircos online
 
-shinyCircos is deployed at <a href="http://venyao.xyz/shinyCircos/" target="_blank">http://venyao.xyz/shinyCircos/</a>, <a href="http://shinycircos.ncpgr.cn/" target="_blank">http://shinycircos.ncpgr.cn/</a> and <a href="https://yimingyu.shinyapps.io/shinycircos/" target="_blank">https://yimingyu.shinyapps.io/shinycircos/</a> for online use.  
+shinyCircos is deployed at <a href="https://venyao.xyz/shinyCircos/" target="_blank">https://venyao.xyz/shinyCircos/</a>, <a href="http://shinycircos.ncpgr.cn/" target="_blank">http://shinycircos.ncpgr.cn/</a> and <a href="https://yimingyu.shinyapps.io/shinycircos/" target="_blank">https://yimingyu.shinyapps.io/shinycircos/</a> for online use.  
 shinyCircos is idle until you activate it by accessing the URLs.  
 So it may take some time when you access this URL for the first time.   
 Once it was activated, shinyCircos could be used smoothly and easily.
