@@ -1,0 +1,12 @@
+name: shinyCircos
+title: shinyCircos
+username:
+account: venyao
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 3726011
+bundleId: 4293428
+url: https://venyao.shinyapps.io/shinyCircos/
+when: 1614743737.72553
+asMultiple: FALSE
+asStatic: FALSE

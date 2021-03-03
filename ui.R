@@ -3581,12 +3581,9 @@ For example, 'chr1,1,100000000,red'. Hex color codes as '#FF0000' are also suppo
 				h6("This application was created by ", a("Wen Yao", href="https://www.researchgate.net/profile/Wen_Yao", target="_blank"), " and ", a("Yiming Yu", href="https://www.researchgate.net/profile/Yiming_Yu6", target="_blank"), 
 				". Please send bugs and feature requests to Wen Yao (ywhzau at gmail.com) or Yiming Yu (yimingyyu at gmail.com). This application uses the ", 
 				a("shiny package from RStudio", href="http://www.rstudio.com/shiny/", target="_blank"), "."),
-				HTML('<p <ul><li style="list-style-type: none; background-image: url(bullet.jpg); padding-left: 18px; background-size:9px 9px; background-repeat: no-repeat; background-position: 0px 50%"><font size="4">Please cite</font></li></ul></p>'),
-				h6("Yiming Yu, Yidan Ouyang, and Wen Yao. shinyCircos: an R/Shiny application for interactive creation of Circos plot. ", 
-				em(strong("Bioinformatics."))," 2017 Nov. 24. ", a("doi:10.1093/bioinformatics/btx763", href="https://academic.oup.com/bioinformatics/advance-article-abstract/doi/10.1093/bioinformatics/btx763/4657077", target="_blank")),
-				HTML('<p <ul><li style="list-style-type: none; background-image: url(bullet.jpg); padding-left: 18px; background-size:9px 9px; background-repeat: no-repeat; background-position: 0px 50%";><font size="5" color="red">!!Note!!</font></li></ul></p>'),
-				h5("Users are encouraged to install and use shinyCircos on local personal computers. 
-				Please check the help menu of the shinyCircos application or  ", a("https://github.com/venyao/shinyCircos", href="https://github.com/venyao/shinyCircos", target="_blank"), " for the installation of shinyCircos on local computers.")
+				HTML('<p <ul><li style="list-style-type: none; background-image: url(bullet.jpg); padding-left: 18px; background-size:9px 9px; background-repeat: no-repeat; background-position: 0px 50%"><font size="5">Please cite</font></li></ul></p>'),
+				h4("Yiming Yu, Yidan Ouyang, and Wen Yao. shinyCircos: an R/Shiny application for interactive creation of Circos plot. ", 
+				em(strong("Bioinformatics."))," 2017 Nov. 24. ", a("doi:10.1093/bioinformatics/btx763", href="https://academic.oup.com/bioinformatics/advance-article-abstract/doi/10.1093/bioinformatics/btx763/4657077", target="_blank"))
 			),
 			## *** Data upload panel ***
 			tabPanel("Data upload",

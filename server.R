@@ -1,6 +1,8 @@
 
 options(shiny.maxRequestSize = 200*1024^2)
 options(warn=-1)
+library(BiocManager)
+options(repos = BiocManager::repositories())
 library(circlize)
 library(RColorBrewer)
 library(GenomicRanges)

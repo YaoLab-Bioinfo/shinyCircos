@@ -5,13 +5,13 @@ This is the repository for the Shiny application presented in "<a href="https://
 
 *****
 
-#	<font color="red">Help manual for the usage of shinyCircos [<a target="_blank" href="http://shinycircos.ncpgr.cn/shinyCircos_Help_Manual.pdf">Download!</a>]</font>
+#	<font color="red">Help manual for the usage of shinyCircos [<a target="_blank" href="http://https://venyao.xyz/shinyCircos/shinyCircos_Help_Manual.pdf">Download!</a>]</font>
 
 *****
 
 #	Use shinyCircos online
 
-shinyCircos is deployed at <a href="https://venyao.xyz/shinyCircos/" target="_blank">https://venyao.xyz/shinyCircos/</a>, <a href="http://shinycircos.ncpgr.cn/" target="_blank">http://shinycircos.ncpgr.cn/</a> and <a href="https://yimingyu.shinyapps.io/shinycircos/" target="_blank">https://yimingyu.shinyapps.io/shinycircos/</a> for online use.  
+shinyCircos is deployed at <a href="https://venyao.xyz/shinyCircos/" target="_blank">https://venyao.xyz/shinyCircos/</a>, <a href="https://venyao.shinyapps.io/shinyCircos/" target="_blank">https://venyao.shinyapps.io/shinyCircos/</a> and <a href="https://yimingyu.shinyapps.io/shinycircos/" target="_blank">https://yimingyu.shinyapps.io/shinycircos/</a> for online use.  
 shinyCircos is idle until you activate it by accessing the URLs.  
 So it may take some time when you access this URL for the first time.   
 Once it was activated, shinyCircos could be used smoothly and easily.
