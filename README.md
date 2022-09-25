@@ -37,9 +37,8 @@ install.packages("circlize")
 install.packages("RColorBrewer")
 install.packages("data.table")
 install.packages("RLumShiny")  
-# try http:// if https:// URLs are not supported   
-source("https://bioconductor.org/biocLite.R")  
-biocLite("GenomicRanges")
+install.packages("BiocManager")
+BiocManager::install("GenomicRanges")
 ```
 
 **Step 3: Start the app**  
@@ -78,9 +77,8 @@ install.packages("circlize")
 install.packages("RColorBrewer")
 install.packages("data.table")
 install.packages("RLumShiny")  
-## try http:// if https:// URLs are not supported  
-source("https://bioconductor.org/biocLite.R")  
-biocLite("GenomicRanges")  
+install.packages("BiocManager")
+BiocManager::install("GenomicRanges")
 ```
 
 For more information, please check the following pages:  
